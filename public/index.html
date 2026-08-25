@@ -3,24 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nandini Joshi | Designer & Full-Stack Developer</title>
+  <title>Nandini Joshi | UI/UX Designer & Full-Stack Engineer</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
-      --bg-main: #0a0c10;
-      --bg-card: #12161f;
-      --bg-card-hover: #19202c;
+      --bg-deep: #07090e;
+      --bg-surface: rgba(18, 24, 38, 0.7);
+      --bg-surface-hover: rgba(28, 38, 58, 0.85);
       --accent: #38bdf8;
-      --accent-purple: #818cf8;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --border: #1e293b;
-      --font-main: 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'Fira Code', monospace;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-purple: #a855f7;
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(56, 189, 248, 0.4);
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
     }
 
     * {
@@ -29,47 +36,68 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--bg-main);
+      background-color: var(--bg-deep);
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.07) 0px, transparent 40%),
+        radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.06) 0px, transparent 45%);
+      background-attachment: fixed;
       color: var(--text-main);
-      font-family: var(--font-main);
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
 
+    /* Spacious Section Layout */
     section {
-      padding: 6rem 0;
+      padding: 7.5rem 0;
+      position: relative;
     }
 
-    /* Navigation */
+    /* Ambient Divider */
+    .section-divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    }
+
+    /* Glass Navigation */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 12, 16, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(7, 9, 14, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 70px;
+      height: 80px;
     }
 
     .logo {
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--text-main);
       text-decoration: none;
       letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
 
     .logo span {
@@ -78,16 +106,16 @@
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
 
     .nav-links a {
-      color: var(--text-muted);
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.25s ease;
     }
 
     .nav-links a:hover {
@@ -96,87 +124,111 @@
 
     /* Hero Section */
     .hero {
-      min-height: 85vh;
+      min-height: 88vh;
       display: flex;
       align-items: center;
+      padding-top: 3rem;
+      padding-bottom: 6rem;
     }
 
     .hero-badge {
-      display: inline-block;
-      padding: 0.35rem 0.85rem;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.45rem 1.1rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       color: var(--accent);
       border-radius: 999px;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.75rem, 5.5vw, 4.25rem);
       font-weight: 800;
       line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 1.5rem;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.75rem;
     }
 
     .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+      background: linear-gradient(135deg, var(--accent) 15%, var(--accent-purple) 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin-bottom: 2.5rem;
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin-bottom: 3rem;
+      line-height: 1.8;
     }
 
     .hero-cta {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
+      align-items: center;
     }
 
+    /* Refined Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.6rem;
-      border-radius: 8px;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius-sm);
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
 
     .btn-primary {
       background: var(--accent);
-      color: #000;
+      color: #030712;
       border: 1px solid var(--accent);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px -10px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 12px 24px -8px rgba(56, 189, 248, 0.45);
+      background: #7dd3fc;
     }
 
     .btn-secondary {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text-main);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(8px);
     }
 
     .btn-secondary:hover {
-      background: var(--bg-card);
-      border-color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--text-secondary);
+      transform: translateY(-2px);
     }
 
-    /* Section Titles */
+    .btn-sm {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    /* Section Headers */
     .section-header {
-      margin-bottom: 3.5rem;
+      margin-bottom: 4.5rem;
     }
 
     .section-header .tag {
@@ -184,202 +236,270 @@
       font-size: 0.85rem;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
       display: block;
+      font-weight: 600;
     }
 
     .section-header h2 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.75px;
     }
 
-    /* Skills Grid */
+    /* Capabilities / Skills Grid */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
     }
 
     .skill-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: border-color 0.2s, transform 0.2s;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
     }
 
     .skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
+      border-color: var(--border-hover);
+      transform: translateY(-5px);
+      background: var(--bg-surface-hover);
+      box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
     }
 
     .skill-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-      color: var(--text-main);
+      font-size: 1.25rem;
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .skill-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+      line-height: 1.65;
     }
 
     .skill-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      padding: 0.35rem 0.7rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.8rem;
       border-radius: 6px;
       font-size: 0.8rem;
       font-family: var(--font-mono);
-      color: var(--text-muted);
+      color: var(--text-secondary);
     }
 
-    /* Projects Grid */
+    /* Featured Projects Grid */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
     }
 
     .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, border-color 0.2s;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-6px);
+      border-color: var(--border-hover);
+      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
     }
 
     .project-image-wrapper {
       width: 100%;
-      height: 210px;
-      background: #0f172a;
+      height: 230px;
+      background: #0d121d;
       overflow: hidden;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
     }
 
     .project-image-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
     .project-card:hover .project-image-wrapper img {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     .project-content {
-      padding: 1.5rem;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
 
-    .project-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-content p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
     .project-tags {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
 
     .project-tags span {
       font-size: 0.75rem;
       color: var(--accent);
+      background: var(--accent-glow);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
       font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .project-content h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+      line-height: 1.65;
     }
 
     .project-links {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
+      align-items: center;
     }
 
-    .btn-sm {
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      border-radius: 6px;
-    }
-
-    /* Contact Form */
+    /* Contact Section Layout */
     .contact-wrapper {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 3rem;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 4rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-intro p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .contact-detail-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-detail-icon {
+      color: var(--accent);
+      font-size: 1.25rem;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.75rem;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .form-group label {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
     }
 
     .form-group input,
     .form-group textarea {
-      background: var(--bg-main);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.8rem;
+      background: rgba(7, 9, 14, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
       color: var(--text-main);
-      font-family: var(--font-main);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+      background: rgba(7, 9, 14, 0.9);
     }
 
-    /* Modal Overlay */
+    /* Interactive Showcase Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      padding: 20px;
+      padding: 24px;
     }
 
     .modal-overlay.active {
@@ -387,26 +507,28 @@
     }
 
     .modal-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: #0e131f;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 2rem;
+      padding: 2.5rem;
       position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 20px;
-      font-size: 1.5rem;
+      top: 20px;
+      right: 24px;
+      font-size: 1.6rem;
       color: var(--text-muted);
       background: none;
       border: none;
       cursor: pointer;
+      transition: color 0.2s;
     }
 
     .modal-close:hover {
@@ -414,29 +536,41 @@
     }
 
     pre {
-      background: var(--bg-main);
-      padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      background: #06080d;
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
       overflow-x: auto;
-      color: #a5b4fc;
+      color: #93c5fd;
       font-size: 0.85rem;
       font-family: var(--font-mono);
-      margin-top: 1rem;
+      margin-top: 1.25rem;
+      line-height: 1.6;
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 0;
+      border-top: 1px solid var(--border-subtle);
+      padding: 4rem 0;
       text-align: center;
       color: var(--text-muted);
       font-size: 0.9rem;
     }
 
+    /* Responsive */
+    @media (max-width: 900px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2.25rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .contact-wrapper { grid-template-columns: 1fr; padding: 1.5rem; }
+      section { padding: 4.5rem 0; }
+      .hero { min-height: auto; padding: 4rem 0; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
@@ -448,7 +582,7 @@
       <a href="#" class="logo">NVLJ<span>.tech</span></a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="#skills">Capabilities</a></li>
         <li><a href="#projects">Work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -458,59 +592,72 @@
   <!-- Hero Section -->
   <section class="hero container" id="about">
     <div>
-      <span class="hero-badge">Available for freelance & full-time roles</span>
-      <h1>Crafting intuitive <span class="gradient-text">UI designs</span> & robust <span class="gradient-text">web systems</span>.</h1>
-      <p>I blend clean visual aesthetics with high-performance code, building full-stack web applications and interactive digital experiences.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Available for engineering & design collaborations
+      </div>
+      <h1>Architecting intuitive <span class="gradient-text">user interfaces</span> & resilient <span class="gradient-text">cloud systems</span>.</h1>
+      <p>I blend rigorous UI/UX design fundamentals with robust full-stack architecture—crafting high-performance web products, scalable database models, and polished interactive experiences.</p>
       <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-layer-group"></i> Explore Portfolio</a>
+        <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
+  <div class="section-divider"></div>
+
+  <!-- Capabilities Section -->
   <section class="container" id="skills">
     <div class="section-header">
       <span class="tag">01. Capabilities</span>
       <h2>Design & Engineering Stack</h2>
     </div>
     <div class="skills-grid">
+      <!-- UX Design -->
       <div class="skill-card">
-        <h3>🎨 UX Design</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">User research, wireframing, usability flows, and interactive user journeys.</p>
+        <div class="skill-icon-wrap"><i class="fas fa-compass-drafting"></i></div>
+        <h3>UX Design</h3>
+        <p>User research synthesis, wireframing, high-impact user flows, interaction mapping, and empirical usability validation.</p>
         <div class="skill-pills">
           <span class="pill">User Journeys</span>
           <span class="pill">Wireframing</span>
-          <span class="pill">Usability Testing</span>
-          <span class="pill">Information Architecture</span>
+          <span class="pill">Usability Audits</span>
+          <span class="pill">Information Arch</span>
         </div>
       </div>
 
+      <!-- UI Design -->
       <div class="skill-card">
-        <h3>✨ UI Design</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Modern design systems, high-fidelity prototypes, and typography hierarchies.</p>
+        <div class="skill-icon-wrap"><i class="fas fa-palette"></i></div>
+        <h3>UI Design</h3>
+        <p>Design token architecture, micro-interactions, responsive grid layouts, and cohesive visual hierarchies.</p>
         <div class="skill-pills">
-          <span class="pill">Figma</span>
-          <span class="pill">Design Systems</span>
-          <span class="pill">Visual Hierarchy</span>
+          <span class="pill">Figma Systems</span>
+          <span class="pill">Typography</span>
+          <span class="pill">Color Science</span>
           <span class="pill">Prototyping</span>
         </div>
       </div>
 
+      <!-- Frontend -->
       <div class="skill-card">
-        <h3>⚡ Frontend Development</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Building accessible, responsive, and performant client-side user interfaces.</p>
+        <div class="skill-icon-wrap"><i class="fas fa-code"></i></div>
+        <h3>Frontend Engineering</h3>
+        <p>Semantic modern HTML5/CSS3, optimized asynchronous JavaScript, responsive fluid viewports, and clean UI components.</p>
         <div class="skill-pills">
           <span class="pill">HTML5 / CSS3</span>
-          <span class="pill">JavaScript (ES6+)</span>
-          <span class="pill">Responsive Layouts</span>
-          <span class="pill">REST Integration</span>
+          <span class="pill">Modern ES6+</span>
+          <span class="pill">Fluid Layouts</span>
+          <span class="pill">REST Clients</span>
         </div>
       </div>
 
+      <!-- Backend -->
       <div class="skill-card">
-        <h3>⚙️ Backend & Architecture</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Developing resilient APIs, TiDB Cloud MySQL schemas, and secure authentication.</p>
+        <div class="skill-icon-wrap"><i class="fas fa-server"></i></div>
+        <h3>Backend & Architecture</h3>
+        <p>Express REST API design, TiDB Cloud MySQL database schemas, connection pooling with TLS, and automated background workers.</p>
         <div class="skill-pills">
           <span class="pill">Node.js</span>
           <span class="pill">Express</span>
@@ -521,11 +668,13 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <div class="section-divider"></div>
+
+  <!-- Featured Projects Section -->
   <section class="container" id="projects">
     <div class="section-header">
       <span class="tag">02. Selected Work</span>
-      <h2>Featured Projects</h2>
+      <h2>Featured Engineering Projects</h2>
     </div>
     <div class="projects-grid">
       <!-- Project 1 -->
@@ -540,7 +689,7 @@
             <span>#Analytics</span>
           </div>
           <h3>SaaS Analytics Platform</h3>
-          <p>A full-stack analytics dashboard with real-time data visualization components, secure cloud database persistence, and revenue metrics.</p>
+          <p>A full-stack analytics suite featuring real-time data streaming telemetry, transactional database operations, and ARR metric aggregators.</p>
           <div class="project-links">
             <button class="btn btn-primary btn-sm" onclick="openDemo('saas')"><i class="fas fa-play"></i> Live Demo</button>
             <button class="btn btn-secondary btn-sm" onclick="openCode('saas')"><i class="fas fa-code"></i> Source Code</button>
@@ -560,7 +709,7 @@
             <span>#UIUX</span>
           </div>
           <h3>Modern E-Commerce Store</h3>
-          <p>A minimalist design system paired with dynamic catalog filtering, persistent shopping cart architecture, and responsive layouts.</p>
+          <p>High-end storefront engine emphasizing performance-optimized image pipelines, persistent cart sync, and accessible checkout architecture.</p>
           <div class="project-links">
             <button class="btn btn-primary btn-sm" onclick="openDemo('ecom')"><i class="fas fa-play"></i> Live Demo</button>
             <button class="btn btn-secondary btn-sm" onclick="openCode('ecom')"><i class="fas fa-code"></i> Source Code</button>
@@ -579,8 +728,8 @@
             <span>#DesignTool</span>
             <span>#WCAG</span>
           </div>
-          <h3>Interactive Design Palette Tool</h3>
-          <p>A browser-based harmonic palette generator tailored for digital designers and engineers to evaluate WCAG contrast compliance.</p>
+          <h3>Interactive Palette Tool</h3>
+          <p>A smart browser-based color studio computing real-time relative luminance, WCAG 2.1 contrast ratios, and instant CSS token exports.</p>
           <div class="project-links">
             <button class="btn btn-primary btn-sm" onclick="openDemo('palette')"><i class="fas fa-play"></i> Live Demo</button>
             <button class="btn btn-secondary btn-sm" onclick="openCode('palette')"><i class="fas fa-code"></i> Source Code</button>
@@ -590,38 +739,51 @@
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- Contact Section -->
   <section class="container" id="contact">
     <div class="contact-wrapper">
-      <div>
-        <div class="section-header" style="margin-bottom: 1.5rem;">
-          <span class="tag">03. Contact</span>
-          <h2>Let's build something together.</h2>
+      <div class="contact-info">
+        <div class="contact-intro">
+          <div class="section-header" style="margin-bottom: 1.5rem;">
+            <span class="tag">03. Contact</span>
+            <h2>Let's build something scalable.</h2>
+          </div>
+          <p>
+            Whether you have an upcoming web initiative, a full-stack design system in need of execution, or a technical inquiry, feel free to reach out.
+          </p>
         </div>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">
-          Whether you need a design overhaul, a web application built from scratch, or assistance with existing codebases, feel free to drop a line.
-        </p>
-        <p style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent);">
-          nandinijoshi25102006@gmail.com
-        </p>
+        
+        <div class="contact-detail-box">
+          <i class="fas fa-envelope-open-text contact-detail-icon"></i>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;">Direct Line</div>
+            <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); font-weight: 500;">
+              nandinijoshi25102006@gmail.com
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Functional Form Connected to TiDB + Resend Pipeline -->
       <form class="contact-form" id="contactForm">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Alex Morgan" required />
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="alex@company.com" required />
         </div>
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+          <label for="message">Project Overview</label>
+          <textarea id="message" name="message" rows="4" placeholder="Briefly outline your goals or timeline..." required></textarea>
         </div>
-        <button type="submit" id="submitBtn" class="btn btn-primary" style="align-self: flex-start;">Send Message</button>
-        <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.5rem;"></p>
+        <button type="submit" id="submitBtn" class="btn btn-primary" style="align-self: flex-start;">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.25rem; font-family: var(--font-mono);"></p>
       </form>
     </div>
   </section>
@@ -629,7 +791,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Nandini Joshi. Built with semantic HTML & modern CSS.</p>
+      <p>&copy; 2026 Nandini Joshi. Engineered with semantic HTML, modern CSS & cloud infrastructure.</p>
     </div>
   </footer>
 
@@ -653,8 +815,8 @@
       saas: {
         title: 'SaaS Analytics Platform - Interactive Preview',
         demoHtml: `
-          <p style="color: var(--text-muted); margin-bottom: 16px;">Simulated live telemetry feed connected to TiDB Cloud instance:</p>
-          <div style="background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border);">
+          <p style="color: var(--text-secondary); margin-bottom: 16px;">Simulated live telemetry feed connected to TiDB Cloud instance:</p>
+          <div style="background: rgba(7, 9, 14, 0.8); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
             <div style="display: flex; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
               <div><small style="color: var(--text-muted);">Active Platform Leads</small><h2 style="color: var(--accent);">2,104 <span style="font-size: 0.8rem; color: #34d399;">+12%</span></h2></div>
               <div><small style="color: var(--text-muted);">Automated Email Dispatches</small><h2 style="color: var(--accent-purple);">18,450 <span style="font-size: 0.8rem; color: #34d399;">+7%</span></h2></div>
@@ -683,8 +845,8 @@ app.get('/api/analytics/metrics', async (req, res) => {
       ecom: {
         title: 'Modern E-Commerce Store - Cart Engine Preview',
         demoHtml: `
-          <div style="display: flex; gap: 16px; background: var(--bg-main); padding: 16px; border-radius: 8px; border: 1px solid var(--border); align-items: center;">
-            <div style="width: 50px; height: 50px; background: #1e293b; border-radius: 6px; display:flex; align-items:center; justify-content:center; color: var(--accent);"><i class="fas fa-bag-shopping"></i></div>
+          <div style="display: flex; gap: 16px; background: rgba(7, 9, 14, 0.8); padding: 16px; border-radius: 8px; border: 1px solid var(--border-subtle); align-items: center;">
+            <div style="width: 52px; height: 52px; background: #1e293b; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: var(--accent);"><i class="fas fa-bag-shopping"></i></div>
             <div style="flex-grow:1;">
               <h4>Elysium Luxury Wool Blazer</h4>
               <p style="color: var(--text-muted); font-size: 0.85rem;">Size: Medium • SKU: ELY-883</p>
@@ -716,12 +878,12 @@ class CartManager {
       palette: {
         title: 'Interactive Design Palette Tool Preview',
         demoHtml: `
-          <p style="color: var(--text-muted); margin-bottom: 12px;">Dynamic Swatch Generation:</p>
-          <div style="display: flex; height: 70px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--border);">
-            <div style="flex:1; background: #0a0c10; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#0A0C10</div>
-            <div style="flex:1; background: #12161f; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#12161F</div>
+          <p style="color: var(--text-secondary); margin-bottom: 12px;">Dynamic Swatch Generation:</p>
+          <div style="display: flex; height: 75px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+            <div style="flex:1; background: #07090e; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#07090E</div>
+            <div style="flex:1; background: #121826; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#121826</div>
             <div style="flex:1; background: #38bdf8; display:flex; align-items:center; justify-content:center; color:#000; font-size:0.75rem; font-family:var(--font-mono); font-weight:700;">#38BDF8</div>
-            <div style="flex:1; background: #818cf8; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#818CF8</div>
+            <div style="flex:1; background: #a855f7; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#A855F7</div>
           </div>
         `,
         code: `// WCAG Contrast Ratio Checker Algorithm
@@ -770,7 +932,7 @@ function checkContrast(hex1, hex2) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Sending...';
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       formStatus.innerText = '';
 
       const payload = {
@@ -790,19 +952,19 @@ function checkContrast(hex1, hex2) {
 
         if (res.ok && data.success) {
           formStatus.style.color = '#38bdf8';
-          formStatus.innerText = data.message;
+          formStatus.innerText = '✓ ' + data.message;
           contactForm.reset();
         } else {
           formStatus.style.color = '#ef4444';
-          formStatus.innerText = data.error || data.message || 'Failed to send message.';
+          formStatus.innerText = '✕ ' + (data.error || data.message || 'Failed to send message.');
         }
       } catch (err) {
         console.error(err);
         formStatus.style.color = '#ef4444';
-        formStatus.innerText = 'Server error. Please try again later.';
+        formStatus.innerText = '✕ Server error. Please try again later.';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerText = 'Send Message';
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       }
     });
   </script>
