@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>NYLJ TECH | Full-Stack Systems & Design Architecture</title>
   
   <!-- Tab Favicon -->
-  <link rel="icon" type="image/jpeg" href="/assets/images/logo.jpg?v=3" />
-  <link rel="shortcut icon" href="/assets/images/logo.jpg?v=3" />
-  <link rel="apple-touch-icon" href="/assets/images/logo.jpg?v=3" />
+  <link rel="icon" type="image/jpeg" href="/assets/images/logo.jpg?v=4" />
+  <link rel="shortcut icon" href="/assets/images/logo.jpg?v=4" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.jpg?v=4" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
@@ -23,28 +23,28 @@
     }
 
     :root {
-      --bg-black: #050608;
-      --bg-surface: rgba(13, 16, 24, 0.85);
-      --bg-surface-hover: rgba(22, 28, 42, 0.95);
+      --bg-black: #040508;
+      --bg-surface: rgba(13, 16, 26, 0.88);
+      --bg-surface-hover: rgba(22, 28, 44, 0.98);
       
       /* Luxury Metallic Gold & Cyber Accents */
       --gold-light: #fef08a;
       --gold-primary: #fbbf24;
       --gold-dark: #d97706;
-      --gold-glow: rgba(251, 191, 36, 0.25);
-      --gold-border: rgba(251, 191, 36, 0.4);
+      --gold-glow: rgba(251, 191, 36, 0.28);
+      --gold-border: rgba(251, 191, 36, 0.45);
       
       --neon-cyan: #06b6d4;
-      --neon-purple: #8b5cf6;
+      --neon-purple: #a855f7;
       --neon-pink: #ec4899;
       
       --gold-gradient: linear-gradient(135deg, #fffbeb 0%, #fbbf24 50%, #d97706 100%);
-      --cyber-gradient: linear-gradient(135deg, #fbbf24 0%, #ec4899 50%, #8b5cf6 100%);
+      --cyber-gradient: linear-gradient(135deg, #fbbf24 0%, #ec4899 50%, #a855f7 100%);
       
       --text-main: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
-      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.09);
       
       --font-display: 'Cinzel', serif;
       --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -52,7 +52,7 @@
       
       --radius-sm: 10px;
       --radius-md: 18px;
-      --radius-lg: 26px;
+      --radius-lg: 24px;
     }
 
     * {
@@ -63,83 +63,47 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
       background-color: var(--bg-black);
       color: var(--text-main);
       font-family: var(--font-sans);
-      line-height: 1.7;
+      line-height: 1.65;
       overflow-x: hidden;
+      width: 100%;
       position: relative;
     }
 
-    /* Fixed Interactive Interactive Canvas Layer */
-    #fxCanvas {
+    /* Ambient Dynamic Background Glows */
+    .bg-mesh {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
       pointer-events: none;
       z-index: 0;
-    }
-
-    /* Floating Effect Switcher Toolbar */
-    .fx-switcher-toolbar {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 120;
-      background: rgba(13, 16, 24, 0.85);
-      border: 1px solid var(--gold-border);
-      backdrop-filter: blur(16px);
-      padding: 6px;
-      border-radius: 999px;
-      display: flex;
-      gap: 6px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--gold-glow);
-    }
-
-    .fx-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding: 8px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .fx-btn.active {
-      background: var(--gold-gradient);
-      color: #050608;
-      font-weight: 700;
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.08) 0px, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(168, 85, 247, 0.08) 0px, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
     }
 
     .container {
-      max-width: 1200px;
+      width: 100%;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 clamp(1rem, 4vw, 2.5rem);
       position: relative;
       z-index: 1;
     }
 
     section {
-      padding: 8.5rem 0;
+      padding: clamp(4.5rem, 9vw, 8.5rem) 0;
       position: relative;
       z-index: 1;
-    }
-
-    .section-spacer-extra {
-      padding-top: 11rem !important;
-      padding-bottom: 10rem !important;
     }
 
     .ambient-separator {
@@ -151,12 +115,12 @@
       z-index: 1;
     }
 
-    /* Glass Navigation */
+    /* Navigation */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 6, 8, 0.85);
+      background: rgba(4, 5, 8, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
@@ -166,36 +130,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 88px;
+      height: clamp(70px, 10vw, 88px);
     }
 
     .logo-brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       text-decoration: none;
     }
 
     .logo-img {
-      width: 48px;
-      height: 48px;
+      width: clamp(38px, 6vw, 48px);
+      height: clamp(38px, 6vw, 48px);
       border-radius: 12px;
       object-fit: cover;
       border: 1.5px solid var(--gold-primary);
       box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .logo-brand:hover .logo-img {
-      transform: scale(1.12) rotate(4deg);
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
+      transform: scale(1.08) rotate(3deg);
     }
 
     .logo-text {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: 1.35rem;
-      letter-spacing: 2.5px;
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      letter-spacing: 2px;
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -203,7 +166,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2.2rem;
       list-style: none;
     }
 
@@ -237,18 +200,17 @@
 
     /* Hero Section */
     .hero {
-      min-height: 90vh;
+      min-height: calc(90vh - 88px);
       display: flex;
       align-items: center;
-      padding-top: 4.5rem;
-      padding-bottom: 7.5rem;
+      padding: clamp(3rem, 7vw, 6rem) 0;
     }
 
     .hero-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 4rem;
+      gap: clamp(2rem, 5vw, 4rem);
       width: 100%;
     }
 
@@ -261,14 +223,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
     }
 
-    /* Liquid Conic Flow Border on Emblem */
     .hero-logo-frame {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: clamp(220px, 32vw, 300px);
+      height: clamp(220px, 32vw, 300px);
       border-radius: 34px;
       display: flex;
       align-items: center;
@@ -277,11 +237,6 @@
       overflow: hidden;
       box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95);
       animation: heroFloat 6s infinite alternate ease-in-out;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .hero-logo-frame:hover {
-      transform: scale(1.05) rotate(1deg);
     }
 
     .hero-logo-frame::before {
@@ -293,7 +248,7 @@
         from 0deg,
         #fbbf24 0%,
         #ec4899 25%,
-        #8b5cf6 50%,
+        #a855f7 50%,
         #06b6d4 75%,
         #fbbf24 100%
       );
@@ -310,21 +265,21 @@
         from 0deg,
         #fbbf24 0%,
         #ec4899 25%,
-        #8b5cf6 50%,
+        #a855f7 50%,
         #06b6d4 75%,
         #fbbf24 100%
       );
       animation: rotateLiquid 4.5s linear infinite;
-      filter: blur(28px);
-      opacity: 0.85;
+      filter: blur(24px);
+      opacity: 0.8;
       z-index: 0;
     }
 
     .hero-logo-inner {
       position: relative;
-      width: calc(100% - 14px);
-      height: calc(100% - 14px);
-      background: #090c14;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      background: #080b12;
       border-radius: 28px;
       overflow: hidden;
       z-index: 2;
@@ -338,7 +293,6 @@
       height: 100%;
       object-fit: cover;
       border-radius: 28px;
-      transition: transform 0.4s ease;
     }
 
     @keyframes rotateLiquid {
@@ -348,22 +302,21 @@
 
     @keyframes heroFloat {
       0% { transform: translateY(0px); }
-      100% { transform: translateY(-16px); }
+      100% { transform: translateY(-14px); }
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 0.5rem 1.3rem;
+      padding: 0.45rem 1.15rem;
       background: rgba(251, 191, 36, 0.08);
       border: 1px solid var(--gold-border);
       color: var(--gold-primary);
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 2vw, 0.85rem);
       font-weight: 600;
-      margin-bottom: 2rem;
-      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
       backdrop-filter: blur(8px);
     }
 
@@ -372,7 +325,7 @@
       height: 8px;
       border-radius: 50%;
       background-color: var(--gold-primary);
-      box-shadow: 0 0 12px var(--gold-primary);
+      box-shadow: 0 0 10px var(--gold-primary);
       animation: blink 2s infinite;
     }
 
@@ -382,11 +335,11 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.75rem, 5vw, 4.3rem);
+      font-size: clamp(2.2rem, 5.2vw, 4.3rem);
       font-weight: 800;
-      line-height: 1.16;
+      line-height: 1.15;
       letter-spacing: -1.5px;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero h1 .gold-text {
@@ -403,33 +356,33 @@
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
       color: var(--text-secondary);
       max-width: 680px;
-      margin-bottom: 3.25rem;
-      line-height: 1.85;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
     }
 
     .hero-cta {
       display: flex;
       gap: 1.25rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
-    /* Buttons */
+    /* Standard Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.7rem;
-      padding: 0.95rem 2rem;
+      padding: 0.9rem 1.8rem;
       border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
-      position: relative;
     }
 
     .btn-primary {
@@ -440,8 +393,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 18px 35px -8px rgba(251, 191, 36, 0.65);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 32px -8px rgba(251, 191, 36, 0.6);
       filter: brightness(1.1);
     }
 
@@ -456,27 +409,543 @@
       background: rgba(251, 191, 36, 0.08);
       border-color: var(--gold-border);
       color: var(--gold-primary);
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 12px 25px -10px rgba(251, 191, 36, 0.3);
+      transform: translateY(-3px) scale(1.02);
     }
 
     .btn-sm {
-      padding: 0.6rem 1.25rem;
-      font-size: 0.85rem;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.88rem;
       border-radius: 8px;
     }
 
-    /* Rotating Conic Border Beam Button */
+    /* Section Headers */
+    .section-header {
+      margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+      width: 100%;
+    }
+
+    .section-header .tag {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.6rem;
+      display: block;
+      font-weight: 600;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.75px;
+      line-height: 1.2;
+    }
+
+    /* ========================================================
+       DESIGN & ENGINEERING STACK: RESPONSIVE CAROUSEL
+       ======================================================== */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 380px;
+      border-radius: var(--radius-lg);
+      background: #070910;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.9);
+      display: flex;
+    }
+
+    .circle-drop-actor {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--drop-color, var(--gold-primary)));
+      box-shadow: 0 0 30px var(--drop-color, var(--gold-primary));
+      transform: translate(-50%, 0) scale(1);
+      opacity: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    @keyframes dropRiseExpand {
+      0% { top: -60px; transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+      20% { opacity: 1; }
+      45% { top: 52%; transform: translate(-50%, -50%) scale(1.2, 0.8); }
+      60% { top: 46%; transform: translate(-50%, -50%) scale(1, 1.1); }
+      75% { top: 50%; transform: translate(-50%, -50%) scale(2.5); opacity: 1; }
+      100% { top: 50%; transform: translate(-50%, -50%) scale(45); opacity: 0; }
+    }
+
+    .circle-drop-actor.animating {
+      animation: dropRiseExpand 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .carousel-card {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--card-accent, var(--gold-border));
+      border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 4vw, 3.25rem);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .carousel-card.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+      clip-path: circle(150% at 50% 50%);
+    }
+
+    .carousel-card-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .carousel-icon-wrap {
+      width: clamp(52px, 8vw, 70px);
+      height: clamp(52px, 8vw, 70px);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      flex-shrink: 0;
+    }
+
+    .carousel-card h3 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+    }
+
+    .carousel-card p {
+      color: var(--text-secondary);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      margin-bottom: 1.75rem;
+      line-height: 1.8;
+    }
+
+    .carousel-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .carousel-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: clamp(0.75rem, 1.8vw, 0.88rem);
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .card-ux { --card-accent: var(--gold-primary); --card-glow: rgba(251, 191, 36, 0.35); }
+    .card-ux .carousel-icon-wrap { background: rgba(251, 191, 36, 0.12); border: 1.5px solid var(--gold-border); color: var(--gold-primary); }
+
+    .card-ui { --card-accent: var(--neon-pink); --card-glow: rgba(236, 72, 153, 0.35); }
+    .card-ui .carousel-icon-wrap { background: rgba(236, 72, 153, 0.12); border: 1.5px solid rgba(236, 72, 153, 0.4); color: var(--neon-pink); }
+
+    .card-frontend { --card-accent: var(--neon-cyan); --card-glow: rgba(6, 182, 212, 0.35); }
+    .card-frontend .carousel-icon-wrap { background: rgba(6, 182, 212, 0.12); border: 1.5px solid rgba(6, 182, 212, 0.4); color: var(--neon-cyan); }
+
+    .card-backend { --card-accent: var(--neon-purple); --card-glow: rgba(168, 85, 247, 0.35); }
+    .card-backend .carousel-icon-wrap { background: rgba(168, 85, 247, 0.12); border: 1.5px solid rgba(168, 85, 247, 0.4); color: var(--neon-purple); }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.75rem;
+      padding: 0 6px;
+    }
+
+    .carousel-nav-btn {
+      width: clamp(46px, 8vw, 54px);
+      height: clamp(46px, 8vw, 54px);
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .carousel-nav-btn:hover {
+      background: var(--gold-gradient);
+      color: #050608;
+      transform: scale(1.1);
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .dot.active {
+      width: 28px;
+      border-radius: 10px;
+      background: var(--gold-gradient);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+    }
+
+    /* ========================================================
+       REALISTIC 3D SCROLL-DRIVEN PARTICLE VORTEX SHOWCASE
+       (As Seen in the Video: Organic Explosions & Scroll Scrub)
+       ======================================================== */
+    .scrolly-portal-section {
+      position: relative;
+      height: 350vh; /* Scrolly virtual track */
+      padding: 0;
+      width: 100%;
+    }
+
+    .scrolly-sticky-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Background 3D Canvas Particle Burst Engine */
+    #scrollyParticleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* HUD Metrics Overlay (From Video) */
+    .scrolly-hud {
+      position: absolute;
+      top: clamp(85px, 12vh, 110px);
+      width: min(92%, 1160px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .hud-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      letter-spacing: 3px;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    .hud-counter {
+      font-family: var(--font-mono);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .scrolly-progress-track {
+      position: absolute;
+      top: clamp(75px, 10vh, 95px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(90%, 650px);
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .scrolly-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--cyber-gradient);
+      box-shadow: 0 0 15px var(--gold-primary);
+      transition: width 0.08s linear;
+    }
+
+    /* Pinned 3D Showcase Stage */
+    .scrolly-stage {
+      position: relative;
+      width: min(92%, 1160px);
+      z-index: 4;
+      perspective: 1200px;
+    }
+
+    .scrolly-card {
+      background: rgba(10, 14, 24, 0.88);
+      border: 1.5px solid var(--card-border-color, var(--gold-border));
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 4vw, 3rem);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+      opacity: 0;
+      transform: translate3d(0, 50px, -100px) scale(0.92);
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 35px 90px -25px rgba(0, 0, 0, 0.95), 0 0 45px var(--card-glow-color, var(--gold-glow));
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+
+    .scrolly-card.active-slide {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* Big High-Def Preview Frame */
+    .scrolly-media-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: #080a10;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+      position: relative;
+    }
+
+    .scrolly-media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .scrolly-card:hover .scrolly-media-frame img {
+      transform: scale(1.05);
+    }
+
+    .scrolly-details h3 {
+      font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.5px;
+    }
+
+    .scrolly-details p {
+      color: var(--text-secondary);
+      font-size: clamp(0.92rem, 1.9vw, 1.05rem);
+      margin-bottom: 1.75rem;
+      line-height: 1.75;
+    }
+
+    .scrolly-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .scrolly-tags span {
+      font-size: 0.75rem;
+      color: var(--gold-light);
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .scrolly-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .slide-saas { --card-border-color: var(--gold-primary); --card-glow-color: rgba(251, 191, 36, 0.35); }
+    .slide-ecom { --card-border-color: var(--neon-pink); --card-glow-color: rgba(236, 72, 153, 0.35); }
+    .slide-palette { --card-border-color: var(--neon-cyan); --card-glow-color: rgba(6, 182, 212, 0.35); }
+
+    .scrolly-stepper-pills {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+
+    .scrolly-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+      color: var(--text-muted);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(13, 16, 26, 0.8);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .scrolly-pill.active {
+      color: var(--gold-primary);
+      border-color: var(--gold-border);
+      background: var(--gold-glow);
+      font-weight: 700;
+    }
+
+    /* ========================================================
+       CONTACT SECTION: ULTRA-RESPONSIVE GLASS ARCHITECTURE
+       ======================================================== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 5vw, 4rem);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.9), 0 0 30px var(--gold-glow);
+      width: 100%;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-intro p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height: 1.8;
+    }
+
+    .contact-detail-box {
+      background: rgba(251, 191, 36, 0.04);
+      border: 1px solid var(--gold-border);
+      padding: clamp(1rem, 2.5vw, 1.4rem);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      word-break: break-all;
+    }
+
+    .contact-detail-icon {
+      color: var(--gold-primary);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: rgba(4, 5, 8, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: clamp(0.85rem, 2vw, 1.05rem) 1.2rem;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+    }
+
     .btn-beam-glow {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      padding: 1.1rem 2.4rem;
+      padding: 1.05rem 2.2rem;
       border-radius: var(--radius-md);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: clamp(0.92rem, 2vw, 1rem);
       color: #ffffff;
       background: #090c14;
       border: none;
@@ -485,6 +954,7 @@
       z-index: 1;
       transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+      width: auto;
     }
 
     .btn-beam-glow::before {
@@ -515,13 +985,11 @@
         rgba(9, 12, 20, 0.95) 75%
       );
       z-index: -1;
-      transition: opacity 0.25s ease;
     }
 
     .btn-beam-glow:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 15px 35px -8px rgba(251, 191, 36, 0.45), 0 0 25px rgba(236, 72, 153, 0.3);
-      color: var(--gold-light);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 35px -8px rgba(251, 191, 36, 0.45);
     }
 
     @keyframes rotateBorderBeam {
@@ -529,508 +997,18 @@
       100% { --btn-angle: 360deg; }
     }
 
-    /* Section Headers */
-    .section-header {
-      margin-bottom: 4.5rem;
-    }
-
-    .section-header .tag {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      margin-bottom: 0.75rem;
-      display: block;
-      font-weight: 600;
-    }
-
-    .section-header h2 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      letter-spacing: -0.75px;
-    }
-
-    /* Capabilities Single-Card Droplet Carousel */
-    .carousel-container {
-      position: relative;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 10px;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      width: 100%;
-      min-height: 440px;
-      border-radius: var(--radius-lg);
-      background: #080b12;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.95);
-    }
-
-    .circle-drop-actor {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--drop-color, var(--gold-primary)));
-      box-shadow: 0 0 30px var(--drop-color, var(--gold-primary)), 0 0 60px var(--drop-color, var(--gold-primary));
-      transform: translate(-50%, 0) scale(1);
-      opacity: 0;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    @keyframes dropRiseExpand {
-      0% { top: -60px; transform: translate(-50%, 0) scale(0.6); opacity: 0; }
-      15% { opacity: 1; }
-      45% { top: 55%; transform: translate(-50%, -50%) scale(1.2, 0.8); }
-      60% { top: 45%; transform: translate(-50%, -50%) scale(1, 1.1); }
-      75% { top: 50%; transform: translate(-50%, -50%) scale(2.5); opacity: 1; }
-      100% { top: 50%; transform: translate(-50%, -50%) scale(45); opacity: 0; }
-    }
-
-    .circle-drop-actor.animating {
-      animation: dropRiseExpand 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .carousel-card {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-surface);
-      border: 1.5px solid var(--card-accent, var(--gold-border));
-      border-radius: var(--radius-lg);
-      padding: 3.5rem;
-      backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1;
-      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
-      clip-path: circle(0% at 50% 50%);
-      transition: clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
-    }
-
-    .carousel-card.active {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 2;
-      clip-path: circle(150% at 50% 50%);
-    }
-
-    .carousel-card .carousel-card-header,
-    .carousel-card p,
-    .carousel-card .carousel-pills {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .carousel-card.active .carousel-card-header { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
-    .carousel-card.active p { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
-    .carousel-card.active .carousel-pills { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
-
-    .carousel-card-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .carousel-icon-wrap {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      flex-shrink: 0;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .carousel-card:hover .carousel-icon-wrap {
-      transform: scale(1.12) rotate(6deg);
-    }
-
-    .carousel-card h3 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .carousel-card p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 2.25rem;
-      line-height: 1.85;
-    }
-
-    .carousel-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .carousel-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      padding: 0.5rem 1.1rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-family: var(--font-mono);
-      color: var(--text-main);
-      transition: all 0.3s ease;
-    }
-
-    .carousel-card:hover .carousel-pill {
-      border-color: var(--card-accent, var(--gold-border));
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
-    }
-
-    .card-ux { --card-accent: var(--gold-primary); --card-glow: rgba(251, 191, 36, 0.35); }
-    .card-ux .carousel-icon-wrap { background: rgba(251, 191, 36, 0.12); border: 1.5px solid var(--gold-border); color: var(--gold-primary); }
-
-    .card-ui { --card-accent: var(--neon-pink); --card-glow: rgba(236, 72, 153, 0.35); }
-    .card-ui .carousel-icon-wrap { background: rgba(236, 72, 153, 0.12); border: 1.5px solid rgba(236, 72, 153, 0.4); color: var(--neon-pink); }
-
-    .card-frontend { --card-accent: var(--neon-cyan); --card-glow: rgba(6, 182, 212, 0.35); }
-    .card-frontend .carousel-icon-wrap { background: rgba(6, 182, 212, 0.12); border: 1.5px solid rgba(6, 182, 212, 0.4); color: var(--neon-cyan); }
-
-    .card-backend { --card-accent: var(--neon-purple); --card-glow: rgba(139, 92, 246, 0.35); }
-    .card-backend .carousel-icon-wrap { background: rgba(139, 92, 246, 0.12); border: 1.5px solid rgba(139, 92, 246, 0.4); color: var(--neon-purple); }
-
-    .carousel-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2.25rem;
-      padding: 0 10px;
-    }
-
-    .carousel-nav-btn {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--bg-surface);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.6);
-    }
-
-    .carousel-nav-btn:hover {
-      background: var(--gold-gradient);
-      color: #050608;
-      transform: scale(1.15);
-      box-shadow: 0 0 25px rgba(251, 191, 36, 0.65);
-    }
-
-    .carousel-dots {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .dot.active {
-      width: 34px;
-      border-radius: 12px;
-      background: var(--gold-gradient);
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
-    }
-
-    /* Scroll-Driven Scrollytelling Projects */
-    .scrolly-section {
-      position: relative;
-      height: 320vh;
-      padding: 0;
-    }
-
-    .scrolly-sticky-viewport {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
-
-    .scrolly-progress-wrapper {
-      position: absolute;
-      top: 95px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(90%, 600px);
-      height: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      overflow: hidden;
-      z-index: 10;
-    }
-
-    .scrolly-progress-bar {
-      height: 100%;
-      width: 0%;
-      background: var(--cyber-gradient);
-      box-shadow: 0 0 15px var(--gold-primary);
-      transition: width 0.1s linear;
-    }
-
-    .scrolly-stage {
-      position: relative;
-      width: 100%;
-      max-width: 1100px;
-      height: 520px;
-      margin: 0 auto;
-      perspective: 1200px;
-    }
-
-    .scrolly-project-slide {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      background: var(--bg-surface);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 3rem;
-      backdrop-filter: blur(22px);
-      opacity: 0;
-      transform: translate3d(0, 40px, -80px) scale(0.92);
-      pointer-events: none;
-      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.4s ease;
-      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95);
-    }
-
-    .scrolly-project-slide.active-slide {
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-      pointer-events: auto;
-      border-color: var(--slide-accent, var(--gold-border));
-      box-shadow: 0 35px 90px -25px rgba(0, 0, 0, 0.95), 0 0 45px var(--slide-glow, var(--gold-glow));
-      z-index: 2;
-    }
-
-    .scrolly-media-frame {
-      width: 100%;
-      height: 340px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-      border: 1px solid var(--border-subtle);
-      background: #090b10;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-    }
-
-    .scrolly-media-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .scrolly-project-slide:hover .scrolly-media-frame img {
-      transform: scale(1.08) rotate(0.5deg);
-    }
-
-    .scrolly-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .scrolly-tags {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .scrolly-tags span {
-      font-size: 0.75rem;
-      color: var(--gold-light);
-      background: rgba(251, 191, 36, 0.08);
-      border: 1px solid rgba(251, 191, 36, 0.25);
-      padding: 0.3rem 0.75rem;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-weight: 500;
-    }
-
-    .scrolly-details h3 {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
-    }
-
-    .scrolly-details p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-      line-height: 1.75;
-    }
-
-    .scrolly-links {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .scrolly-nav-indicator {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      z-index: 10;
-    }
-
-    .scrolly-step-pill {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .scrolly-step-pill.active {
-      color: var(--gold-primary);
-      border-color: var(--gold-border);
-      background: var(--gold-glow);
-      font-weight: 700;
-    }
-
-    .slide-saas { --slide-accent: var(--gold-primary); --slide-glow: rgba(251, 191, 36, 0.35); }
-    .slide-ecom { --slide-accent: var(--neon-pink); --slide-glow: rgba(236, 72, 153, 0.35); }
-    .slide-palette { --slide-accent: var(--neon-cyan); --slide-glow: rgba(6, 182, 212, 0.35); }
-
-    /* Contact Section Layout */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 5rem;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 4.5rem;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.7);
-    }
-
-    .contact-intro p {
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .contact-detail-box {
-      background: rgba(251, 191, 36, 0.04);
-      border: 1px solid var(--gold-border);
-      padding: 1.4rem 1.75rem;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      transition: all 0.3s ease;
-    }
-
-    .contact-detail-box:hover {
-      transform: translateX(6px);
-      box-shadow: 0 0 25px rgba(251, 191, 36, 0.2);
-    }
-
-    .contact-detail-icon {
-      color: var(--gold-primary);
-      font-size: 1.5rem;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.85rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: rgba(5, 6, 8, 0.75);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 1.05rem 1.3rem;
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      transition: all 0.25s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
-      background: rgba(5, 6, 8, 0.95);
-    }
-
-    /* Modal Overlay */
+    /* Interactive Modal */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.88);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      padding: 24px;
+      padding: clamp(1rem, 3vw, 2rem);
     }
 
     .modal-overlay.active {
@@ -1038,28 +1016,26 @@
     }
 
     .modal-box {
-      background: #0d1017;
+      background: #0c0f18;
       border: 1.5px solid var(--gold-border);
       border-radius: var(--radius-lg);
       width: 100%;
       max-width: 720px;
-      max-height: 85vh;
+      max-height: 88vh;
       overflow-y: auto;
-      padding: 2.75rem;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
       position: relative;
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95);
     }
 
     .modal-close {
       position: absolute;
-      top: 22px;
-      right: 24px;
-      font-size: 1.6rem;
+      top: 18px;
+      right: 20px;
+      font-size: 1.5rem;
       color: var(--text-muted);
       background: none;
       border: none;
       cursor: pointer;
-      transition: color 0.2s;
     }
 
     .modal-close:hover {
@@ -1067,80 +1043,79 @@
     }
 
     pre {
-      background: #050608;
-      padding: 1.25rem;
+      background: #040508;
+      padding: 1.2rem;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-subtle);
       overflow-x: auto;
       color: var(--gold-light);
       font-size: 0.85rem;
       font-family: var(--font-mono);
-      margin-top: 1.25rem;
-      line-height: 1.65;
+      margin-top: 1rem;
+      line-height: 1.6;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 4.5rem 0;
+      padding: clamp(3rem, 6vw, 4.5rem) 0;
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: clamp(0.82rem, 2vw, 0.9rem);
       position: relative;
       z-index: 1;
     }
 
-    /* Responsive Device Scaling */
-    @media (max-width: 1024px) {
-      .scrolly-stage { height: 600px; }
-      .scrolly-project-slide {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-        padding: 2.25rem;
-        height: auto;
+    /* ========================================================
+       RESPONSIVE BREAKPOINTS (Mobile, Tablet, Desktop)
+       ======================================================== */
+    @media (max-width: 980px) {
+      .hero-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2.5rem;
       }
-      .scrolly-media-frame { height: 220px; }
-      .scrolly-details h3 { font-size: 1.6rem; }
-      .contact-wrapper { gap: 3.5rem; padding: 3rem; }
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-cta {
+        justify-content: center;
+      }
+      .scrolly-portal-section {
+        height: 320vh;
+      }
+      .scrolly-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.75rem;
+        max-height: 75vh;
+      }
+      .scrolly-media-frame {
+        aspect-ratio: 16 / 9;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
     }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      section { padding: 5.5rem 0; }
-      .section-spacer-extra { padding-top: 6.5rem !important; }
-      .hero { min-height: auto; padding: 4rem 0; }
-      .hero-wrapper { flex-direction: column; text-align: center; gap: 3rem; }
-      .hero-content { display: flex; flex-direction: column; align-items: center; }
-      .hero-cta { flex-direction: column; width: 100%; }
+      .carousel-wrapper { min-height: 420px; }
+      .carousel-card { padding: 1.5rem; justify-content: flex-start; }
       .hero-cta .btn { width: 100%; }
-      .hero-logo-frame { width: 240px; height: 240px; }
-      
-      .scrolly-section { height: 280vh; }
-      .scrolly-stage { height: auto; min-height: 520px; }
-      .scrolly-project-slide { padding: 1.5rem; }
-      .scrolly-details p { font-size: 0.95rem; margin-bottom: 1.25rem; }
-      .scrolly-media-frame { height: 180px; }
-      
-      .carousel-card { padding: 2rem; }
-      .carousel-wrapper { min-height: 500px; }
       .btn-beam-glow { width: 100%; }
-      .contact-wrapper { grid-template-columns: 1fr; padding: 2rem; }
-      .fx-switcher-toolbar { bottom: 16px; right: 16px; padding: 4px; }
-      .fx-btn { padding: 6px 10px; font-size: 0.75rem; }
+      .scrolly-portal-section { height: 280vh; }
+      .scrolly-media-frame { aspect-ratio: 16 / 10; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Interactive HTML5 Canvas Layer -->
-  <canvas id="fxCanvas"></canvas>
-
-  <!-- Interactive Background Canvas FX Switcher -->
-  <div class="fx-switcher-toolbar">
-    <button class="fx-btn active" data-fx="spider"><i class="fas fa-network-wired"></i> Spider</button>
-    <button class="fx-btn" data-fx="powder"><i class="fas fa-atom"></i> Powder</button>
-    <button class="fx-btn" data-fx="jellyfish"><i class="fas fa-water"></i> Jellyfish</button>
-  </div>
+  <!-- Dynamic Ambient Glow Layer -->
+  <div class="bg-mesh"></div>
 
   <!-- Navigation with Gold Brand Identity -->
   <nav>
@@ -1203,7 +1178,7 @@
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-compass-drafting"></i></div>
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold-primary);">Pillar 01</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold-primary);">Pillar 01</span>
               <h3>UX Design</h3>
             </div>
           </div>
@@ -1221,7 +1196,7 @@
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-palette"></i></div>
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--neon-pink);">Pillar 02</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-pink);">Pillar 02</span>
               <h3>UI Design</h3>
             </div>
           </div>
@@ -1239,7 +1214,7 @@
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-code"></i></div>
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--neon-cyan);">Pillar 03</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Pillar 03</span>
               <h3>Frontend Engineering</h3>
             </div>
           </div>
@@ -1253,11 +1228,11 @@
         </div>
 
         <!-- Card 4: Backend & Architecture -->
-        <div class="carousel-card card-backend" data-color="#8b5cf6">
+        <div class="carousel-card card-backend" data-color="#a855f7">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-server"></i></div>
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--neon-purple);">Pillar 04</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-purple);">Pillar 04</span>
               <h3>Backend & Architecture</h3>
             </div>
           </div>
@@ -1293,100 +1268,104 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Scroll-Driven Scrollytelling Project Showcase -->
-  <section class="scrolly-section" id="projects">
-    <div class="scrolly-sticky-viewport">
-      <div class="container">
-        
-        <div class="section-header" style="margin-bottom: 2.5rem; text-align: center;">
-          <span class="tag">02. Selected Work</span>
-          <h2>Featured Engineering Projects</h2>
-        </div>
+  <!-- ========================================================
+       REALISTIC 3D PARTICLE BURST SCROLLYTELLING SHOWCASE
+       ======================================================== -->
+  <section class="scrolly-portal-section" id="projects">
+    <div class="scrolly-sticky-container">
+      
+      <!-- 3D Particle Explosion Canvas Layer (From Video) -->
+      <canvas id="scrollyParticleCanvas"></canvas>
 
-        <!-- Progress Indicator -->
-        <div class="scrolly-progress-wrapper">
-          <div class="scrolly-progress-bar" id="scrollyProgressBar"></div>
-        </div>
-
-        <!-- Scrolly Showcase Stage -->
-        <div class="scrolly-stage">
-          <!-- Slide 1: SaaS Analytics -->
-          <div class="scrolly-project-slide slide-saas active-slide" data-slide="0">
-            <div class="scrolly-media-frame">
-              <img src="/assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
-            </div>
-            <div class="scrolly-details">
-              <div class="scrolly-tags">
-                <span>#NodeJS</span>
-                <span>#TiDBCloud</span>
-                <span>#Analytics</span>
-              </div>
-              <h3>SaaS Analytics Platform</h3>
-              <p>A full-stack enterprise analytics suite featuring real-time data streaming telemetry, transactional database operations, and live recurring revenue aggregators.</p>
-              <div class="scrolly-links">
-                <button class="btn btn-primary btn-sm" onclick="openDemo('saas')"><i class="fas fa-play"></i> Live Demo</button>
-                <button class="btn btn-secondary btn-sm" onclick="openCode('saas')"><i class="fas fa-code"></i> Source Code</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2: E-Commerce Store -->
-          <div class="scrolly-project-slide slide-ecom" data-slide="1">
-            <div class="scrolly-media-frame">
-              <img src="/assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
-            </div>
-            <div class="scrolly-details">
-              <div class="scrolly-tags">
-                <span>#Express</span>
-                <span>#ECommerce</span>
-                <span>#UIUX</span>
-              </div>
-              <h3>Modern E-Commerce Store</h3>
-              <p>High-end storefront engine emphasizing performance-optimized image pipelines, persistent client-state sync, and accessible checkout architecture.</p>
-              <div class="scrolly-links">
-                <button class="btn btn-primary btn-sm" onclick="openDemo('ecom')"><i class="fas fa-play"></i> Live Demo</button>
-                <button class="btn btn-secondary btn-sm" onclick="openCode('ecom')"><i class="fas fa-code"></i> Source Code</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3: Palette Tool -->
-          <div class="scrolly-project-slide slide-palette" data-slide="2">
-            <div class="scrolly-media-frame">
-              <img src="/assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
-            </div>
-            <div class="scrolly-details">
-              <div class="scrolly-tags">
-                <span>#JavaScript</span>
-                <span>#DesignTool</span>
-                <span>#WCAG</span>
-              </div>
-              <h3>Interactive Palette Tool</h3>
-              <p>A smart browser-based color studio computing real-time relative luminance, WCAG 2.1 contrast ratios, and instant CSS design token exports.</p>
-              <div class="scrolly-links">
-                <button class="btn btn-primary btn-sm" onclick="openDemo('palette')"><i class="fas fa-play"></i> Live Demo</button>
-                <button class="btn btn-secondary btn-sm" onclick="openCode('palette')"><i class="fas fa-code"></i> Source Code</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interactive Stepper Indicator -->
-        <div class="scrolly-nav-indicator">
-          <span class="scrolly-step-pill active" onclick="scrollToSlide(0)">01. Analytics</span>
-          <span class="scrolly-step-pill" onclick="scrollToSlide(1)">02. E-Commerce</span>
-          <span class="scrolly-step-pill" onclick="scrollToSlide(2)">03. Palette Studio</span>
-        </div>
-
+      <!-- HUD Metrics (From Video) -->
+      <div class="scrolly-hud">
+        <div class="hud-title">FEATURED WORK</div>
+        <div class="hud-counter" id="hudCounter">+24 FPS</div>
       </div>
+
+      <!-- Scroll Progress Line -->
+      <div class="scrolly-progress-track">
+        <div class="scrolly-progress-fill" id="scrollyProgressFill"></div>
+      </div>
+
+      <!-- Pinned Showcase Stage -->
+      <div class="scrolly-stage">
+        <!-- Project 1 -->
+        <div class="scrolly-card slide-saas active-slide" data-slide="0">
+          <div class="scrolly-media-frame">
+            <img src="/assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
+          </div>
+          <div class="scrolly-details">
+            <div class="scrolly-tags">
+              <span>#NodeJS</span>
+              <span>#TiDBCloud</span>
+              <span>#Analytics</span>
+            </div>
+            <h3>SaaS Analytics Platform</h3>
+            <p>A full-stack enterprise analytics suite featuring real-time data streaming telemetry, transactional database operations, and live recurring revenue aggregators.</p>
+            <div class="scrolly-links">
+              <button class="btn btn-primary btn-sm" onclick="openDemo('saas')"><i class="fas fa-play"></i> Live Demo</button>
+              <button class="btn btn-secondary btn-sm" onclick="openCode('saas')"><i class="fas fa-code"></i> Source Code</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="scrolly-card slide-ecom" data-slide="1">
+          <div class="scrolly-media-frame">
+            <img src="/assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
+          </div>
+          <div class="scrolly-details">
+            <div class="scrolly-tags">
+              <span>#Express</span>
+              <span>#ECommerce</span>
+              <span>#UIUX</span>
+            </div>
+            <h3>Modern E-Commerce Store</h3>
+            <p>High-end storefront engine emphasizing performance-optimized image pipelines, persistent client-state sync, and accessible checkout architecture.</p>
+            <div class="scrolly-links">
+              <button class="btn btn-primary btn-sm" onclick="openDemo('ecom')"><i class="fas fa-play"></i> Live Demo</button>
+              <button class="btn btn-secondary btn-sm" onclick="openCode('ecom')"><i class="fas fa-code"></i> Source Code</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="scrolly-card slide-palette" data-slide="2">
+          <div class="scrolly-media-frame">
+            <img src="/assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
+          </div>
+          <div class="scrolly-details">
+            <div class="scrolly-tags">
+              <span>#JavaScript</span>
+              <span>#DesignTool</span>
+              <span>#WCAG</span>
+            </div>
+            <h3>Interactive Palette Tool</h3>
+            <p>A smart browser-based color studio computing real-time relative luminance, WCAG 2.1 contrast ratios, and instant CSS design token exports.</p>
+            <div class="scrolly-links">
+              <button class="btn btn-primary btn-sm" onclick="openDemo('palette')"><i class="fas fa-play"></i> Live Demo</button>
+              <button class="btn btn-secondary btn-sm" onclick="openCode('palette')"><i class="fas fa-code"></i> Source Code</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stepper Navigation -->
+        <div class="scrolly-stepper-pills">
+          <span class="scrolly-pill active" onclick="jumpToProjectSlide(0)">01. Analytics</span>
+          <span class="scrolly-pill" onclick="jumpToProjectSlide(1)">02. E-Commerce</span>
+          <span class="scrolly-pill" onclick="jumpToProjectSlide(2)">03. Palette Tool</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Large Spacer Divider Between Projects & Contact -->
+  <!-- Large Spacer Divider -->
   <div class="ambient-separator"></div>
 
-  <!-- Contact Section -->
-  <section class="container section-spacer-extra" id="contact">
+  <!-- Contact Section: Full-Width Mobile Glass Architecture -->
+  <section class="container" id="contact" style="padding-top: clamp(6rem, 10vw, 10rem);">
     <div class="contact-wrapper">
       <div class="contact-info">
         <div class="contact-intro">
@@ -1403,14 +1382,14 @@
           <i class="fas fa-envelope-open-text contact-detail-icon"></i>
           <div>
             <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;">Direct Line</div>
-            <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--gold-primary); font-weight: 600;">
+            <div style="font-family: var(--font-mono); font-size: clamp(0.85rem, 2vw, 0.95rem); color: var(--gold-primary); font-weight: 600;">
               nandinijoshi25102006@gmail.com
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Functional Form with Rotating Beam Glow Button -->
+      <!-- Functional Form -->
       <form class="contact-form" id="contactForm">
         <div class="form-group">
           <label for="name">Your Name</label>
@@ -1425,7 +1404,6 @@
           <textarea id="message" name="message" rows="4" placeholder="Briefly outline your goals or timeline..." required></textarea>
         </div>
         
-        <!-- Rotating Conic Glow Button with Mouse Spotlight Tracking -->
         <button type="submit" id="submitBtn" class="btn-beam-glow" style="align-self: flex-start;">
           <i class="fas fa-paper-plane"></i> <span>Send Message</span>
         </button>
@@ -1452,254 +1430,7 @@
 
   <!-- Scripts -->
   <script>
-    // ========================================================
-    // HIGH-PERFORMANCE CANVAS ENGINE: SPIDER, POWDER & JELLYFISH
-    // ========================================================
-    const canvas = document.getElementById('fxCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let currentFX = 'spider'; // default active mode
-
-    const mouse = { x: -1000, y: -1000, radius: 150 };
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    window.addEventListener('mouseleave', () => {
-      mouse.x = -1000;
-      mouse.y = -1000;
-    });
-
-    function resizeCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      initFX();
-    }
-    window.addEventListener('resize', resizeCanvas);
-
-    // FX Mode 1: Spider (Constellation Nodes)
-    let spiderNodes = [];
-    class SpiderNode {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1.2;
-        this.vy = (Math.random() - 0.5) * 1.2;
-        this.radius = Math.random() * 2 + 1.2;
-        this.color = Math.random() > 0.4 ? '#fbbf24' : '#8b5cf6';
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-
-        // Mouse gravity
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < mouse.radius) {
-          this.x -= (dx / dist) * 1.5;
-          this.y -= (dy / dist) * 1.5;
-        }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    }
-
-    // FX Mode 2: Powder (Explosive Fluid Dust)
-    let powderParticles = [];
-    class PowderParticle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.size = Math.random() * 2 + 0.8;
-        this.alpha = Math.random() * 0.6 + 0.2;
-        this.colors = ['#fbbf24', '#ec4899', '#06b6d4', '#ffffff'];
-        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 120) {
-          const force = (120 - dist) / 120;
-          this.x -= (dx / dist) * force * 7;
-          this.y -= (dy / dist) * force * 7;
-        }
-
-        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-          this.reset();
-        }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.alpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    // FX Mode 3: Jellyfish (Organic Floating Organisms with Wave Tentacles)
-    let jellies = [];
-    class Jellyfish {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height + 100;
-        this.size = Math.random() * 18 + 14;
-        this.vy = -(Math.random() * 0.5 + 0.3);
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.pulse = Math.random() * Math.PI * 2;
-        this.tentacles = 5;
-        this.colors = ['#fbbf24', '#a855f7', '#06b6d4', '#ec4899'];
-        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
-      }
-      update() {
-        this.pulse += 0.04;
-        this.y += this.vy + Math.sin(this.pulse) * 0.6;
-        this.x += this.vx + Math.cos(this.pulse * 0.5) * 0.4;
-
-        if (this.y < -100) {
-          this.y = height + 80;
-          this.x = Math.random() * width;
-        }
-      }
-      draw() {
-        const expansion = Math.sin(this.pulse) * 0.2 + 1;
-        const r = this.size * expansion;
-
-        ctx.save();
-        ctx.translate(this.x, this.y);
-
-        // Jelly Head
-        ctx.beginPath();
-        ctx.arc(0, 0, r, Math.PI, 0, false);
-        ctx.quadraticCurveTo(r * 0.6, r * 0.4, 0, r * 0.2);
-        ctx.quadraticCurveTo(-r * 0.6, r * 0.4, -r, 0);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 0.25;
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = this.color;
-        ctx.fill();
-
-        // Tentacles
-        ctx.globalAlpha = 0.6;
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = 1.2;
-        for (let i = 0; i < this.tentacles; i++) {
-          const offsetX = (i - (this.tentacles - 1) / 2) * (r / 2.5);
-          ctx.beginPath();
-          ctx.moveTo(offsetX, r * 0.2);
-          for (let j = 1; j <= 4; j++) {
-            const segY = r * 0.2 + j * 16;
-            const wave = Math.sin(this.pulse * 1.5 + j * 0.8 + i) * 8;
-            ctx.lineTo(offsetX + wave, segY);
-          }
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-    }
-
-    function initFX() {
-      // Spider
-      spiderNodes = [];
-      const nodeCount = Math.min(Math.floor((width * height) / 14000), 90);
-      for (let i = 0; i < nodeCount; i++) spiderNodes.push(new SpiderNode());
-
-      // Powder
-      powderParticles = [];
-      const powderCount = Math.min(Math.floor((width * height) / 7000), 160);
-      for (let i = 0; i < powderCount; i++) powderParticles.push(new PowderParticle());
-
-      // Jellyfish
-      jellies = [];
-      const jellyCount = Math.min(Math.floor(width / 130), 14);
-      for (let i = 0; i < jellyCount; i++) jellies.push(new Jellyfish());
-    }
-
-    function renderFX() {
-      ctx.clearRect(0, 0, width, height);
-
-      if (currentFX === 'spider') {
-        for (let i = 0; i < spiderNodes.length; i++) {
-          spiderNodes[i].update();
-          spiderNodes[i].draw();
-
-          // Connect nearby nodes
-          for (let j = i + 1; j < spiderNodes.length; j++) {
-            const dist = Math.hypot(spiderNodes[i].x - spiderNodes[j].x, spiderNodes[i].y - spiderNodes[j].y);
-            if (dist < 130) {
-              ctx.beginPath();
-              ctx.moveTo(spiderNodes[i].x, spiderNodes[i].y);
-              ctx.lineTo(spiderNodes[j].x, spiderNodes[j].y);
-              ctx.strokeStyle = `rgba(251, 191, 36, ${1 - dist / 130})`;
-              ctx.lineWidth = 0.65;
-              ctx.stroke();
-            }
-          }
-
-          // Connect to mouse
-          const mDist = Math.hypot(spiderNodes[i].x - mouse.x, spiderNodes[i].y - mouse.y);
-          if (mDist < mouse.radius) {
-            ctx.beginPath();
-            ctx.moveTo(spiderNodes[i].x, spiderNodes[i].y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(139, 92, 246, ${1 - mDist / mouse.radius})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      } else if (currentFX === 'powder') {
-        for (let i = 0; i < powderParticles.length; i++) {
-          powderParticles[i].update();
-          powderParticles[i].draw();
-        }
-      } else if (currentFX === 'jellyfish') {
-        for (let i = 0; i < jellies.length; i++) {
-          jellies[i].update();
-          jellies[i].draw();
-        }
-      }
-
-      requestAnimationFrame(renderFX);
-    }
-
-    resizeCanvas();
-    renderFX();
-
-    // Toolbar Switcher Buttons
-    const fxBtns = document.querySelectorAll('.fx-btn');
-    fxBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        fxBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFX = btn.getAttribute('data-fx');
-      });
-    });
-
-    // ========================================================
-    // MOUSE-TRACKING SPOTLIGHT EFFECT ON SEND BUTTON
-    // ========================================================
+    // Spotlight Mouse Tracker on Send Button
     const glowBtn = document.getElementById('submitBtn');
     if (glowBtn) {
       glowBtn.addEventListener('mousemove', (e) => {
@@ -1710,22 +1441,22 @@
     }
 
     // ========================================================
-    // CIRCLE DROP -> RISE -> EXPAND CAROUSEL
+    // CAPABILITIES DROP-EXPAND CAROUSEL
     // ========================================================
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const dropActor = document.getElementById('dropActor');
-    let currentIndex = 0;
+    let currentCapabilityIndex = 0;
     let autoSlideInterval;
-    let isTransitioning = false;
+    let isCapabilityTransitioning = false;
 
     function triggerCardTransition(targetIndex) {
-      if (isTransitioning || targetIndex === currentIndex) return;
-      isTransitioning = true;
+      if (isCapabilityTransitioning || targetIndex === currentCapabilityIndex) return;
+      isCapabilityTransitioning = true;
 
-      const currentCard = cards[currentIndex];
+      const currentCard = cards[currentCapabilityIndex];
       if (targetIndex >= cards.length) targetIndex = 0;
       else if (targetIndex < 0) targetIndex = cards.length - 1;
 
@@ -1749,19 +1480,19 @@
         setTimeout(() => {
           currentCard.classList.remove('active');
           nextCard.style.zIndex = '2';
-          currentIndex = targetIndex;
-          isTransitioning = false;
+          currentCapabilityIndex = targetIndex;
+          isCapabilityTransitioning = false;
         }, 450);
       }, 500);
     }
 
     prevBtn.addEventListener('click', () => {
-      triggerCardTransition(currentIndex - 1);
+      triggerCardTransition(currentCapabilityIndex - 1);
       resetAutoSlide();
     });
 
     nextBtn.addEventListener('click', () => {
-      triggerCardTransition(currentIndex + 1);
+      triggerCardTransition(currentCapabilityIndex + 1);
       resetAutoSlide();
     });
 
@@ -1775,7 +1506,7 @@
 
     function startAutoSlide() {
       autoSlideInterval = setInterval(() => {
-        triggerCardTransition(currentIndex + 1);
+        triggerCardTransition(currentCapabilityIndex + 1);
       }, 6000);
     }
 
@@ -1787,48 +1518,135 @@
     startAutoSlide();
 
     // ========================================================
-    // SCROLL-DRIVEN SCROLLYTELLING ANIMATION ENGINE
+    // 3D REALISTIC PARTICLE BURST ENGINE (SCROLLYTELLING)
+    // ========================================================
+    const pCanvas = document.getElementById('scrollyParticleCanvas');
+    const pCtx = pCanvas.getContext('2d');
+    let pWidth, pHeight;
+    let particles = [];
+    const PARTICLE_COUNT = 160;
+
+    class BurstParticle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.theta = Math.random() * Math.PI * 2;
+        this.phi = Math.acos((Math.random() * 2) - 1);
+        this.baseSpeed = Math.random() * 2 + 1;
+        this.size = Math.random() * 3 + 1.2;
+        this.colorPool = ['#fbbf24', '#ec4899', '#a855f7', '#06b6d4', '#ffffff'];
+        this.color = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
+        this.dist = Math.random() * 80;
+      }
+      draw(progress) {
+        // Dynamic explosion expansion multiplier based on scroll progress
+        const expansion = 1 + progress * 8.5;
+        const currentDist = (this.dist * expansion) % (pWidth * 0.75);
+
+        // 3D Spherical Coordinates projected to 2D
+        const x3d = currentDist * Math.sin(this.phi) * Math.cos(this.theta);
+        const y3d = currentDist * Math.sin(this.phi) * Math.sin(this.theta);
+        const z3d = currentDist * Math.cos(this.phi) + 300;
+
+        // Perspective projection formula
+        const fov = 350;
+        const scale = fov / (fov + z3d);
+        const x2d = pWidth / 2 + x3d * scale;
+        const y2d = pHeight / 2 + y3d * scale;
+
+        if (scale > 0 && x2d > 0 && x2d < pWidth && y2d > 0 && y2d < pHeight) {
+          pCtx.beginPath();
+          pCtx.arc(x2d, y2d, Math.max(0.5, this.size * scale), 0, Math.PI * 2);
+          pCtx.fillStyle = this.color;
+          pCtx.shadowBlur = 12 * scale;
+          pCtx.shadowColor = this.color;
+          pCtx.globalAlpha = Math.min(1, Math.max(0.2, scale * 1.5));
+          pCtx.fill();
+          pCtx.shadowBlur = 0;
+          pCtx.globalAlpha = 1;
+        }
+      }
+    }
+
+    function initBurstParticles() {
+      pWidth = pCanvas.width = pCanvas.offsetWidth || window.innerWidth;
+      pHeight = pCanvas.height = pCanvas.offsetHeight || window.innerHeight;
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new BurstParticle());
+      }
+    }
+
+    let currentScrollProgress = 0;
+
+    function renderParticles() {
+      pCtx.clearRect(0, 0, pWidth, pHeight);
+      
+      // Draw organic glowing center vortex
+      const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, 260);
+      grad.addColorStop(0, 'rgba(168, 85, 247, 0.25)');
+      grad.addColorStop(0.5, 'rgba(251, 191, 36, 0.12)');
+      grad.addColorStop(1, 'transparent');
+      pCtx.fillStyle = grad;
+      pCtx.fillRect(0, 0, pWidth, pHeight);
+
+      particles.forEach(p => p.draw(currentScrollProgress));
+      requestAnimationFrame(renderParticles);
+    }
+
+    window.addEventListener('resize', initBurstParticles);
+    initBurstParticles();
+    renderParticles();
+
+    // ========================================================
+    // SCROLL-DRIVEN TRACKING ENGINE
     // ========================================================
     const scrollySection = document.getElementById('projects');
-    const scrollySlides = document.querySelectorAll('.scrolly-project-slide');
-    const scrollyPills = document.querySelectorAll('.scrolly-step-pill');
-    const progressBar = document.getElementById('scrollyProgressBar');
+    const scrollyCards = document.querySelectorAll('.scrolly-card');
+    const scrollyPills = document.querySelectorAll('.scrolly-pill');
+    const progressFill = document.getElementById('scrollyProgressFill');
+    const hudCounter = document.getElementById('hudCounter');
 
-    function updateScrollytelling() {
+    function updateScrollyState() {
       const rect = scrollySection.getBoundingClientRect();
       const scrollProgress = -rect.top / (rect.height - window.innerHeight);
-      const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
+      const clamped = Math.min(Math.max(scrollProgress, 0), 1);
+      currentScrollProgress = clamped;
 
-      if (progressBar) {
-        progressBar.style.width = `${clampedProgress * 100}%`;
+      if (progressFill) {
+        progressFill.style.width = `${clamped * 100}%`;
       }
 
-      let activeSlideIndex = 0;
-      if (clampedProgress >= 0.66) {
-        activeSlideIndex = 2;
-      } else if (clampedProgress >= 0.33) {
-        activeSlideIndex = 1;
+      if (hudCounter) {
+        hudCounter.innerText = `+${Math.floor(clamped * 90 + 10)}`;
       }
 
-      scrollySlides.forEach((slide, idx) => {
-        slide.classList.toggle('active-slide', idx === activeSlideIndex);
+      let activeIndex = 0;
+      if (clamped >= 0.66) {
+        activeIndex = 2;
+      } else if (clamped >= 0.33) {
+        activeIndex = 1;
+      }
+
+      scrollyCards.forEach((card, idx) => {
+        card.classList.toggle('active-slide', idx === activeIndex);
       });
 
       scrollyPills.forEach((pill, idx) => {
-        pill.classList.toggle('active', idx === activeSlideIndex);
+        pill.classList.toggle('active', idx === activeIndex);
       });
     }
 
-    function scrollToSlide(index) {
+    function jumpToProjectSlide(index) {
       const sectionTop = scrollySection.offsetTop;
       const sectionHeight = scrollySection.offsetHeight - window.innerHeight;
       const targetScroll = sectionTop + (index / 2) * sectionHeight;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
 
-    window.addEventListener('scroll', updateScrollytelling, { passive: true });
-    window.addEventListener('resize', updateScrollytelling);
-    updateScrollytelling();
+    window.addEventListener('scroll', updateScrollyState, { passive: true });
+    updateScrollyState();
 
     // ========================================================
     // MODAL SHOWCASE DATA & ACTIONS
