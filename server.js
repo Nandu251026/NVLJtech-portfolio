@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mysql = require('mysql2');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +23,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize Resend with API Key
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Native Basic Authentication Middleware for Admin Panel
 const adminAuth = (req, res, next) => {
@@ -86,19 +89,6 @@ db.getConnection((err, conn) => {
   }
 });
 
-// Nodemailer Setup using Direct SSL Port 465 (Bypasses Render SMTP blocking)
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // Uses SSL directly
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  connectionTimeout: 10000, // 10 seconds timeout
-  greetingTimeout: 10000
-});
-
 // Public API Route: Fast Contact Form Submission
 app.post('/api/contact', contactLimiter, (req, res) => {
   const { name, email, message } = req.body;
@@ -114,7 +104,7 @@ app.post('/api/contact', contactLimiter, (req, res) => {
 
   // 1. Save submission into MySQL Table
   const sqlInsert = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
-  db.query(sqlInsert, [name.trim(), email.trim(), message.trim()], (dbErr, result) => {
+  db.query(sqlInsert, [name.trim(), email.trim(), message.trim()], async (dbErr, result) => {
     if (dbErr) {
       console.error('Database Error:', dbErr);
       return res.status(500).json({ success: false, error: 'Database saving failed.' });
@@ -128,29 +118,33 @@ app.post('/api/contact', contactLimiter, (req, res) => {
       message: 'Message sent & saved successfully!'
     });
 
-    // 2. Dispatch Email in background
-    const mailOptions = {
-      from: `"NVLJtech Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER,
-      subject: `New Message from ${name}`,
-      html: `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-        <hr/>
-        <small>Saved in Database Record #${result.insertId}</small>
-      `
-    };
+    // 2. Dispatch Email in background via HTTPS API (Bypasses Render SMTP port blocking)
+    try {
+      if (process.env.RESEND_API_KEY) {
+        const { data, error } = await resend.emails.send({
+          from: 'NVLJtech Portfolio <onboarding@resend.dev>',
+          to: [process.env.RECEIVER_EMAIL || process.env.EMAIL_USER],
+          subject: `New Message from ${name}`,
+          html: `
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>
+            <hr/>
+            <small>Saved in Database Record #${result.insertId}</small>
+          `
+        });
 
-    transporter.sendMail(mailOptions, (mailErr, info) => {
-      if (mailErr) {
-        console.error('⚠️ Background Email Failed:', mailErr.message);
-      } else {
-        console.log('✅ Background Email Dispatched:', info.response);
+        if (error) {
+          console.error('⚠️ Resend Email Error:', error);
+        } else {
+          console.log('✅ Background Email Dispatched via Resend:', data.id);
+        }
       }
-    });
+    } catch (apiErr) {
+      console.error('⚠️ Background Email API Failed:', apiErr.message);
+    }
   });
 });
 
