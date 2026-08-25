@@ -3,31 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nandini Joshi | UI/UX Designer & Full-Stack Engineer</title>
+  <title>NYLJ TECH | Full-Stack Systems & Design Architecture</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
-      --bg-deep: #07090e;
-      --bg-surface: rgba(18, 24, 38, 0.7);
-      --bg-surface-hover: rgba(28, 38, 58, 0.85);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --accent-purple: #a855f7;
+      --bg-black: #050608;
+      --bg-surface: rgba(15, 17, 23, 0.75);
+      --bg-surface-hover: rgba(24, 27, 36, 0.9);
+      
+      /* Luxury Gold Palette */
+      --gold-light: #fde68a;
+      --gold-primary: #fbbf24;
+      --gold-dark: #d97706;
+      --gold-glow: rgba(251, 191, 36, 0.15);
+      --gold-border: rgba(251, 191, 36, 0.3);
+      --gold-gradient: linear-gradient(135deg, #fde68a 0%, #fbbf24 45%, #d97706 100%);
+      
       --text-main: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(56, 189, 248, 0.4);
+      
+      --font-display: 'Cinzel', serif;
       --font-sans: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 20px;
+      --radius-lg: 22px;
     }
 
     * {
@@ -41,10 +49,10 @@
     }
 
     body {
-      background-color: var(--bg-deep);
+      background-color: var(--bg-black);
       background-image: 
-        radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.07) 0px, transparent 40%),
-        radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.06) 0px, transparent 45%);
+        radial-gradient(at 15% 15%, rgba(251, 191, 36, 0.07) 0px, transparent 45%),
+        radial-gradient(at 85% 75%, rgba(217, 119, 6, 0.05) 0px, transparent 50%);
       background-attachment: fixed;
       color: var(--text-main);
       font-family: var(--font-sans);
@@ -53,32 +61,38 @@
     }
 
     .container {
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* Spacious Section Layout */
+    /* Spacious Sectioning */
     section {
-      padding: 7.5rem 0;
+      padding: 8rem 0;
       position: relative;
     }
 
-    /* Ambient Divider */
-    .section-divider {
-      height: 1px;
-      width: 100%;
-      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    /* Extra Distance Between Projects & Contact Section */
+    .section-spacer-extra {
+      padding-top: 10rem !important;
+      padding-bottom: 9rem !important;
     }
 
-    /* Glass Navigation */
+    .ambient-separator {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+      opacity: 0.6;
+    }
+
+    /* Navigation */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 9, 14, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 6, 8, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-subtle);
     }
 
@@ -86,22 +100,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
+      height: 85px;
     }
 
-    .logo {
-      font-weight: 800;
-      font-size: 1.35rem;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: -0.5px;
+    .logo-brand {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 12px;
+      text-decoration: none;
     }
 
-    .logo span {
-      color: var(--accent);
+    .logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--gold-border);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .nav-links {
@@ -119,50 +144,53 @@
     }
 
     .nav-links a:hover {
-      color: var(--accent);
+      color: var(--gold-primary);
     }
 
     /* Hero Section */
     .hero {
-      min-height: 88vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
-      padding-top: 3rem;
-      padding-bottom: 6rem;
+      padding-top: 4rem;
+      padding-bottom: 7rem;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 0.45rem 1.1rem;
-      background: var(--accent-glow);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent);
+      gap: 10px;
+      padding: 0.5rem 1.25rem;
+      background: var(--gold-glow);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
       border-radius: 999px;
       font-size: 0.85rem;
       font-weight: 600;
       margin-bottom: 2rem;
+      letter-spacing: 0.5px;
     }
 
     .hero-badge-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      background-color: var(--gold-primary);
+      box-shadow: 0 0 12px var(--gold-primary);
     }
 
     .hero h1 {
-      font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+      font-size: clamp(2.75rem, 5.5vw, 4.4rem);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.18;
       letter-spacing: -1.5px;
       margin-bottom: 1.75rem;
     }
 
-    .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--accent) 15%, var(--accent-purple) 90%);
+    .hero h1 .gold-text {
+      font-family: var(--font-display);
+      letter-spacing: 0px;
+      background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -170,9 +198,9 @@
     .hero p {
       font-size: 1.25rem;
       color: var(--text-secondary);
-      max-width: 720px;
-      margin-bottom: 3rem;
-      line-height: 1.8;
+      max-width: 740px;
+      margin-bottom: 3.25rem;
+      line-height: 1.85;
     }
 
     .hero-cta {
@@ -181,13 +209,13 @@
       align-items: center;
     }
 
-    /* Refined Buttons */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      padding: 0.9rem 1.8rem;
+      gap: 0.65rem;
+      padding: 0.95rem 1.9rem;
       border-radius: var(--radius-sm);
       font-weight: 600;
       font-size: 0.95rem;
@@ -197,15 +225,16 @@
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #030712;
-      border: 1px solid var(--accent);
+      background: var(--gold-gradient);
+      color: #000;
+      border: 1px solid var(--gold-primary);
+      font-weight: 700;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(56, 189, 248, 0.45);
-      background: #7dd3fc;
+      box-shadow: 0 14px 28px -8px rgba(251, 191, 36, 0.45);
+      filter: brightness(1.1);
     }
 
     .btn-secondary {
@@ -216,8 +245,9 @@
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: var(--text-secondary);
+      background: rgba(251, 191, 36, 0.06);
+      border-color: var(--gold-border);
+      color: var(--gold-primary);
       transform: translateY(-2px);
     }
 
@@ -234,9 +264,9 @@
     .section-header .tag {
       font-family: var(--font-mono);
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--gold-primary);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       margin-bottom: 0.75rem;
       display: block;
       font-weight: 600;
@@ -252,39 +282,39 @@
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      gap: 2.25rem;
     }
 
     .skill-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 2.25rem;
-      backdrop-filter: blur(12px);
+      padding: 2.5rem;
+      backdrop-filter: blur(14px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
     }
 
     .skill-card:hover {
-      border-color: var(--border-hover);
+      border-color: var(--gold-border);
       transform: translateY(-5px);
       background: var(--bg-surface-hover);
-      box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.7);
     }
 
     .skill-icon-wrap {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 12px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: var(--gold-glow);
+      border: 1px solid var(--gold-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.35rem;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--gold-primary);
+      margin-bottom: 1.75rem;
     }
 
     .skill-card h3 {
@@ -298,7 +328,7 @@
       font-size: 0.95rem;
       margin-bottom: 2rem;
       flex-grow: 1;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .skill-pills {
@@ -317,11 +347,11 @@
       color: var(--text-secondary);
     }
 
-    /* Featured Projects Grid */
+    /* Projects Grid */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.5rem;
+      gap: 2.75rem;
     }
 
     .project-card {
@@ -331,23 +361,22 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .project-card:hover {
       transform: translateY(-6px);
-      border-color: var(--border-hover);
-      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+      border-color: var(--gold-border);
+      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8);
     }
 
     .project-image-wrapper {
       width: 100%;
-      height: 230px;
-      background: #0d121d;
+      height: 235px;
+      background: #090b10;
       overflow: hidden;
       border-bottom: 1px solid var(--border-subtle);
-      position: relative;
     }
 
     .project-image-wrapper img {
@@ -362,7 +391,7 @@
     }
 
     .project-content {
-      padding: 2rem;
+      padding: 2.25rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -377,8 +406,9 @@
 
     .project-tags span {
       font-size: 0.75rem;
-      color: var(--accent);
-      background: var(--accent-glow);
+      color: var(--gold-light);
+      background: var(--gold-glow);
+      border: 1px solid rgba(251, 191, 36, 0.2);
       padding: 0.25rem 0.65rem;
       border-radius: 4px;
       font-family: var(--font-mono);
@@ -396,7 +426,7 @@
       font-size: 0.95rem;
       margin-bottom: 2rem;
       flex-grow: 1;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .project-links {
@@ -409,53 +439,47 @@
     .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 4.5rem;
+      gap: 5rem;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 4rem;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 4.5rem;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
     }
 
     .contact-intro p {
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       font-size: 1.05rem;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     .contact-detail-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-subtle);
-      padding: 1.25rem 1.5rem;
+      background: rgba(251, 191, 36, 0.03);
+      border: 1px solid var(--gold-border);
+      padding: 1.35rem 1.6rem;
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.1rem;
     }
 
     .contact-detail-icon {
-      color: var(--accent);
-      font-size: 1.25rem;
+      color: var(--gold-primary);
+      font-size: 1.35rem;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
+      gap: 1.85rem;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
 
     .form-group label {
@@ -467,10 +491,10 @@
 
     .form-group input,
     .form-group textarea {
-      background: rgba(7, 9, 14, 0.6);
+      background: rgba(5, 6, 8, 0.7);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
-      padding: 1rem 1.2rem;
+      padding: 1rem 1.25rem;
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: 0.95rem;
@@ -480,21 +504,21 @@
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-      background: rgba(7, 9, 14, 0.9);
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+      background: rgba(5, 6, 8, 0.95);
     }
 
-    /* Interactive Showcase Modal */
+    /* Modal Overlay */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -507,21 +531,21 @@
     }
 
     .modal-box {
-      background: #0e131f;
-      border: 1px solid var(--border-subtle);
+      background: #0d1017;
+      border: 1px solid var(--gold-border);
       border-radius: var(--radius-lg);
       width: 100%;
       max-width: 720px;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 2.5rem;
+      padding: 2.75rem;
       position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9);
     }
 
     .modal-close {
       position: absolute;
-      top: 20px;
+      top: 22px;
       right: 24px;
       font-size: 1.6rem;
       color: var(--text-muted);
@@ -532,20 +556,20 @@
     }
 
     .modal-close:hover {
-      color: var(--text-main);
+      color: var(--gold-primary);
     }
 
     pre {
-      background: #06080d;
+      background: #050608;
       padding: 1.25rem;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-subtle);
       overflow-x: auto;
-      color: #93c5fd;
+      color: #fde68a;
       font-size: 0.85rem;
       font-family: var(--font-mono);
       margin-top: 1.25rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* Footer */
@@ -561,14 +585,15 @@
     @media (max-width: 900px) {
       .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: 3rem;
-        padding: 2.25rem;
+        gap: 3.5rem;
+        padding: 2.5rem;
       }
     }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      section { padding: 4.5rem 0; }
+      section { padding: 5rem 0; }
+      .section-spacer-extra { padding-top: 6rem !important; }
       .hero { min-height: auto; padding: 4rem 0; }
       .hero-cta { flex-direction: column; align-items: stretch; }
     }
@@ -576,10 +601,13 @@
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation with Gold Brand Identity -->
   <nav>
     <div class="container nav-container">
-      <a href="#" class="logo">NVLJ<span>.tech</span></a>
+      <a href="#" class="logo-brand">
+        <img src="assets/images/logo.png" alt="NYLJ TECH Logo" class="logo-img" onerror="this.style.display='none';" />
+        <span class="logo-text">NYLJ TECH</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Capabilities</a></li>
@@ -594,10 +622,10 @@
     <div>
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        Available for engineering & design collaborations
+        Available for full-stack engineering & design collaborations
       </div>
-      <h1>Architecting intuitive <span class="gradient-text">user interfaces</span> & resilient <span class="gradient-text">cloud systems</span>.</h1>
-      <p>I blend rigorous UI/UX design fundamentals with robust full-stack architecture—crafting high-performance web products, scalable database models, and polished interactive experiences.</p>
+      <h1>Architecting intuitive <span class="gold-text">user interfaces</span> & resilient <span class="gold-text">cloud systems</span>.</h1>
+      <p>I merge high-end UI/UX aesthetics with scalable database architecture—crafting high-converting web applications, TiDB Cloud backends, and bespoke digital experiences.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary"><i class="fas fa-layer-group"></i> Explore Portfolio</a>
         <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
@@ -605,7 +633,7 @@
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="ambient-separator"></div>
 
   <!-- Capabilities Section -->
   <section class="container" id="skills">
@@ -631,7 +659,7 @@
       <div class="skill-card">
         <div class="skill-icon-wrap"><i class="fas fa-palette"></i></div>
         <h3>UI Design</h3>
-        <p>Design token architecture, micro-interactions, responsive grid layouts, and cohesive visual hierarchies.</p>
+        <p>Design token architecture, micro-interactions, responsive grid layouts, and luxury visual hierarchies.</p>
         <div class="skill-pills">
           <span class="pill">Figma Systems</span>
           <span class="pill">Typography</span>
@@ -644,7 +672,7 @@
       <div class="skill-card">
         <div class="skill-icon-wrap"><i class="fas fa-code"></i></div>
         <h3>Frontend Engineering</h3>
-        <p>Semantic modern HTML5/CSS3, optimized asynchronous JavaScript, responsive fluid viewports, and clean UI components.</p>
+        <p>Semantic HTML5/CSS3, optimized asynchronous JavaScript, responsive fluid viewports, and clean UI components.</p>
         <div class="skill-pills">
           <span class="pill">HTML5 / CSS3</span>
           <span class="pill">Modern ES6+</span>
@@ -668,7 +696,7 @@
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="ambient-separator"></div>
 
   <!-- Featured Projects Section -->
   <section class="container" id="projects">
@@ -739,10 +767,11 @@
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <!-- Large Spacer Divider Between Projects & Contact -->
+  <div class="ambient-separator"></div>
 
-  <!-- Contact Section -->
-  <section class="container" id="contact">
+  <!-- Contact Section with Expanded Vertical Spacing -->
+  <section class="container section-spacer-extra" id="contact">
     <div class="contact-wrapper">
       <div class="contact-info">
         <div class="contact-intro">
@@ -759,7 +788,7 @@
           <i class="fas fa-envelope-open-text contact-detail-icon"></i>
           <div>
             <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;">Direct Line</div>
-            <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); font-weight: 500;">
+            <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--gold-primary); font-weight: 600;">
               nandinijoshi25102006@gmail.com
             </div>
           </div>
@@ -791,7 +820,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Nandini Joshi. Engineered with semantic HTML, modern CSS & cloud infrastructure.</p>
+      <p>&copy; 2026 NYLJ TECH. Engineered with semantic HTML, modern CSS & cloud infrastructure.</p>
     </div>
   </footer>
 
@@ -799,7 +828,7 @@
   <div id="projectModal" class="modal-overlay">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      <h2 id="modalTitle" style="margin-bottom: 12px; font-size: 1.4rem;"></h2>
+      <h2 id="modalTitle" style="margin-bottom: 12px; font-size: 1.4rem; color: var(--gold-primary); font-family: var(--font-sans);"></h2>
       <div id="modalBody"></div>
     </div>
   </div>
@@ -816,13 +845,13 @@
         title: 'SaaS Analytics Platform - Interactive Preview',
         demoHtml: `
           <p style="color: var(--text-secondary); margin-bottom: 16px;">Simulated live telemetry feed connected to TiDB Cloud instance:</p>
-          <div style="background: rgba(7, 9, 14, 0.8); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+          <div style="background: rgba(5, 6, 8, 0.9); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
             <div style="display: flex; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-              <div><small style="color: var(--text-muted);">Active Platform Leads</small><h2 style="color: var(--accent);">2,104 <span style="font-size: 0.8rem; color: #34d399;">+12%</span></h2></div>
-              <div><small style="color: var(--text-muted);">Automated Email Dispatches</small><h2 style="color: var(--accent-purple);">18,450 <span style="font-size: 0.8rem; color: #34d399;">+7%</span></h2></div>
+              <div><small style="color: var(--text-muted);">Active Platform Leads</small><h2 style="color: var(--gold-primary);">2,104 <span style="font-size: 0.8rem; color: #34d399;">+12%</span></h2></div>
+              <div><small style="color: var(--text-muted);">Automated Email Dispatches</small><h2 style="color: var(--gold-light);">18,450 <span style="font-size: 0.8rem; color: #34d399;">+7%</span></h2></div>
             </div>
-            <div style="height: 10px; width: 100%; background: #1e293b; border-radius: 6px; overflow: hidden;">
-              <div style="height: 100%; width: 85%; background: linear-gradient(90deg, var(--accent), var(--accent-purple));"></div>
+            <div style="height: 10px; width: 100%; background: #181b24; border-radius: 6px; overflow: hidden;">
+              <div style="height: 100%; width: 85%; background: var(--gold-gradient);"></div>
             </div>
           </div>
         `,
@@ -845,13 +874,13 @@ app.get('/api/analytics/metrics', async (req, res) => {
       ecom: {
         title: 'Modern E-Commerce Store - Cart Engine Preview',
         demoHtml: `
-          <div style="display: flex; gap: 16px; background: rgba(7, 9, 14, 0.8); padding: 16px; border-radius: 8px; border: 1px solid var(--border-subtle); align-items: center;">
-            <div style="width: 52px; height: 52px; background: #1e293b; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: var(--accent);"><i class="fas fa-bag-shopping"></i></div>
+          <div style="display: flex; gap: 16px; background: rgba(5, 6, 8, 0.9); padding: 16px; border-radius: 8px; border: 1px solid var(--border-subtle); align-items: center;">
+            <div style="width: 52px; height: 52px; background: #181b24; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: var(--gold-primary);"><i class="fas fa-bag-shopping"></i></div>
             <div style="flex-grow:1;">
               <h4>Elysium Luxury Wool Blazer</h4>
               <p style="color: var(--text-muted); font-size: 0.85rem;">Size: Medium • SKU: ELY-883</p>
             </div>
-            <strong style="color: #34d399; font-size: 1.1rem;">$310.00</strong>
+            <strong style="color: var(--gold-primary); font-size: 1.1rem;">$310.00</strong>
           </div>
         `,
         code: `// Cart State Management Module
@@ -879,11 +908,11 @@ class CartManager {
         title: 'Interactive Design Palette Tool Preview',
         demoHtml: `
           <p style="color: var(--text-secondary); margin-bottom: 12px;">Dynamic Swatch Generation:</p>
-          <div style="display: flex; height: 75px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
-            <div style="flex:1; background: #07090e; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#07090E</div>
-            <div style="flex:1; background: #121826; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#121826</div>
-            <div style="flex:1; background: #38bdf8; display:flex; align-items:center; justify-content:center; color:#000; font-size:0.75rem; font-family:var(--font-mono); font-weight:700;">#38BDF8</div>
-            <div style="flex:1; background: #a855f7; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#A855F7</div>
+          <div style="display: flex; height: 75px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--gold-border);">
+            <div style="flex:1; background: #050608; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#050608</div>
+            <div style="flex:1; background: #181b24; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#181B24</div>
+            <div style="flex:1; background: #fbbf24; display:flex; align-items:center; justify-content:center; color:#000; font-size:0.75rem; font-family:var(--font-mono); font-weight:700;">#FBBF24</div>
+            <div style="flex:1; background: #d97706; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.75rem; font-family:var(--font-mono);">#D97706</div>
           </div>
         `,
         code: `// WCAG Contrast Ratio Checker Algorithm
@@ -951,7 +980,7 @@ function checkContrast(hex1, hex2) {
         const data = await res.json();
 
         if (res.ok && data.success) {
-          formStatus.style.color = '#38bdf8';
+          formStatus.style.color = '#fbbf24';
           formStatus.innerText = '✓ ' + data.message;
           contactForm.reset();
         } else {
