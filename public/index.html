@@ -811,55 +811,68 @@
       font-weight: 700;
     }
 
-    /* Contact Section: Fully Responsive Glass */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: clamp(2rem, 5vw, 4.5rem);
-      background: var(--bg-surface);
-      border: 1px solid var(--gold-border);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.75rem, 5vw, 4rem);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.9), 0 0 30px var(--gold-glow);
+    /* ========================================================
+       ANIMATED FLOATING OBSIDIAN CONTACT CARD WITH 3D MORPHING CORE
+       ======================================================== */
+    .contact-card-outer {
+      position: relative;
       width: 100%;
+      border-radius: 28px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.6) 0%, rgba(168, 85, 247, 0.4) 50%, rgba(6, 182, 212, 0.4) 100%);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), 0 0 50px rgba(168, 85, 247, 0.25);
+      animation: cardPulseGlow 8s infinite alternate ease-in-out;
     }
 
-    .contact-info {
+    @keyframes cardPulseGlow {
+      0% { box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), 0 0 40px rgba(251, 191, 36, 0.2); }
+      100% { box-shadow: 0 35px 90px -20px rgba(0, 0, 0, 0.95), 0 0 60px rgba(168, 85, 247, 0.35), 0 0 30px rgba(236, 72, 153, 0.25); }
+    }
+
+    .contact-card-inner {
+      position: relative;
+      width: 100%;
+      background: rgba(8, 10, 18, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 26px;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .contact-form-side {
+      position: relative;
+      z-index: 3;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
-    .contact-intro p {
-      color: var(--text-secondary);
+    .contact-card-header {
       margin-bottom: 2rem;
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      line-height: 1.8;
     }
 
-    .contact-detail-box {
-      background: rgba(251, 191, 36, 0.04);
-      border: 1px solid var(--gold-border);
-      padding: clamp(1rem, 2.5vw, 1.4rem);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      gap: 1.1rem;
-      word-break: break-all;
+    .contact-card-header h2 {
+      font-size: clamp(2rem, 4.2vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
     }
 
-    .contact-detail-icon {
-      color: var(--gold-primary);
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      flex-shrink: 0;
+    .contact-card-header p {
+      color: var(--text-secondary);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      line-height: 1.7;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1.4rem;
+      gap: 1.35rem;
       width: 100%;
     }
 
@@ -878,14 +891,14 @@
 
     .form-group input,
     .form-group textarea {
-      background: rgba(4, 5, 8, 0.85);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: clamp(0.85rem, 2vw, 1.05rem) 1.2rem;
+      background: rgba(15, 20, 32, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: clamp(0.85rem, 2vw, 1.05rem) 1.25rem;
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: clamp(0.9rem, 2vw, 1rem);
-      transition: all 0.25s ease;
+      transition: all 0.3s ease;
       width: 100%;
     }
 
@@ -893,7 +906,8 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2), 0 0 20px rgba(251, 191, 36, 0.15);
+      background: rgba(15, 20, 32, 0.95);
     }
 
     .btn-beam-glow {
@@ -902,7 +916,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      padding: 1.05rem 2.2rem;
+      padding: 1.1rem 2.4rem;
       border-radius: var(--radius-md);
       font-weight: 700;
       font-size: clamp(0.92rem, 2vw, 1rem);
@@ -915,6 +929,7 @@
       transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
       width: auto;
+      margin-top: 0.5rem;
     }
 
     .btn-beam-glow::before {
@@ -955,6 +970,54 @@
     @keyframes rotateBorderBeam {
       0% { --btn-angle: 0deg; }
       100% { --btn-angle: 360deg; }
+    }
+
+    /* 3D Morphing Crystal Visual Column */
+    .contact-visual-side {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, rgba(251, 191, 36, 0.05) 50%, transparent 75%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    #contactOrbCanvas {
+      width: 100%;
+      height: 320px;
+      display: block;
+      pointer-events: none;
+    }
+
+    .contact-direct-chip {
+      margin-top: 1rem;
+      background: rgba(251, 191, 36, 0.06);
+      border: 1px solid var(--gold-border);
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+
+    .contact-direct-chip i {
+      color: var(--gold-primary);
+      font-size: 1.1rem;
+    }
+
+    .contact-direct-chip span {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      color: var(--gold-light);
+      font-weight: 600;
     }
 
     /* Modal */
@@ -1053,9 +1116,16 @@
       .scrolly-media-frame {
         aspect-ratio: 16 / 9;
       }
-      .contact-wrapper {
+      .contact-card-inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+        padding: 2rem;
+      }
+      .contact-visual-side {
+        min-height: 300px;
+      }
+      #contactOrbCanvas {
+        height: 240px;
       }
     }
 
@@ -1223,16 +1293,12 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- ========================================================
-       REALISTIC 3D ORGANIC PARTICLE BURST SCROLLYTELLING SHOWCASE
-       ======================================================== -->
+  <!-- Realistic 3D Organic Particle Burst Scrollytelling Showcase -->
   <section class="scrolly-portal-section" id="projects">
     <div class="scrolly-sticky-container">
       
-      <!-- Realistic 3D Organic Particle Burst Engine -->
       <canvas id="scrollyParticleCanvas"></canvas>
 
-      <!-- Pinned Showcase Stage -->
       <div class="scrolly-stage">
         <!-- Project 1 -->
         <div class="scrolly-card slide-saas active-slide" data-slide="0">
@@ -1307,51 +1373,52 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Contact Section -->
+  <!-- ========================================================
+       ANIMATED OBSIDIAN GLASS CONTACT CARD WITH 3D MORPHING CORE
+       ======================================================== -->
   <section class="container" id="contact" style="padding-top: clamp(6rem, 10vw, 10rem);">
-    <div class="contact-wrapper">
-      <div class="contact-info">
-        <div class="contact-intro">
-          <div class="section-header" style="margin-bottom: 1.5rem;">
-            <span class="tag">03. Contact</span>
+    <div class="contact-card-outer">
+      <div class="contact-card-inner">
+        
+        <!-- Left: Glass Form Panel -->
+        <div class="contact-form-side">
+          <div class="contact-card-header">
+            <span class="tag" style="color: var(--gold-primary); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">03. Get In Touch</span>
             <h2>Let's build something scalable.</h2>
+            <p>Whether you need a design overhaul, full-stack web application development, or resilient cloud architecture, let's connect.</p>
           </div>
-          <p>
-            Whether you have an upcoming web initiative, a full-stack design system in need of execution, or a technical inquiry, feel free to reach out.
-          </p>
-        </div>
-        
-        <div class="contact-detail-box">
-          <i class="fas fa-envelope-open-text contact-detail-icon"></i>
-          <div>
-            <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;">Direct Line</div>
-            <div style="font-family: var(--font-mono); font-size: clamp(0.85rem, 2vw, 0.95rem); color: var(--gold-primary); font-weight: 600;">
-              nandinijoshi25102006@gmail.com
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Functional Form -->
-      <form class="contact-form" id="contactForm">
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Alex Morgan" required />
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Alex Morgan" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="alex@company.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Project Overview</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me about your project goals or timeline..." required></textarea>
+            </div>
+            
+            <button type="submit" id="submitBtn" class="btn-beam-glow" style="align-self: flex-start;">
+              <i class="fas fa-paper-plane"></i> <span>Send Message</span>
+            </button>
+            <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.25rem; font-family: var(--font-mono);"></p>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="alex@company.com" required />
+
+        <!-- Right: 3D Morphing Crystal Orb Visual (From Video) -->
+        <div class="contact-visual-side">
+          <canvas id="contactOrbCanvas"></canvas>
+          <div class="contact-direct-chip">
+            <i class="fas fa-envelope-open-text"></i>
+            <span>nandinijoshi25102006@gmail.com</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="message">Project Overview</label>
-          <textarea id="message" name="message" rows="4" placeholder="Briefly outline your goals or timeline..." required></textarea>
-        </div>
-        
-        <button type="submit" id="submitBtn" class="btn-beam-glow" style="align-self: flex-start;">
-          <i class="fas fa-paper-plane"></i> <span>Send Message</span>
-        </button>
-        <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.25rem; font-family: var(--font-mono);"></p>
-      </form>
+
+      </div>
     </div>
   </section>
 
@@ -1382,6 +1449,100 @@
         glowBtn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
       });
     }
+
+    // ========================================================
+    // 3D ORGANIC MORPHING CRYSTAL ORB (CONTACT SECTION)
+    // ========================================================
+    const orbCanvas = document.getElementById('contactOrbCanvas');
+    const orbCtx = orbCanvas.getContext('2d');
+    let orbWidth, orbHeight;
+    let orbPhase = 0;
+
+    function resizeOrbCanvas() {
+      orbWidth = orbCanvas.width = orbCanvas.offsetWidth || 340;
+      orbHeight = orbCanvas.height = orbCanvas.offsetHeight || 320;
+    }
+    window.addEventListener('resize', resizeOrbCanvas);
+    resizeOrbCanvas();
+
+    function drawMorphingOrb() {
+      orbCtx.clearRect(0, 0, orbWidth, orbHeight);
+      orbPhase += 0.025;
+
+      const cx = orbWidth / 2;
+      const cy = orbHeight / 2;
+      const baseRadius = Math.min(orbWidth, orbHeight) * 0.28;
+
+      // Radiant Core Glow
+      const glowGrad = orbCtx.createRadialGradient(cx, cy, 10, cx, cy, baseRadius * 1.8);
+      glowGrad.addColorStop(0, 'rgba(168, 85, 247, 0.45)');
+      glowGrad.addColorStop(0.5, 'rgba(251, 191, 36, 0.2)');
+      glowGrad.addColorStop(1, 'transparent');
+      orbCtx.fillStyle = glowGrad;
+      orbCtx.beginPath();
+      orbCtx.arc(cx, cy, baseRadius * 1.8, 0, Math.PI * 2);
+      orbCtx.fill();
+
+      // Multi-Layer Morphing Organic Spline Waves
+      for (let layer = 0; layer < 4; layer++) {
+        orbCtx.beginPath();
+        const numPoints = 64;
+        const layerOffset = layer * (Math.PI / 2);
+
+        for (let i = 0; i <= numPoints; i++) {
+          const angle = (i / numPoints) * Math.PI * 2;
+          
+          // Organic 3D harmonic distortion formula
+          const wave1 = Math.sin(angle * 3 + orbPhase + layerOffset) * 16;
+          const wave2 = Math.cos(angle * 5 - orbPhase * 1.5) * 10;
+          const wave3 = Math.sin(angle * 7 + orbPhase * 0.8) * 6;
+          const r = baseRadius + wave1 + wave2 + wave3 - (layer * 12);
+
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+
+          if (i === 0) orbCtx.moveTo(x, y);
+          else orbCtx.lineTo(x, y);
+        }
+
+        orbCtx.closePath();
+
+        if (layer === 0) {
+          const bodyGrad = orbCtx.createLinearGradient(cx - baseRadius, cy - baseRadius, cx + baseRadius, cy + baseRadius);
+          bodyGrad.addColorStop(0, 'rgba(236, 72, 153, 0.35)');
+          bodyGrad.addColorStop(0.5, 'rgba(168, 85, 247, 0.25)');
+          bodyGrad.addColorStop(1, 'rgba(251, 191, 36, 0.2)');
+          orbCtx.fillStyle = bodyGrad;
+          orbCtx.fill();
+        }
+
+        orbCtx.strokeStyle = layer === 0 ? 'rgba(251, 191, 36, 0.8)' : layer === 1 ? 'rgba(236, 72, 153, 0.6)' : 'rgba(6, 182, 212, 0.5)';
+        orbCtx.lineWidth = layer === 0 ? 2 : 1.2;
+        orbCtx.shadowBlur = 15;
+        orbCtx.shadowColor = 'rgba(168, 85, 247, 0.8)';
+        orbCtx.stroke();
+        orbCtx.shadowBlur = 0;
+      }
+
+      // Orbital Floating Energy Particles
+      for (let p = 0; p < 12; p++) {
+        const pAngle = orbPhase * (0.8 + p * 0.1) + p * (Math.PI / 6);
+        const pDist = baseRadius * 1.25 + Math.sin(orbPhase * 2 + p) * 18;
+        const px = cx + Math.cos(pAngle) * pDist;
+        const py = cy + Math.sin(pAngle) * pDist;
+
+        orbCtx.beginPath();
+        orbCtx.arc(px, py, 2.5, 0, Math.PI * 2);
+        orbCtx.fillStyle = p % 2 === 0 ? '#fbbf24' : '#06b6d4';
+        orbCtx.shadowBlur = 10;
+        orbCtx.shadowColor = orbCtx.fillStyle;
+        orbCtx.fill();
+        orbCtx.shadowBlur = 0;
+      }
+
+      requestAnimationFrame(drawMorphingOrb);
+    }
+    drawMorphingOrb();
 
     // Capabilities Drop-Expand Carousel
     const cards = document.querySelectorAll('.carousel-card');
@@ -1458,9 +1619,7 @@
 
     startAutoSlide();
 
-    // ========================================================
-    // REALISTIC 3D ORGANIC PARTICLE BURST ENGINE
-    // ========================================================
+    // Realistic 3D Organic Particle Burst Engine (Scrollytelling)
     const pCanvas = document.getElementById('scrollyParticleCanvas');
     const pCtx = pCanvas.getContext('2d');
     let pWidth, pHeight;
@@ -1486,7 +1645,6 @@
         const expansion = 1 + progress * 9.5;
         const currentDist = (this.dist * expansion) % (pWidth * 0.85);
 
-        // 3D Spherical Coordinates projected to 2D
         const x3d = currentDist * Math.sin(this.phi) * Math.cos(this.theta);
         const y3d = currentDist * Math.sin(this.phi) * Math.sin(this.theta);
         const z3d = currentDist * Math.cos(this.phi) + 320;
@@ -1504,7 +1662,6 @@
           pCtx.rotate(this.rotation);
           
           pCtx.beginPath();
-          // Organic curved petal/crystal shard shape
           const w = Math.max(1, this.size * scale * 2.8);
           const h = Math.max(0.6, this.size * scale * 1.2);
           pCtx.ellipse(0, 0, w, h, 0, 0, Math.PI * 2);
@@ -1533,7 +1690,6 @@
     function renderParticles() {
       pCtx.clearRect(0, 0, pWidth, pHeight);
       
-      // Radiant Glowing Center Core
       const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, Math.min(pWidth, pHeight) * 0.45);
       grad.addColorStop(0, 'rgba(236, 72, 153, 0.28)');
       grad.addColorStop(0.35, 'rgba(168, 85, 247, 0.18)');
