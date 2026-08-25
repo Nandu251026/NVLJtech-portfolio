@@ -10,6 +10,9 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust reverse proxy (Required for Render & express-rate-limit)
+app.set('trust proxy', 1);
+
 // Security Headers Middleware
 app.use(helmet({
   contentSecurityPolicy: false
@@ -57,7 +60,7 @@ const contactLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// MySQL Connection Pool (TiDB Cloud TLS/SSL & Local XAMPP Compatible)
+// MySQL Connection Pool (TiDB Cloud TLS/SSL & Local Compatible)
 const db = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
@@ -83,13 +86,17 @@ db.getConnection((err, conn) => {
   }
 });
 
-// Nodemailer Setup
+// Nodemailer Setup using Direct SSL Port 465 (Bypasses Render SMTP blocking)
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // Uses SSL directly
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  }
+  },
+  connectionTimeout: 10000, // 10 seconds timeout
+  greetingTimeout: 10000
 });
 
 // Public API Route: Fast Contact Form Submission
@@ -123,7 +130,7 @@ app.post('/api/contact', contactLimiter, (req, res) => {
 
     // 2. Dispatch Email in background
     const mailOptions = {
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+      from: `"NVLJtech Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER,
       subject: `New Message from ${name}`,
       html: `
