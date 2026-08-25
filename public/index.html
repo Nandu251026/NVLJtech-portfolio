@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
+    /* CSS @property definition for conic angle rotation */
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
     :root {
       --bg-black: #050608;
       --bg-surface: rgba(13, 16, 24, 0.75);
@@ -254,9 +261,6 @@
       position: relative;
     }
 
-    /* ========================================================
-       LIQUID FLOW ANIMATED BORDER FOR HERO LOGO FRAME
-       ======================================================== */
     .hero-logo-frame {
       position: relative;
       width: 300px;
@@ -276,7 +280,6 @@
       transform: scale(1.05) rotate(1deg);
     }
 
-    /* Rotating Liquid Conic Flow Layer */
     .hero-logo-frame::before {
       content: '';
       position: absolute;
@@ -294,7 +297,6 @@
       z-index: 1;
     }
 
-    /* Soft Atmospheric Liquid Glow Layer */
     .hero-logo-frame::after {
       content: '';
       position: absolute;
@@ -314,10 +316,9 @@
       z-index: 0;
     }
 
-    /* Inner Container Holding Image - Thickness Determined by Padding */
     .hero-logo-inner {
       position: relative;
-      width: calc(100% - 14px); /* 7px thick liquid border on all sides */
+      width: calc(100% - 14px);
       height: calc(100% - 14px);
       background: #090c14;
       border-radius: 28px;
@@ -334,10 +335,6 @@
       object-fit: cover;
       border-radius: 28px;
       transition: transform 0.4s ease;
-    }
-
-    .hero-logo-frame:hover .hero-logo-inner img {
-      transform: scale(1.04);
     }
 
     @keyframes rotateLiquid {
@@ -415,7 +412,7 @@
       align-items: center;
     }
 
-    /* Buttons */
+    /* Standard Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -464,6 +461,105 @@
       padding: 0.6rem 1.25rem;
       font-size: 0.85rem;
       border-radius: 8px;
+    }
+
+    /* ========================================================
+       EFFECT FROM VIDEO: ANIMATED HOVER SEND BUTTON
+       ======================================================== */
+    .glow-send-btn {
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      position: relative;
+      padding: 1.15rem 2.8rem;
+      border-radius: 9999px;
+      background: #080a10;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      isolation: isolate;
+      align-self: flex-start;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+
+    .glow-send-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 20px 40px -10px rgba(251, 191, 36, 0.45);
+    }
+
+    /* Inner text & icon container */
+    .glow-send-btn span {
+      position: relative;
+      z-index: 10;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .glow-send-btn:hover span {
+      color: var(--gold-light);
+    }
+
+    /* Conic Gradient Animated Borders */
+    .glow-send-btn::before,
+    .glow-send-btn::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      background-image: conic-gradient(
+        from var(--angle) at 50% 50%,
+        transparent 0%,
+        var(--gold-primary) 20%,
+        var(--neon-pink) 40%,
+        var(--neon-purple) 60%,
+        var(--neon-cyan) 80%,
+        transparent 100%
+      );
+      animation: rotateAngle 3.5s linear infinite;
+      z-index: -2;
+    }
+
+    .glow-send-btn::after {
+      filter: blur(16px);
+      opacity: 0.75;
+      z-index: -3;
+    }
+
+    /* Radial Light Follower Behind Text */
+    .glow-send-btn-inner {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        120px circle at var(--mouse-x) var(--mouse-y),
+        rgba(251, 191, 36, 0.35),
+        transparent 65%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .glow-send-btn:hover .glow-send-btn-inner {
+      opacity: 1;
+    }
+
+    @keyframes rotateAngle {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
     }
 
     /* Section Headers */
@@ -590,7 +686,6 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Carousel Custom Theming */
     .card-ux {
       --card-accent: var(--gold-primary);
       --card-glow: rgba(251, 191, 36, 0.25);
@@ -631,7 +726,6 @@
       color: var(--neon-purple);
     }
 
-    /* Carousel Navigation Controls */
     .carousel-controls {
       display: flex;
       justify-content: space-between;
@@ -718,7 +812,6 @@
       background: #090b10;
       overflow: hidden;
       border-bottom: 1px solid var(--border-subtle);
-      position: relative;
     }
 
     .project-image-wrapper img {
@@ -777,7 +870,7 @@
       align-items: center;
     }
 
-    /* Contact Section Layout */
+    /* Contact Section */
     .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -1231,9 +1324,13 @@
           <label for="message">Project Overview</label>
           <textarea id="message" name="message" rows="4" placeholder="Briefly outline your goals or timeline..." required></textarea>
         </div>
-        <button type="submit" id="submitBtn" class="btn btn-primary" style="align-self: flex-start;">
-          <i class="fas fa-paper-plane"></i> Send Message
+
+        <!-- Glow Conic Gradient Send Message Button -->
+        <button type="submit" id="submitBtn" class="glow-send-btn">
+          <div class="glow-send-btn-inner"></div>
+          <span><i class="fas fa-paper-plane"></i> Send Message</span>
         </button>
+
         <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.25rem; font-family: var(--font-mono);"></p>
       </form>
     </div>
@@ -1257,6 +1354,18 @@
 
   <!-- Scripts -->
   <script>
+    // Conic Radial Mouse-Glow Follower for Send Button
+    const sendButton = document.getElementById('submitBtn');
+    if (sendButton) {
+      sendButton.addEventListener('mousemove', (e) => {
+        const rect = sendButton.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        sendButton.style.setProperty('--mouse-x', `${x}px`);
+        sendButton.style.setProperty('--mouse-y', `${y}px`);
+      });
+    }
+
     // Single-Card Carousel Logic
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
@@ -1321,7 +1430,7 @@
         demoHtml: `
           <p style="color: var(--text-secondary); margin-bottom: 16px;">Simulated live telemetry feed connected to TiDB Cloud instance:</p>
           <div style="background: rgba(5, 6, 8, 0.9); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 16px; flex-wrap: gap; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
               <div><small style="color: var(--text-muted);">Active Platform Leads</small><h2 style="color: var(--gold-primary);">2,104 <span style="font-size: 0.8rem; color: #34d399;">+12%</span></h2></div>
               <div><small style="color: var(--text-muted);">Automated Email Dispatches</small><h2 style="color: var(--gold-light);">18,450 <span style="font-size: 0.8rem; color: #34d399;">+7%</span></h2></div>
             </div>
@@ -1435,7 +1544,7 @@ function checkContrast(hex1, hex2) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.querySelector('span').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       formStatus.innerText = '';
 
       const payload = {
@@ -1467,7 +1576,7 @@ function checkContrast(hex1, hex2) {
         formStatus.innerText = '✕ Server error. Please try again later.';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        submitBtn.querySelector('span').innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
       }
     });
   </script>
