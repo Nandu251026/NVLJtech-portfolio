@@ -6,38 +6,52 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mysql = require('mysql2');
 const nodemailer = require('nodemailer');
-const auth = require('basic-auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security Middleware
-app.use(helmet({ contentSecurityPolicy: false }));
+// Security Headers Middleware
+app.use(helmet({
+  contentSecurityPolicy: false
+}));
+
+// Body Parsers & Static Files
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Basic Authentication Middleware for Admin Panel
+// Native Basic Authentication Middleware for Admin Panel
 const adminAuth = (req, res, next) => {
-  const credentials = auth(req);
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="NVLJtech Admin Area"');
+    return res.status(401).send('Access denied: Authentication required.');
+  }
+
+  const base64Credentials = authHeader.split(' ')[1];
+  const decoded = Buffer.from(base64Credentials, 'base64').toString('utf-8');
+  const [username, password] = decoded.split(':');
+
   const adminUser = process.env.ADMIN_USER || 'admin';
   const adminPass = process.env.ADMIN_PASS || 'Admin@12345';
 
-  if (!credentials || credentials.name !== adminUser || credentials.pass !== adminPass) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="NVLJtech Admin Area"');
-    return res.status(401).send('Access denied: Invalid admin credentials.');
+  if (username === adminUser && password === adminPass) {
+    return next();
   }
-  next();
+
+  res.setHeader('WWW-Authenticate', 'Basic realm="NVLJtech Admin Area"');
+  return res.status(401).send('Access denied: Invalid admin credentials.');
 };
 
-// Anti-Spam Rate Limiter (Max 5 requests per 15 mins)
+// Anti-Spam Rate Limiter (Max 5 requests per 15 minutes per IP)
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
   message: {
     success: false,
-    error: 'Too many requests. Please try again after 15 minutes.'
+    error: 'Too many requests from this IP. Please try again after 15 minutes.'
   },
   standardHeaders: true,
   legacyHeaders: false,
@@ -73,7 +87,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Public Route: Contact Form Submission
+// Public API Route: Fast Contact Form Submission
 app.post('/api/contact', contactLimiter, (req, res) => {
   const { name, email, message } = req.body;
 
@@ -86,6 +100,7 @@ app.post('/api/contact', contactLimiter, (req, res) => {
     return res.status(400).json({ success: false, error: 'Please enter a valid email address.' });
   }
 
+  // 1. Save submission into MySQL Table
   const sqlInsert = 'INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)';
   db.query(sqlInsert, [name.trim(), email.trim(), message.trim()], (dbErr, result) => {
     if (dbErr) {
@@ -95,13 +110,13 @@ app.post('/api/contact', contactLimiter, (req, res) => {
 
     console.log(`✅ Lead saved to DB with ID: ${result.insertId}`);
 
-    // Fast instant response
+    // Instant response to frontend
     res.status(200).json({
       success: true,
       message: 'Message sent & saved successfully!'
     });
 
-    // Background Email Dispatch
+    // 2. Dispatch Email in background
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER,
@@ -127,39 +142,42 @@ app.post('/api/contact', contactLimiter, (req, res) => {
   });
 });
 
-// PROTECTED Admin Route: View Dashboard Page
+// PROTECTED Route: Serve Admin Dashboard Page
 app.get('/admin', adminAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-// PROTECTED Admin Route: Fetch Submissions
+// PROTECTED API Route: Fetch All Submissions
 app.get('/api/submissions', adminAuth, (req, res) => {
   const sql = 'SELECT * FROM contact_submissions ORDER BY created_at DESC';
   db.query(sql, (err, results) => {
     if (err) {
+      console.error('Fetch Error:', err.message);
       return res.status(500).json({ success: false, error: 'Database fetch failed.' });
     }
     res.json({ success: true, data: results });
   });
 });
 
-// PROTECTED Admin Route: Delete Submission
+// PROTECTED API Route: Delete a Submission by ID
 app.delete('/api/submissions/:id', adminAuth, (req, res) => {
   const { id } = req.params;
   const sql = 'DELETE FROM contact_submissions WHERE id = ?';
   db.query(sql, [id], (err) => {
     if (err) {
+      console.error('Delete Error:', err.message);
       return res.status(500).json({ success: false, error: 'Failed to delete record.' });
     }
     res.json({ success: true, message: `Submission #${id} deleted successfully.` });
   });
 });
 
-// Fallback Route for Main Portfolio
+// Fallback Route for Single Page / Portfolio View
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server listening on http://localhost:${PORT}`);
 });
