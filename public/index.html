@@ -547,9 +547,7 @@
       letter-spacing: -0.75px;
     }
 
-    /* ========================================================
-       CIRCLE DROP -> RISE -> EXPAND & OPEN ANIMATION
-       ======================================================== */
+    /* Capabilities Single-Card Droplet Carousel */
     .carousel-container {
       position: relative;
       max-width: 860px;
@@ -568,7 +566,6 @@
       box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.95);
     }
 
-    /* The Animated Physics Droplet Element */
     .circle-drop-actor {
       position: absolute;
       top: -60px;
@@ -584,42 +581,19 @@
       pointer-events: none;
     }
 
-    /* Droplet falling down, bouncing slightly up, and opening into full screen */
     @keyframes dropRiseExpand {
-      0% {
-        top: -60px;
-        transform: translate(-50%, 0) scale(0.6);
-        opacity: 0;
-        border-radius: 50%;
-      }
-      15% {
-        opacity: 1;
-      }
-      45% {
-        top: 55%; /* Drops down into the lower-middle */
-        transform: translate(-50%, -50%) scale(1.2, 0.8); /* Slight liquid squish */
-      }
-      60% {
-        top: 45%; /* Bounces back up */
-        transform: translate(-50%, -50%) scale(1, 1.1);
-      }
-      75% {
-        top: 50%;
-        transform: translate(-50%, -50%) scale(2.5);
-        opacity: 1;
-      }
-      100% {
-        top: 50%;
-        transform: translate(-50%, -50%) scale(45); /* Explodes/Opens completely across the card */
-        opacity: 0;
-      }
+      0% { top: -60px; transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+      15% { opacity: 1; }
+      45% { top: 55%; transform: translate(-50%, -50%) scale(1.2, 0.8); }
+      60% { top: 45%; transform: translate(-50%, -50%) scale(1, 1.1); }
+      75% { top: 50%; transform: translate(-50%, -50%) scale(2.5); opacity: 1; }
+      100% { top: 50%; transform: translate(-50%, -50%) scale(45); opacity: 0; }
     }
 
     .circle-drop-actor.animating {
       animation: dropRiseExpand 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    /* Carousel Cards */
     .carousel-card {
       position: absolute;
       inset: 0;
@@ -635,8 +609,6 @@
       pointer-events: none;
       z-index: 1;
       box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
-      
-      /* Circular Opening Mask */
       clip-path: circle(0% at 50% 50%);
       transition: clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
     }
@@ -648,7 +620,6 @@
       clip-path: circle(150% at 50% 50%);
     }
 
-    /* Content Stagger Animation when Card Opens */
     .carousel-card .carousel-card-header,
     .carousel-card p,
     .carousel-card .carousel-pills {
@@ -657,21 +628,9 @@
       transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .carousel-card.active .carousel-card-header {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.35s;
-    }
-    .carousel-card.active p {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.45s;
-    }
-    .carousel-card.active .carousel-pills {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.55s;
-    }
+    .carousel-card.active .carousel-card-header { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+    .carousel-card.active p { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+    .carousel-card.active .carousel-pills { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
 
     .carousel-card-header {
       display: flex;
@@ -732,48 +691,18 @@
       transform: translateY(-2px);
     }
 
-    /* Pillars Specific Themes */
-    .card-ux {
-      --card-accent: var(--gold-primary);
-      --card-glow: rgba(251, 191, 36, 0.35);
-    }
-    .card-ux .carousel-icon-wrap {
-      background: rgba(251, 191, 36, 0.12);
-      border: 1.5px solid var(--gold-border);
-      color: var(--gold-primary);
-    }
+    .card-ux { --card-accent: var(--gold-primary); --card-glow: rgba(251, 191, 36, 0.35); }
+    .card-ux .carousel-icon-wrap { background: rgba(251, 191, 36, 0.12); border: 1.5px solid var(--gold-border); color: var(--gold-primary); }
 
-    .card-ui {
-      --card-accent: var(--neon-pink);
-      --card-glow: rgba(236, 72, 153, 0.35);
-    }
-    .card-ui .carousel-icon-wrap {
-      background: rgba(236, 72, 153, 0.12);
-      border: 1.5px solid rgba(236, 72, 153, 0.4);
-      color: var(--neon-pink);
-    }
+    .card-ui { --card-accent: var(--neon-pink); --card-glow: rgba(236, 72, 153, 0.35); }
+    .card-ui .carousel-icon-wrap { background: rgba(236, 72, 153, 0.12); border: 1.5px solid rgba(236, 72, 153, 0.4); color: var(--neon-pink); }
 
-    .card-frontend {
-      --card-accent: var(--neon-cyan);
-      --card-glow: rgba(6, 182, 212, 0.35);
-    }
-    .card-frontend .carousel-icon-wrap {
-      background: rgba(6, 182, 212, 0.12);
-      border: 1.5px solid rgba(6, 182, 212, 0.4);
-      color: var(--neon-cyan);
-    }
+    .card-frontend { --card-accent: var(--neon-cyan); --card-glow: rgba(6, 182, 212, 0.35); }
+    .card-frontend .carousel-icon-wrap { background: rgba(6, 182, 212, 0.12); border: 1.5px solid rgba(6, 182, 212, 0.4); color: var(--neon-cyan); }
 
-    .card-backend {
-      --card-accent: var(--neon-purple);
-      --card-glow: rgba(139, 92, 246, 0.35);
-    }
-    .card-backend .carousel-icon-wrap {
-      background: rgba(139, 92, 246, 0.12);
-      border: 1.5px solid rgba(139, 92, 246, 0.4);
-      color: var(--neon-purple);
-    }
+    .card-backend { --card-accent: var(--neon-purple); --card-glow: rgba(139, 92, 246, 0.35); }
+    .card-backend .carousel-icon-wrap { background: rgba(139, 92, 246, 0.12); border: 1.5px solid rgba(139, 92, 246, 0.4); color: var(--neon-purple); }
 
-    /* Carousel Navigation Controls */
     .carousel-controls {
       display: flex;
       justify-content: space-between;
@@ -828,94 +757,194 @@
       box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
     }
 
-    /* Projects Grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.75rem;
+    /* ========================================================
+       SCROLL-DRIVEN 3D CINEMATIC SCROLLYTELLING SHOWCASE
+       ======================================================== */
+    .scrolly-section {
+      position: relative;
+      height: 320vh; /* Scrolly Virtual Track Height */
+      padding: 0;
     }
 
-    .project-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
+    .scrolly-sticky-viewport {
+      position: sticky;
+      top: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      backdrop-filter: blur(16px);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      border-color: var(--gold-border);
-      box-shadow: 0 30px 60px -16px rgba(0, 0, 0, 0.9), 0 0 30px rgba(251, 191, 36, 0.25);
-    }
-
-    .project-image-wrapper {
-      width: 100%;
-      height: 240px;
-      background: #090b10;
+      justify-content: center;
       overflow: hidden;
-      border-bottom: 1px solid var(--border-subtle);
-      position: relative;
+      padding: 2rem 0;
     }
 
-    .project-image-wrapper img {
+    /* Scrolly Progress Bar Indicator */
+    .scrolly-progress-wrapper {
+      position: absolute;
+      top: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(90%, 600px);
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .scrolly-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--cyber-gradient);
+      box-shadow: 0 0 15px var(--gold-primary);
+      transition: width 0.1s linear;
+    }
+
+    /* Showcase Display Stage */
+    .scrolly-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      height: 520px;
+      margin: 0 auto;
+      perspective: 1200px;
+    }
+
+    .scrolly-project-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      backdrop-filter: blur(22px);
+      opacity: 0;
+      transform: translate3d(0, 40px, -80px) scale(0.92);
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.4s ease;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95);
+    }
+
+    .scrolly-project-slide.active-slide {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      pointer-events: auto;
+      border-color: var(--slide-accent, var(--gold-border));
+      box-shadow: 0 35px 90px -25px rgba(0, 0, 0, 0.95), 0 0 45px var(--slide-glow, var(--gold-glow));
+      z-index: 2;
+    }
+
+    .scrolly-media-frame {
+      width: 100%;
+      height: 340px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-subtle);
+      background: #090b10;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .scrolly-media-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .project-card:hover .project-image-wrapper img {
+    .scrolly-project-slide:hover .scrolly-media-frame img {
       transform: scale(1.08) rotate(0.5deg);
     }
 
-    .project-content {
-      padding: 2.25rem;
+    .scrolly-details {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      justify-content: center;
     }
 
-    .project-tags {
+    .scrolly-tags {
       display: flex;
       gap: 0.6rem;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
 
-    .project-tags span {
+    .scrolly-tags span {
       font-size: 0.75rem;
       color: var(--gold-light);
       background: rgba(251, 191, 36, 0.08);
       border: 1px solid rgba(251, 191, 36, 0.25);
-      padding: 0.25rem 0.65rem;
+      padding: 0.3rem 0.75rem;
       border-radius: 6px;
       font-family: var(--font-mono);
       font-weight: 500;
     }
 
-    .project-content h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+    .scrolly-details h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
     }
 
-    .project-content p {
+    .scrolly-details p {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       margin-bottom: 2rem;
-      flex-grow: 1;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
-    .project-links {
+    .scrolly-links {
       display: flex;
       gap: 1rem;
       align-items: center;
+    }
+
+    /* Scrolly Stepper Numbers */
+    .scrolly-nav-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      z-index: 10;
+    }
+
+    .scrolly-step-pill {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .scrolly-step-pill.active {
+      color: var(--gold-primary);
+      border-color: var(--gold-border);
+      background: var(--gold-glow);
+      font-weight: 700;
+    }
+
+    /* Scrolly Slide Accent Styles */
+    .slide-saas {
+      --slide-accent: var(--gold-primary);
+      --slide-glow: rgba(251, 191, 36, 0.35);
+    }
+    .slide-ecom {
+      --slide-accent: var(--neon-pink);
+      --slide-glow: rgba(236, 72, 153, 0.35);
+    }
+    .slide-palette {
+      --slide-accent: var(--neon-cyan);
+      --slide-glow: rgba(6, 182, 212, 0.35);
     }
 
     /* Contact Section Layout */
@@ -1070,26 +1099,18 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive */
-    @media (max-width: 960px) {
-      .hero-wrapper {
-        flex-direction: column;
-        text-align: center;
-        gap: 3rem;
-      }
-      .hero-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero-cta {
-        justify-content: center;
-      }
-      .contact-wrapper {
+    /* Responsive Device Scaling */
+    @media (max-width: 1024px) {
+      .scrolly-stage { height: 600px; }
+      .scrolly-project-slide {
         grid-template-columns: 1fr;
-        gap: 3.5rem;
-        padding: 2.5rem;
+        gap: 1.75rem;
+        padding: 2.25rem;
+        height: auto;
       }
+      .scrolly-media-frame { height: 220px; }
+      .scrolly-details h3 { font-size: 1.6rem; }
+      .contact-wrapper { gap: 3.5rem; padding: 3rem; }
     }
 
     @media (max-width: 768px) {
@@ -1097,12 +1118,22 @@
       section { padding: 5.5rem 0; }
       .section-spacer-extra { padding-top: 6.5rem !important; }
       .hero { min-height: auto; padding: 4rem 0; }
+      .hero-wrapper { flex-direction: column; text-align: center; gap: 3rem; }
+      .hero-content { display: flex; flex-direction: column; align-items: center; }
       .hero-cta { flex-direction: column; width: 100%; }
       .hero-cta .btn { width: 100%; }
-      .carousel-card { padding: 2.25rem; }
+      .hero-logo-frame { width: 240px; height: 240px; }
+      
+      .scrolly-section { height: 280vh; }
+      .scrolly-stage { height: auto; min-height: 520px; }
+      .scrolly-project-slide { padding: 1.5rem; }
+      .scrolly-details p { font-size: 0.95rem; margin-bottom: 1.25rem; }
+      .scrolly-media-frame { height: 180px; }
+      
+      .carousel-card { padding: 2rem; }
       .carousel-wrapper { min-height: 500px; }
-      .hero-logo-frame { width: 250px; height: 250px; }
       .btn-beam-glow { width: 100%; }
+      .contact-wrapper { grid-template-columns: 1fr; padding: 2rem; }
     }
   </style>
 </head>
@@ -1158,7 +1189,7 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Single-Card Carousel with Dynamic Droplet Drop, Rise & Opening Expansion -->
+  <!-- Capabilities Carousel with Dynamic Droplet Drop, Rise & Opening Expansion -->
   <section class="container" id="skills">
     <div class="section-header">
       <span class="tag">01. Capabilities</span>
@@ -1167,7 +1198,6 @@
 
     <div class="carousel-container">
       <div class="carousel-wrapper" id="carouselWrapper">
-        <!-- The Animated Dynamic Drop/Circle Actor -->
         <div class="circle-drop-actor" id="dropActor"></div>
 
         <!-- Card 1: UX Design -->
@@ -1243,7 +1273,7 @@
         </div>
       </div>
 
-      <!-- Carousel Navigation Controls -->
+      <!-- Controls -->
       <div class="carousel-controls">
         <button class="carousel-nav-btn" id="prevBtn" aria-label="Previous capability card">
           <i class="fas fa-arrow-left"></i>
@@ -1265,71 +1295,94 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Featured Projects Section -->
-  <section class="container" id="projects">
-    <div class="section-header">
-      <span class="tag">02. Selected Work</span>
-      <h2>Featured Engineering Projects</h2>
-    </div>
-    <div class="projects-grid">
-      <!-- Project 1 -->
-      <div class="project-card">
-        <div class="project-image-wrapper">
-          <img src="/assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
+  <!-- ========================================================
+       SCROLL-DRIVEN CINEMATIC SCROLLYTELLING PROJECT SECTION
+       ======================================================== -->
+  <section class="scrolly-section" id="projects">
+    <div class="scrolly-sticky-viewport">
+      <div class="container">
+        
+        <!-- Scrolly Section Header -->
+        <div class="section-header" style="margin-bottom: 2.5rem; text-align: center;">
+          <span class="tag">02. Selected Work</span>
+          <h2>Featured Engineering Projects</h2>
         </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span>#NodeJS</span>
-            <span>#TiDBCloud</span>
-            <span>#Analytics</span>
-          </div>
-          <h3>SaaS Analytics Platform</h3>
-          <p>A full-stack analytics suite featuring real-time data streaming telemetry, transactional database operations, and ARR metric aggregators.</p>
-          <div class="project-links">
-            <button class="btn btn-primary btn-sm" onclick="openDemo('saas')"><i class="fas fa-play"></i> Live Demo</button>
-            <button class="btn btn-secondary btn-sm" onclick="openCode('saas')"><i class="fas fa-code"></i> Source Code</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- Project 2 -->
-      <div class="project-card">
-        <div class="project-image-wrapper">
-          <img src="/assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
+        <!-- Progress Indicator -->
+        <div class="scrolly-progress-wrapper">
+          <div class="scrolly-progress-bar" id="scrollyProgressBar"></div>
         </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span>#Express</span>
-            <span>#ECommerce</span>
-            <span>#UIUX</span>
-          </div>
-          <h3>Modern E-Commerce Store</h3>
-          <p>High-end storefront engine emphasizing performance-optimized image pipelines, persistent cart sync, and accessible checkout architecture.</p>
-          <div class="project-links">
-            <button class="btn btn-primary btn-sm" onclick="openDemo('ecom')"><i class="fas fa-play"></i> Live Demo</button>
-            <button class="btn btn-secondary btn-sm" onclick="openCode('ecom')"><i class="fas fa-code"></i> Source Code</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- Project 3 -->
-      <div class="project-card">
-        <div class="project-image-wrapper">
-          <img src="/assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
-        </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span>#JavaScript</span>
-            <span>#DesignTool</span>
-            <span>#WCAG</span>
+        <!-- Scrolly Showcase Stage -->
+        <div class="scrolly-stage">
+          <!-- Slide 1: SaaS Analytics -->
+          <div class="scrolly-project-slide slide-saas active-slide" data-slide="0">
+            <div class="scrolly-media-frame">
+              <img src="/assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
+            </div>
+            <div class="scrolly-details">
+              <div class="scrolly-tags">
+                <span>#NodeJS</span>
+                <span>#TiDBCloud</span>
+                <span>#Analytics</span>
+              </div>
+              <h3>SaaS Analytics Platform</h3>
+              <p>A full-stack enterprise analytics suite featuring real-time data streaming telemetry, transactional database operations, and live recurring revenue aggregators.</p>
+              <div class="scrolly-links">
+                <button class="btn btn-primary btn-sm" onclick="openDemo('saas')"><i class="fas fa-play"></i> Live Demo</button>
+                <button class="btn btn-secondary btn-sm" onclick="openCode('saas')"><i class="fas fa-code"></i> Source Code</button>
+              </div>
+            </div>
           </div>
-          <h3>Interactive Palette Tool</h3>
-          <p>A smart browser-based color studio computing real-time relative luminance, WCAG 2.1 contrast ratios, and instant CSS token exports.</p>
-          <div class="project-links">
-            <button class="btn btn-primary btn-sm" onclick="openDemo('palette')"><i class="fas fa-play"></i> Live Demo</button>
-            <button class="btn btn-secondary btn-sm" onclick="openCode('palette')"><i class="fas fa-code"></i> Source Code</button>
+
+          <!-- Slide 2: E-Commerce Store -->
+          <div class="scrolly-project-slide slide-ecom" data-slide="1">
+            <div class="scrolly-media-frame">
+              <img src="/assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
+            </div>
+            <div class="scrolly-details">
+              <div class="scrolly-tags">
+                <span>#Express</span>
+                <span>#ECommerce</span>
+                <span>#UIUX</span>
+              </div>
+              <h3>Modern E-Commerce Store</h3>
+              <p>High-end storefront engine emphasizing performance-optimized image pipelines, persistent client-state sync, and accessible checkout architecture.</p>
+              <div class="scrolly-links">
+                <button class="btn btn-primary btn-sm" onclick="openDemo('ecom')"><i class="fas fa-play"></i> Live Demo</button>
+                <button class="btn btn-secondary btn-sm" onclick="openCode('ecom')"><i class="fas fa-code"></i> Source Code</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Palette Tool -->
+          <div class="scrolly-project-slide slide-palette" data-slide="2">
+            <div class="scrolly-media-frame">
+              <img src="/assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
+            </div>
+            <div class="scrolly-details">
+              <div class="scrolly-tags">
+                <span>#JavaScript</span>
+                <span>#DesignTool</span>
+                <span>#WCAG</span>
+              </div>
+              <h3>Interactive Palette Tool</h3>
+              <p>A smart browser-based color studio computing real-time relative luminance, WCAG 2.1 contrast ratios, and instant CSS design token exports.</p>
+              <div class="scrolly-links">
+                <button class="btn btn-primary btn-sm" onclick="openDemo('palette')"><i class="fas fa-play"></i> Live Demo</button>
+                <button class="btn btn-secondary btn-sm" onclick="openCode('palette')"><i class="fas fa-code"></i> Source Code</button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Interactive Stepper Indicator -->
+        <div class="scrolly-nav-indicator">
+          <span class="scrolly-step-pill active" onclick="scrollToSlide(0)">01. Analytics</span>
+          <span class="scrolly-step-pill" onclick="scrollToSlide(1)">02. E-Commerce</span>
+          <span class="scrolly-step-pill" onclick="scrollToSlide(2)">03. Palette Studio</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1337,7 +1390,7 @@
   <!-- Large Spacer Divider Between Projects & Contact -->
   <div class="ambient-separator"></div>
 
-  <!-- Contact Section with Expanded Vertical Spacing -->
+  <!-- Contact Section -->
   <section class="container section-spacer-extra" id="contact">
     <div class="contact-wrapper">
       <div class="contact-info">
@@ -1417,7 +1470,7 @@
     }
 
     // ========================================================
-    // CIRCLE DROP -> RISE -> EXPAND & OPEN CAROUSEL LOGIC
+    // CIRCLE DROP -> RISE -> EXPAND CAROUSEL
     // ========================================================
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
@@ -1433,26 +1486,21 @@
       isTransitioning = true;
 
       const currentCard = cards[currentIndex];
-
-      // Circular wrap target index
       if (targetIndex >= cards.length) targetIndex = 0;
       else if (targetIndex < 0) targetIndex = cards.length - 1;
 
       const nextCard = cards[targetIndex];
       const targetColor = nextCard.getAttribute('data-color') || '#fbbf24';
 
-      // Configure Droplet Color
       dropActor.style.setProperty('--drop-color', targetColor);
       dropActor.classList.remove('animating');
-      void dropActor.offsetWidth; // Force Reflow
+      void dropActor.offsetWidth;
       dropActor.classList.add('animating');
 
-      // Update Dots Immediately
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === targetIndex);
       });
 
-      // Synchronize with the drop-rise-expand physics peak (at 550ms)
       setTimeout(() => {
         nextCard.style.zIndex = '3';
         currentCard.style.zIndex = '1';
@@ -1497,6 +1545,52 @@
     }
 
     startAutoSlide();
+
+    // ========================================================
+    // SCROLL-DRIVEN SCROLLYTELLING ANIMATION ENGINE
+    // ========================================================
+    const scrollySection = document.getElementById('projects');
+    const scrollySlides = document.querySelectorAll('.scrolly-project-slide');
+    const scrollyPills = document.querySelectorAll('.scrolly-step-pill');
+    const progressBar = document.getElementById('scrollyProgressBar');
+
+    function updateScrollytelling() {
+      const rect = scrollySection.getBoundingClientRect();
+      const scrollProgress = -rect.top / (rect.height - window.innerHeight);
+      const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
+
+      // Update liquid progress bar
+      if (progressBar) {
+        progressBar.style.width = `${clampedProgress * 100}%`;
+      }
+
+      // 3 slides mapped across 0% to 100% scroll
+      let activeSlideIndex = 0;
+      if (clampedProgress >= 0.66) {
+        activeSlideIndex = 2;
+      } else if (clampedProgress >= 0.33) {
+        activeSlideIndex = 1;
+      }
+
+      scrollySlides.forEach((slide, idx) => {
+        slide.classList.toggle('active-slide', idx === activeSlideIndex);
+      });
+
+      scrollyPills.forEach((pill, idx) => {
+        pill.classList.toggle('active', idx === activeSlideIndex);
+      });
+    }
+
+    function scrollToSlide(index) {
+      const sectionTop = scrollySection.offsetTop;
+      const sectionHeight = scrollySection.offsetHeight - window.innerHeight;
+      const targetScroll = sectionTop + (index / 2) * sectionHeight;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', updateScrollytelling, { passive: true });
+    window.addEventListener('resize', updateScrollytelling);
+    updateScrollytelling();
 
     // ========================================================
     // MODAL SHOWCASE DATA & ACTIONS
