@@ -76,7 +76,6 @@
       position: relative;
     }
 
-    /* Ambient Dynamic Background Glows */
     .bg-mesh {
       position: fixed;
       inset: 0;
@@ -370,7 +369,6 @@
       flex-wrap: wrap;
     }
 
-    /* Standard Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -418,7 +416,6 @@
       border-radius: 8px;
     }
 
-    /* Section Headers */
     .section-header {
       margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
       width: 100%;
@@ -442,9 +439,7 @@
       line-height: 1.2;
     }
 
-    /* ========================================================
-       DESIGN & ENGINEERING STACK: RESPONSIVE CAROUSEL
-       ======================================================== */
+    /* Capabilities Responsive Carousel */
     .carousel-container {
       position: relative;
       width: 100%;
@@ -633,12 +628,11 @@
     }
 
     /* ========================================================
-       REALISTIC 3D SCROLL-DRIVEN PARTICLE VORTEX SHOWCASE
-       (As Seen in the Video: Organic Explosions & Scroll Scrub)
+       REALISTIC 3D SCROLL-DRIVEN PARTICLE VORTEX PORTAL
        ======================================================== */
     .scrolly-portal-section {
       position: relative;
-      height: 350vh; /* Scrolly virtual track */
+      height: 350vh;
       padding: 0;
       width: 100%;
     }
@@ -655,7 +649,6 @@
       overflow: hidden;
     }
 
-    /* Background 3D Canvas Particle Burst Engine */
     #scrollyParticleCanvas {
       position: absolute;
       inset: 0;
@@ -663,35 +656,6 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
-    }
-
-    /* HUD Metrics Overlay (From Video) */
-    .scrolly-hud {
-      position: absolute;
-      top: clamp(85px, 12vh, 110px);
-      width: min(92%, 1160px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .hud-title {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      letter-spacing: 3px;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
-    }
-
-    .hud-counter {
-      font-family: var(--font-mono);
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      color: var(--gold-primary);
-      font-weight: 700;
     }
 
     .scrolly-progress-track {
@@ -715,7 +679,6 @@
       transition: width 0.08s linear;
     }
 
-    /* Pinned 3D Showcase Stage */
     .scrolly-stage {
       position: relative;
       width: min(92%, 1160px);
@@ -754,7 +717,6 @@
       position: relative;
     }
 
-    /* Big High-Def Preview Frame */
     .scrolly-media-frame {
       width: 100%;
       aspect-ratio: 16 / 9.5;
@@ -849,9 +811,7 @@
       font-weight: 700;
     }
 
-    /* ========================================================
-       CONTACT SECTION: ULTRA-RESPONSIVE GLASS ARCHITECTURE
-       ======================================================== */
+    /* Contact Section: Fully Responsive Glass */
     .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.25fr;
@@ -997,7 +957,7 @@
       100% { --btn-angle: 360deg; }
     }
 
-    /* Interactive Modal */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1066,9 +1026,7 @@
       z-index: 1;
     }
 
-    /* ========================================================
-       RESPONSIVE BREAKPOINTS (Mobile, Tablet, Desktop)
-       ======================================================== */
+    /* Responsive Breakpoints */
     @media (max-width: 980px) {
       .hero-wrapper {
         flex-direction: column-reverse;
@@ -1114,10 +1072,9 @@
 </head>
 <body>
 
-  <!-- Dynamic Ambient Glow Layer -->
   <div class="bg-mesh"></div>
 
-  <!-- Navigation with Gold Brand Identity -->
+  <!-- Navigation -->
   <nav>
     <div class="container nav-container">
       <a href="#" class="logo-brand">
@@ -1133,7 +1090,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section with Animated Liquid Border Brand Emblem -->
+  <!-- Hero Section -->
   <section class="hero container" id="about">
     <div class="hero-wrapper">
       <div class="hero-content">
@@ -1149,7 +1106,6 @@
         </div>
       </div>
 
-      <!-- Glowing 3D Brand Emblem Visual with Thick Liquid Gradient Border -->
       <div class="hero-visual">
         <div class="hero-logo-frame">
           <div class="hero-logo-inner">
@@ -1162,7 +1118,7 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Capabilities Carousel with Dynamic Droplet Drop, Rise & Opening Expansion -->
+  <!-- Capabilities Section -->
   <section class="container" id="skills">
     <div class="section-header">
       <span class="tag">01. Capabilities</span>
@@ -1246,7 +1202,6 @@
         </div>
       </div>
 
-      <!-- Controls -->
       <div class="carousel-controls">
         <button class="carousel-nav-btn" id="prevBtn" aria-label="Previous capability card">
           <i class="fas fa-arrow-left"></i>
@@ -1269,24 +1224,13 @@
   <div class="ambient-separator"></div>
 
   <!-- ========================================================
-       REALISTIC 3D PARTICLE BURST SCROLLYTELLING SHOWCASE
+       REALISTIC 3D ORGANIC PARTICLE BURST SCROLLYTELLING SHOWCASE
        ======================================================== -->
   <section class="scrolly-portal-section" id="projects">
     <div class="scrolly-sticky-container">
       
-      <!-- 3D Particle Explosion Canvas Layer (From Video) -->
+      <!-- Realistic 3D Organic Particle Burst Engine -->
       <canvas id="scrollyParticleCanvas"></canvas>
-
-      <!-- HUD Metrics (From Video) -->
-      <div class="scrolly-hud">
-        <div class="hud-title">FEATURED WORK</div>
-        <div class="hud-counter" id="hudCounter">+24 FPS</div>
-      </div>
-
-      <!-- Scroll Progress Line -->
-      <div class="scrolly-progress-track">
-        <div class="scrolly-progress-fill" id="scrollyProgressFill"></div>
-      </div>
 
       <!-- Pinned Showcase Stage -->
       <div class="scrolly-stage">
@@ -1361,10 +1305,9 @@
     </div>
   </section>
 
-  <!-- Large Spacer Divider -->
   <div class="ambient-separator"></div>
 
-  <!-- Contact Section: Full-Width Mobile Glass Architecture -->
+  <!-- Contact Section -->
   <section class="container" id="contact" style="padding-top: clamp(6rem, 10vw, 10rem);">
     <div class="contact-wrapper">
       <div class="contact-info">
@@ -1419,7 +1362,7 @@
     </div>
   </footer>
 
-  <!-- Interactive Project Modal Overlay -->
+  <!-- Modal -->
   <div id="projectModal" class="modal-overlay">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -1440,9 +1383,7 @@
       });
     }
 
-    // ========================================================
-    // CAPABILITIES DROP-EXPAND CAROUSEL
-    // ========================================================
+    // Capabilities Drop-Expand Carousel
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('prevBtn');
@@ -1518,13 +1459,13 @@
     startAutoSlide();
 
     // ========================================================
-    // 3D REALISTIC PARTICLE BURST ENGINE (SCROLLYTELLING)
+    // REALISTIC 3D ORGANIC PARTICLE BURST ENGINE
     // ========================================================
     const pCanvas = document.getElementById('scrollyParticleCanvas');
     const pCtx = pCanvas.getContext('2d');
     let pWidth, pHeight;
     let particles = [];
-    const PARTICLE_COUNT = 160;
+    const PARTICLE_COUNT = 240;
 
     class BurstParticle {
       constructor() {
@@ -1534,37 +1475,46 @@
         this.theta = Math.random() * Math.PI * 2;
         this.phi = Math.acos((Math.random() * 2) - 1);
         this.baseSpeed = Math.random() * 2 + 1;
-        this.size = Math.random() * 3 + 1.2;
+        this.size = Math.random() * 3.5 + 1.2;
         this.colorPool = ['#fbbf24', '#ec4899', '#a855f7', '#06b6d4', '#ffffff'];
         this.color = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
-        this.dist = Math.random() * 80;
+        this.dist = Math.random() * 90;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.04;
       }
       draw(progress) {
-        // Dynamic explosion expansion multiplier based on scroll progress
-        const expansion = 1 + progress * 8.5;
-        const currentDist = (this.dist * expansion) % (pWidth * 0.75);
+        const expansion = 1 + progress * 9.5;
+        const currentDist = (this.dist * expansion) % (pWidth * 0.85);
 
         // 3D Spherical Coordinates projected to 2D
         const x3d = currentDist * Math.sin(this.phi) * Math.cos(this.theta);
         const y3d = currentDist * Math.sin(this.phi) * Math.sin(this.theta);
-        const z3d = currentDist * Math.cos(this.phi) + 300;
+        const z3d = currentDist * Math.cos(this.phi) + 320;
 
-        // Perspective projection formula
-        const fov = 350;
+        const fov = 380;
         const scale = fov / (fov + z3d);
         const x2d = pWidth / 2 + x3d * scale;
         const y2d = pHeight / 2 + y3d * scale;
 
-        if (scale > 0 && x2d > 0 && x2d < pWidth && y2d > 0 && y2d < pHeight) {
+        this.rotation += this.rotSpeed;
+
+        if (scale > 0 && x2d > -50 && x2d < pWidth + 50 && y2d > -50 && y2d < pHeight + 50) {
+          pCtx.save();
+          pCtx.translate(x2d, y2d);
+          pCtx.rotate(this.rotation);
+          
           pCtx.beginPath();
-          pCtx.arc(x2d, y2d, Math.max(0.5, this.size * scale), 0, Math.PI * 2);
+          // Organic curved petal/crystal shard shape
+          const w = Math.max(1, this.size * scale * 2.8);
+          const h = Math.max(0.6, this.size * scale * 1.2);
+          pCtx.ellipse(0, 0, w, h, 0, 0, Math.PI * 2);
+          
           pCtx.fillStyle = this.color;
-          pCtx.shadowBlur = 12 * scale;
+          pCtx.shadowBlur = 14 * scale;
           pCtx.shadowColor = this.color;
-          pCtx.globalAlpha = Math.min(1, Math.max(0.2, scale * 1.5));
+          pCtx.globalAlpha = Math.min(1, Math.max(0.18, scale * 1.6));
           pCtx.fill();
-          pCtx.shadowBlur = 0;
-          pCtx.globalAlpha = 1;
+          pCtx.restore();
         }
       }
     }
@@ -1583,10 +1533,11 @@
     function renderParticles() {
       pCtx.clearRect(0, 0, pWidth, pHeight);
       
-      // Draw organic glowing center vortex
-      const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, 260);
-      grad.addColorStop(0, 'rgba(168, 85, 247, 0.25)');
-      grad.addColorStop(0.5, 'rgba(251, 191, 36, 0.12)');
+      // Radiant Glowing Center Core
+      const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, Math.min(pWidth, pHeight) * 0.45);
+      grad.addColorStop(0, 'rgba(236, 72, 153, 0.28)');
+      grad.addColorStop(0.35, 'rgba(168, 85, 247, 0.18)');
+      grad.addColorStop(0.7, 'rgba(251, 191, 36, 0.08)');
       grad.addColorStop(1, 'transparent');
       pCtx.fillStyle = grad;
       pCtx.fillRect(0, 0, pWidth, pHeight);
@@ -1599,28 +1550,16 @@
     initBurstParticles();
     renderParticles();
 
-    // ========================================================
-    // SCROLL-DRIVEN TRACKING ENGINE
-    // ========================================================
+    // Scroll-Driven Tracking Engine
     const scrollySection = document.getElementById('projects');
     const scrollyCards = document.querySelectorAll('.scrolly-card');
     const scrollyPills = document.querySelectorAll('.scrolly-pill');
-    const progressFill = document.getElementById('scrollyProgressFill');
-    const hudCounter = document.getElementById('hudCounter');
 
     function updateScrollyState() {
       const rect = scrollySection.getBoundingClientRect();
       const scrollProgress = -rect.top / (rect.height - window.innerHeight);
       const clamped = Math.min(Math.max(scrollProgress, 0), 1);
       currentScrollProgress = clamped;
-
-      if (progressFill) {
-        progressFill.style.width = `${clamped * 100}%`;
-      }
-
-      if (hudCounter) {
-        hudCounter.innerText = `+${Math.floor(clamped * 90 + 10)}`;
-      }
 
       let activeIndex = 0;
       if (clamped >= 0.66) {
@@ -1648,9 +1587,7 @@
     window.addEventListener('scroll', updateScrollyState, { passive: true });
     updateScrollyState();
 
-    // ========================================================
-    // MODAL SHOWCASE DATA & ACTIONS
-    // ========================================================
+    // Modal Showcase Data & Actions
     const modal = document.getElementById('projectModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
@@ -1767,9 +1704,7 @@ function checkContrast(hex1, hex2) {
       if (e.target === modal) closeModal();
     };
 
-    // ========================================================
-    // CONTACT FORM AJAX SUBMISSION
-    // ========================================================
+    // Contact Form AJAX Handler
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
