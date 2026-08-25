@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mysql = require('mysql2');
 const nodemailer = require('nodemailer');
+const auth = require('basic-auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Basic Authentication Middleware for Admin Panel
+const adminAuth = (req, res, next) => {
+  const credentials = auth(req);
+  const adminUser = process.env.ADMIN_USER || 'admin';
+  const adminPass = process.env.ADMIN_PASS || 'Admin@12345';
+
+  if (!credentials || credentials.name !== adminUser || credentials.pass !== adminPass) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="NVLJtech Admin Area"');
+    return res.status(401).send('Access denied: Invalid admin credentials.');
+  }
+  next();
+};
 
 // Anti-Spam Rate Limiter (Max 5 requests per 15 mins)
 const contactLimiter = rateLimit({
@@ -59,7 +73,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Route: Contact Form Submission
+// Public Route: Contact Form Submission
 app.post('/api/contact', contactLimiter, (req, res) => {
   const { name, email, message } = req.body;
 
@@ -81,7 +95,7 @@ app.post('/api/contact', contactLimiter, (req, res) => {
 
     console.log(`✅ Lead saved to DB with ID: ${result.insertId}`);
 
-    // Fast instant response to browser
+    // Fast instant response
     res.status(200).json({
       success: true,
       message: 'Message sent & saved successfully!'
@@ -113,8 +127,13 @@ app.post('/api/contact', contactLimiter, (req, res) => {
   });
 });
 
-// Route: Admin Fetch Submissions
-app.get('/api/submissions', (req, res) => {
+// PROTECTED Admin Route: View Dashboard Page
+app.get('/admin', adminAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
+
+// PROTECTED Admin Route: Fetch Submissions
+app.get('/api/submissions', adminAuth, (req, res) => {
   const sql = 'SELECT * FROM contact_submissions ORDER BY created_at DESC';
   db.query(sql, (err, results) => {
     if (err) {
@@ -124,8 +143,8 @@ app.get('/api/submissions', (req, res) => {
   });
 });
 
-// Route: Admin Delete Submission
-app.delete('/api/submissions/:id', (req, res) => {
+// PROTECTED Admin Route: Delete Submission
+app.delete('/api/submissions/:id', adminAuth, (req, res) => {
   const { id } = req.params;
   const sql = 'DELETE FROM contact_submissions WHERE id = ?';
   db.query(sql, [id], (err) => {
@@ -136,12 +155,7 @@ app.delete('/api/submissions/:id', (req, res) => {
   });
 });
 
-// Route: Admin Page
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-});
-
-// Fallback Route
+// Fallback Route for Main Portfolio
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
