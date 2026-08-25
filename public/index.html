@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    /* CSS Custom Property for Button Conic Rotation */
     @property --btn-angle {
       syntax: '<angle>';
       initial-value: 0deg;
@@ -25,7 +24,7 @@
 
     :root {
       --bg-black: #050608;
-      --bg-surface: rgba(13, 16, 24, 0.75);
+      --bg-surface: rgba(13, 16, 24, 0.85);
       --bg-surface-hover: rgba(22, 28, 42, 0.95);
       
       /* Luxury Metallic Gold & Cyber Accents */
@@ -413,7 +412,7 @@
       align-items: center;
     }
 
-    /* Standard Buttons */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -549,11 +548,11 @@
     }
 
     /* ========================================================
-       CIRCULAR CLIP-PATH WIPE / REVEAL CAROUSEL
+       CIRCLE DROP -> RISE -> EXPAND & OPEN ANIMATION
        ======================================================== */
     .carousel-container {
       position: relative;
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 10px;
     }
@@ -561,12 +560,66 @@
     .carousel-wrapper {
       position: relative;
       width: 100%;
-      min-height: 430px;
+      min-height: 440px;
       border-radius: var(--radius-lg);
-      background: #06080d;
-      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.95);
+      background: #080b12;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.95);
     }
 
+    /* The Animated Physics Droplet Element */
+    .circle-drop-actor {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--drop-color, var(--gold-primary)));
+      box-shadow: 0 0 30px var(--drop-color, var(--gold-primary)), 0 0 60px var(--drop-color, var(--gold-primary));
+      transform: translate(-50%, 0) scale(1);
+      opacity: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Droplet falling down, bouncing slightly up, and opening into full screen */
+    @keyframes dropRiseExpand {
+      0% {
+        top: -60px;
+        transform: translate(-50%, 0) scale(0.6);
+        opacity: 0;
+        border-radius: 50%;
+      }
+      15% {
+        opacity: 1;
+      }
+      45% {
+        top: 55%; /* Drops down into the lower-middle */
+        transform: translate(-50%, -50%) scale(1.2, 0.8); /* Slight liquid squish */
+      }
+      60% {
+        top: 45%; /* Bounces back up */
+        transform: translate(-50%, -50%) scale(1, 1.1);
+      }
+      75% {
+        top: 50%;
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 1;
+      }
+      100% {
+        top: 50%;
+        transform: translate(-50%, -50%) scale(45); /* Explodes/Opens completely across the card */
+        opacity: 0;
+      }
+    }
+
+    .circle-drop-actor.animating {
+      animation: dropRiseExpand 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Carousel Cards */
     .carousel-card {
       position: absolute;
       inset: 0;
@@ -581,14 +634,13 @@
       opacity: 0;
       pointer-events: none;
       z-index: 1;
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px var(--card-glow, var(--gold-glow));
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
       
-      /* Default initial state: Collapsed circle */
+      /* Circular Opening Mask */
       clip-path: circle(0% at 50% 50%);
-      transition: clip-path 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease;
+      transition: clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
     }
 
-    /* Active fully-expanded state */
     .carousel-card.active {
       opacity: 1;
       pointer-events: auto;
@@ -596,20 +648,29 @@
       clip-path: circle(150% at 50% 50%);
     }
 
-    /* Entering from Right (Next Click) */
-    .carousel-card.wipe-from-right {
-      clip-path: circle(0% at 90% 50%);
-    }
-    .carousel-card.wipe-from-right.active {
-      clip-path: circle(150% at 90% 50%);
+    /* Content Stagger Animation when Card Opens */
+    .carousel-card .carousel-card-header,
+    .carousel-card p,
+    .carousel-card .carousel-pills {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* Entering from Left (Prev Click) */
-    .carousel-card.wipe-from-left {
-      clip-path: circle(0% at 10% 50%);
+    .carousel-card.active .carousel-card-header {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.35s;
     }
-    .carousel-card.wipe-from-left.active {
-      clip-path: circle(150% at 10% 50%);
+    .carousel-card.active p {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.45s;
+    }
+    .carousel-card.active .carousel-pills {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.55s;
     }
 
     .carousel-card-header {
@@ -620,19 +681,19 @@
     }
 
     .carousel-icon-wrap {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.9rem;
+      font-size: 2rem;
       flex-shrink: 0;
       transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .carousel-card:hover .carousel-icon-wrap {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.12) rotate(6deg);
     }
 
     .carousel-card h3 {
@@ -671,10 +732,10 @@
       transform: translateY(-2px);
     }
 
-    /* Carousel Color Themes */
+    /* Pillars Specific Themes */
     .card-ux {
       --card-accent: var(--gold-primary);
-      --card-glow: rgba(251, 191, 36, 0.3);
+      --card-glow: rgba(251, 191, 36, 0.35);
     }
     .card-ux .carousel-icon-wrap {
       background: rgba(251, 191, 36, 0.12);
@@ -684,7 +745,7 @@
 
     .card-ui {
       --card-accent: var(--neon-pink);
-      --card-glow: rgba(236, 72, 153, 0.3);
+      --card-glow: rgba(236, 72, 153, 0.35);
     }
     .card-ui .carousel-icon-wrap {
       background: rgba(236, 72, 153, 0.12);
@@ -694,7 +755,7 @@
 
     .card-frontend {
       --card-accent: var(--neon-cyan);
-      --card-glow: rgba(6, 182, 212, 0.3);
+      --card-glow: rgba(6, 182, 212, 0.35);
     }
     .card-frontend .carousel-icon-wrap {
       background: rgba(6, 182, 212, 0.12);
@@ -704,7 +765,7 @@
 
     .card-backend {
       --card-accent: var(--neon-purple);
-      --card-glow: rgba(139, 92, 246, 0.3);
+      --card-glow: rgba(139, 92, 246, 0.35);
     }
     .card-backend .carousel-icon-wrap {
       background: rgba(139, 92, 246, 0.12);
@@ -722,8 +783,8 @@
     }
 
     .carousel-nav-btn {
-      width: 54px;
-      height: 54px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       background: var(--bg-surface);
       border: 1px solid var(--gold-border);
@@ -1039,7 +1100,7 @@
       .hero-cta { flex-direction: column; width: 100%; }
       .hero-cta .btn { width: 100%; }
       .carousel-card { padding: 2.25rem; }
-      .carousel-wrapper { min-height: 480px; }
+      .carousel-wrapper { min-height: 500px; }
       .hero-logo-frame { width: 250px; height: 250px; }
       .btn-beam-glow { width: 100%; }
     }
@@ -1097,7 +1158,7 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Single-Card Carousel with Circular Mask Wipe Reveal Transition -->
+  <!-- Single-Card Carousel with Dynamic Droplet Drop, Rise & Opening Expansion -->
   <section class="container" id="skills">
     <div class="section-header">
       <span class="tag">01. Capabilities</span>
@@ -1105,9 +1166,12 @@
     </div>
 
     <div class="carousel-container">
-      <div class="carousel-wrapper">
+      <div class="carousel-wrapper" id="carouselWrapper">
+        <!-- The Animated Dynamic Drop/Circle Actor -->
+        <div class="circle-drop-actor" id="dropActor"></div>
+
         <!-- Card 1: UX Design -->
-        <div class="carousel-card card-ux active">
+        <div class="carousel-card card-ux active" data-color="#fbbf24">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-compass-drafting"></i></div>
             <div>
@@ -1125,7 +1189,7 @@
         </div>
 
         <!-- Card 2: UI Design -->
-        <div class="carousel-card card-ui">
+        <div class="carousel-card card-ui" data-color="#ec4899">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-palette"></i></div>
             <div>
@@ -1143,7 +1207,7 @@
         </div>
 
         <!-- Card 3: Frontend Engineering -->
-        <div class="carousel-card card-frontend">
+        <div class="carousel-card card-frontend" data-color="#06b6d4">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-code"></i></div>
             <div>
@@ -1161,7 +1225,7 @@
         </div>
 
         <!-- Card 4: Backend & Architecture -->
-        <div class="carousel-card card-backend">
+        <div class="carousel-card card-backend" data-color="#8b5cf6">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-server"></i></div>
             <div>
@@ -1340,9 +1404,7 @@
 
   <!-- Scripts -->
   <script>
-    // ========================================================
-    // MOUSE-TRACKING SPOTLIGHT EFFECT FOR GLOW BUTTON
-    // ========================================================
+    // Spotlight Mouse Tracker on Send Button
     const glowBtn = document.getElementById('submitBtn');
     if (glowBtn) {
       glowBtn.addEventListener('mousemove', (e) => {
@@ -1355,81 +1417,78 @@
     }
 
     // ========================================================
-    // CIRCULAR CLIP-PATH WIPE / REVEAL CAROUSEL LOGIC
+    // CIRCLE DROP -> RISE -> EXPAND & OPEN CAROUSEL LOGIC
     // ========================================================
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const dropActor = document.getElementById('dropActor');
     let currentIndex = 0;
     let autoSlideInterval;
     let isTransitioning = false;
 
-    function showCard(targetIndex, direction = 'right') {
+    function triggerCardTransition(targetIndex) {
       if (isTransitioning || targetIndex === currentIndex) return;
       isTransitioning = true;
 
       const currentCard = cards[currentIndex];
-      
-      // Calculate wrapped target index
+
+      // Circular wrap target index
       if (targetIndex >= cards.length) targetIndex = 0;
       else if (targetIndex < 0) targetIndex = cards.length - 1;
 
       const nextCard = cards[targetIndex];
+      const targetColor = nextCard.getAttribute('data-color') || '#fbbf24';
 
-      // Prepare directional classes for circular wipe
-      nextCard.classList.remove('wipe-from-right', 'wipe-from-left');
-      if (direction === 'right') {
-        nextCard.classList.add('wipe-from-right');
-      } else {
-        nextCard.classList.add('wipe-from-left');
-      }
+      // Configure Droplet Color
+      dropActor.style.setProperty('--drop-color', targetColor);
+      dropActor.classList.remove('animating');
+      void dropActor.offsetWidth; // Force Reflow
+      dropActor.classList.add('animating');
 
-      // Ensure the incoming card is raised above the old card
-      nextCard.style.zIndex = '3';
-      currentCard.style.zIndex = '1';
-
-      // Update dots immediately
+      // Update Dots Immediately
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === targetIndex);
       });
 
-      // Trigger the expanding circle transition
-      requestAnimationFrame(() => {
+      // Synchronize with the drop-rise-expand physics peak (at 550ms)
+      setTimeout(() => {
+        nextCard.style.zIndex = '3';
+        currentCard.style.zIndex = '1';
         nextCard.classList.add('active');
 
         setTimeout(() => {
-          currentCard.classList.remove('active', 'wipe-from-right', 'wipe-from-left');
+          currentCard.classList.remove('active');
           nextCard.style.zIndex = '2';
           currentIndex = targetIndex;
           isTransitioning = false;
-        }, 850); // Matches CSS transition duration
-      });
+        }, 450);
+      }, 500);
     }
 
     prevBtn.addEventListener('click', () => {
-      showCard(currentIndex - 1, 'left');
+      triggerCardTransition(currentIndex - 1);
       resetAutoSlide();
     });
 
     nextBtn.addEventListener('click', () => {
-      showCard(currentIndex + 1, 'right');
+      triggerCardTransition(currentIndex + 1);
       resetAutoSlide();
     });
 
     dots.forEach((dot) => {
       dot.addEventListener('click', (e) => {
         const targetIndex = parseInt(e.target.getAttribute('data-index'));
-        const dir = targetIndex > currentIndex ? 'right' : 'left';
-        showCard(targetIndex, dir);
+        triggerCardTransition(targetIndex);
         resetAutoSlide();
       });
     });
 
     function startAutoSlide() {
       autoSlideInterval = setInterval(() => {
-        showCard(currentIndex + 1, 'right');
-      }, 5500);
+        triggerCardTransition(currentIndex + 1);
+      }, 6000);
     }
 
     function resetAutoSlide() {
@@ -1558,9 +1617,7 @@ function checkContrast(hex1, hex2) {
       if (e.target === modal) closeModal();
     };
 
-    // ========================================================
-    // CONTACT FORM AJAX SUBMISSION
-    // ========================================================
+    // Contact Form AJAX Handler
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
