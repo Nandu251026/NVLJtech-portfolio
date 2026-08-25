@@ -5,26 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NYLJ TECH | Full-Stack Systems & Design Architecture</title>
   
-  <!-- Browser Tab Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <!-- Tab Favicon with Dynamic Cache Buster -->
+  <link rel="icon" type="image/jpeg" href="/assets/images/logo.jpg?v=3" />
+  <link rel="shortcut icon" href="/assets/images/logo.jpg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.jpg?v=3" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
       --bg-black: #050608;
       --bg-surface: rgba(13, 16, 24, 0.72);
-      --bg-surface-hover: rgba(22, 28, 42, 0.88);
+      --bg-surface-hover: rgba(22, 28, 42, 0.9);
       
-      /* Vibrant Luxury Multi-Color Accent Palette */
+      /* Luxury Metallic Gold & Cyber Accents */
       --gold-light: #fef08a;
       --gold-primary: #fbbf24;
       --gold-dark: #d97706;
-      --gold-glow: rgba(251, 191, 36, 0.2);
-      --gold-border: rgba(251, 191, 36, 0.35);
+      --gold-glow: rgba(251, 191, 36, 0.22);
+      --gold-border: rgba(251, 191, 36, 0.38);
       
       --neon-cyan: #06b6d4;
       --neon-purple: #8b5cf6;
@@ -73,7 +75,7 @@
       overflow-x: hidden;
     }
 
-    /* Ambient Floating Geometric Shapes */
+    /* Floating Ambient Glowing Shapes */
     .shape-blob {
       position: absolute;
       filter: blur(80px);
@@ -121,7 +123,7 @@
       z-index: 1;
     }
 
-    /* Spacious Section Layout */
+    /* Section Spacing */
     section {
       padding: 8.5rem 0;
       position: relative;
@@ -144,7 +146,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 6, 8, 0.82);
+      background: rgba(5, 6, 8, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
@@ -792,11 +794,11 @@
   <div class="shape-blob shape-2"></div>
   <div class="shape-blob shape-3"></div>
 
-  <!-- Navigation with Logo Branding -->
+  <!-- Navigation with Gold Brand Identity -->
   <nav>
     <div class="container nav-container">
       <a href="#" class="logo-brand">
-        <img src="assets/images/logo.png" alt="NYLJ TECH Logo" class="logo-img" onerror="this.style.display='none';" />
+        <img src="/assets/images/logo.jpg" alt="NYLJ TECH Logo" class="logo-img" onerror="this.style.display='none';" />
         <span class="logo-text">NYLJ TECH</span>
       </a>
       <ul class="nav-links">
@@ -827,7 +829,7 @@
       <!-- Glowing 3D Brand Emblem Visual -->
       <div class="hero-visual">
         <div class="hero-logo-frame">
-          <img src="assets/images/logo.png" alt="NYLJ TECH Emblem" onerror="this.parentElement.style.display='none';" />
+          <img src="/assets/images/logo.jpg" alt="NYLJ TECH Emblem" onerror="this.parentElement.style.display='none';" />
         </div>
       </div>
     </div>
@@ -908,7 +910,7 @@
       <!-- Project 1 -->
       <div class="project-card">
         <div class="project-image-wrapper">
-          <img src="assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
+          <img src="/assets/images/saas-analytics.png" alt="SaaS Analytics Platform" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ SaaS Analytics Image ]</span>';" />
         </div>
         <div class="project-content">
           <div class="project-tags">
@@ -928,7 +930,7 @@
       <!-- Project 2 -->
       <div class="project-card">
         <div class="project-image-wrapper">
-          <img src="assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
+          <img src="/assets/images/ecommerce-store.png" alt="Modern E-Commerce Store" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ E-Commerce Store Image ]</span>';" />
         </div>
         <div class="project-content">
           <div class="project-tags">
@@ -948,7 +950,7 @@
       <!-- Project 3 -->
       <div class="project-card">
         <div class="project-image-wrapper">
-          <img src="assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
+          <img src="/assets/images/palette-tool.png" alt="Interactive Design Palette Tool" onerror="this.onerror=null; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=\'color:var(--text-muted); font-family:var(--font-mono);\'>[ Palette Tool Image ]</span>';" />
         </div>
         <div class="project-content">
           <div class="project-tags">
@@ -995,7 +997,7 @@
         </div>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Functional Form Connected to TiDB + Resend Pipeline -->
       <form class="contact-form" id="contactForm">
         <div class="form-group">
           <label for="name">Your Name</label>
