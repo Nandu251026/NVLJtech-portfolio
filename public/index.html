@@ -16,6 +16,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
+    @property --btn-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
     :root {
       --bg-black: #040508;
       --bg-surface: rgba(13, 16, 26, 0.88);
@@ -76,11 +82,12 @@
       pointer-events: none;
       z-index: 0;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.06) 0px, transparent 40%),
-        radial-gradient(circle at 85% 25%, rgba(168, 85, 247, 0.06) 0px, transparent 45%),
+        radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.08) 0px, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(168, 85, 247, 0.08) 0px, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
         linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
     }
 
     .container {
@@ -102,7 +109,7 @@
       height: 1px;
       width: 100%;
       background: linear-gradient(90deg, transparent, var(--gold-border), var(--neon-purple), transparent);
-      opacity: 0.6;
+      opacity: 0.75;
       position: relative;
       z-index: 1;
     }
@@ -112,7 +119,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(4, 5, 8, 0.9);
+      background: rgba(4, 5, 8, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
@@ -138,12 +145,12 @@
       border-radius: 12px;
       object-fit: cover;
       border: 1.5px solid var(--gold-primary);
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .logo-brand:hover .logo-img {
-      transform: scale(1.05);
+      transform: scale(1.08) rotate(3deg);
     }
 
     .logo-text {
@@ -192,7 +199,7 @@
 
     /* Hero Section */
     .hero {
-      min-height: calc(85vh - 88px);
+      min-height: calc(90vh - 88px);
       display: flex;
       align-items: center;
       padding: clamp(3rem, 7vw, 6rem) 0;
@@ -219,34 +226,82 @@
 
     .hero-logo-frame {
       position: relative;
-      width: clamp(220px, 30vw, 280px);
-      height: clamp(220px, 30vw, 280px);
-      border-radius: 28px;
+      width: clamp(220px, 32vw, 300px);
+      height: clamp(220px, 32vw, 300px);
+      border-radius: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(13, 16, 26, 0.8);
-      border: 2px solid var(--gold-border);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(251, 191, 36, 0.15);
-      padding: 10px;
+      background: transparent;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95);
+      animation: heroFloat 6s infinite alternate ease-in-out;
+    }
+
+    .hero-logo-frame::before {
+      content: '';
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      background: conic-gradient(
+        from 0deg,
+        #fbbf24 0%,
+        #ec4899 25%,
+        #a855f7 50%,
+        #06b6d4 75%,
+        #fbbf24 100%
+      );
+      animation: rotateLiquid 4.5s linear infinite;
+      z-index: 1;
+    }
+
+    .hero-logo-frame::after {
+      content: '';
+      position: absolute;
+      width: 160%;
+      height: 160%;
+      background: conic-gradient(
+        from 0deg,
+        #fbbf24 0%,
+        #ec4899 25%,
+        #a855f7 50%,
+        #06b6d4 75%,
+        #fbbf24 100%
+      );
+      animation: rotateLiquid 4.5s linear infinite;
+      filter: blur(24px);
+      opacity: 0.8;
+      z-index: 0;
     }
 
     .hero-logo-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 20px;
+      position: relative;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      background: #080b12;
+      border-radius: 28px;
       overflow: hidden;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #080b12;
     }
 
     .hero-logo-inner img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 28px;
+    }
+
+    @keyframes rotateLiquid {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes heroFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-14px); }
     }
 
     .hero-badge {
@@ -261,6 +316,7 @@
       font-size: clamp(0.75rem, 2vw, 0.85rem);
       font-weight: 600;
       margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
     }
 
     .hero-badge-dot {
@@ -268,7 +324,13 @@
       height: 8px;
       border-radius: 50%;
       background-color: var(--gold-primary);
-      box-shadow: 0 0 8px var(--gold-primary);
+      box-shadow: 0 0 10px var(--gold-primary);
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     .hero h1 {
@@ -317,7 +379,7 @@
       font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
     }
 
@@ -325,26 +387,27 @@
       background: var(--gold-gradient);
       color: #050608;
       border: 1px solid var(--gold-primary);
-      box-shadow: 0 8px 20px -6px rgba(251, 191, 36, 0.4);
+      box-shadow: 0 10px 25px -8px rgba(251, 191, 36, 0.4);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px -6px rgba(251, 191, 36, 0.6);
-      filter: brightness(1.08);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 32px -8px rgba(251, 191, 36, 0.6);
+      filter: brightness(1.1);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(10px);
     }
 
     .btn-secondary:hover {
       background: rgba(251, 191, 36, 0.08);
       border-color: var(--gold-border);
       color: var(--gold-primary);
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.02);
     }
 
     .btn-sm {
@@ -354,7 +417,7 @@
     }
 
     .section-header {
-      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
       width: 100%;
     }
 
@@ -376,7 +439,7 @@
       line-height: 1.2;
     }
 
-    /* Capabilities Clean Carousel */
+    /* Capabilities Responsive Carousel */
     .carousel-container {
       position: relative;
       width: 100%;
@@ -392,8 +455,36 @@
       background: #070910;
       overflow: hidden;
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.9);
       display: flex;
+    }
+
+    .circle-drop-actor {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--drop-color, var(--gold-primary)));
+      box-shadow: 0 0 30px var(--drop-color, var(--gold-primary));
+      transform: translate(-50%, 0) scale(1);
+      opacity: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    @keyframes dropRiseExpand {
+      0% { top: -60px; transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+      20% { opacity: 1; }
+      45% { top: 52%; transform: translate(-50%, -50%) scale(1.2, 0.8); }
+      60% { top: 46%; transform: translate(-50%, -50%) scale(1, 1.1); }
+      75% { top: 50%; transform: translate(-50%, -50%) scale(2.5); opacity: 1; }
+      100% { top: 50%; transform: translate(-50%, -50%) scale(45); opacity: 0; }
+    }
+
+    .circle-drop-actor.animating {
+      animation: dropRiseExpand 0.95s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
     .carousel-card {
@@ -412,8 +503,8 @@
       opacity: 0;
       pointer-events: none;
       z-index: 1;
-      transform: translateX(30px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
       overflow-y: auto;
     }
 
@@ -421,7 +512,7 @@
       opacity: 1;
       pointer-events: auto;
       z-index: 2;
-      transform: translateX(0);
+      clip-path: circle(150% at 50% 50%);
     }
 
     .carousel-card-header {
@@ -472,16 +563,16 @@
       color: var(--text-main);
     }
 
-    .card-ux { --card-accent: var(--gold-primary); }
+    .card-ux { --card-accent: var(--gold-primary); --card-glow: rgba(251, 191, 36, 0.35); }
     .card-ux .carousel-icon-wrap { background: rgba(251, 191, 36, 0.12); border: 1.5px solid var(--gold-border); color: var(--gold-primary); }
 
-    .card-ui { --card-accent: var(--neon-pink); }
+    .card-ui { --card-accent: var(--neon-pink); --card-glow: rgba(236, 72, 153, 0.35); }
     .card-ui .carousel-icon-wrap { background: rgba(236, 72, 153, 0.12); border: 1.5px solid rgba(236, 72, 153, 0.4); color: var(--neon-pink); }
 
-    .card-frontend { --card-accent: var(--neon-cyan); }
+    .card-frontend { --card-accent: var(--neon-cyan); --card-glow: rgba(6, 182, 212, 0.35); }
     .card-frontend .carousel-icon-wrap { background: rgba(6, 182, 212, 0.12); border: 1.5px solid rgba(6, 182, 212, 0.4); color: var(--neon-cyan); }
 
-    .card-backend { --card-accent: var(--neon-purple); }
+    .card-backend { --card-accent: var(--neon-purple); --card-glow: rgba(168, 85, 247, 0.35); }
     .card-backend .carousel-icon-wrap { background: rgba(168, 85, 247, 0.12); border: 1.5px solid rgba(168, 85, 247, 0.4); color: var(--neon-purple); }
 
     .carousel-controls {
@@ -505,13 +596,13 @@
       font-size: 1.2rem;
       cursor: pointer;
       backdrop-filter: blur(12px);
-      transition: all 0.25s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .carousel-nav-btn:hover {
       background: var(--gold-gradient);
       color: #050608;
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .carousel-dots {
@@ -526,7 +617,7 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.18);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .dot.active {
@@ -537,7 +628,7 @@
     }
 
     /* ========================================================
-       REALISTIC 3D ANIMATION EFFECTS FOR FEATURED ENGINEERING PROJECTS
+       REALISTIC 3D SCROLL-DRIVEN PARTICLE VORTEX PORTAL
        ======================================================== */
     .scrolly-portal-section {
       position: relative;
@@ -567,43 +658,9 @@
       z-index: 1;
     }
 
-    .scrolly-header {
-      position: absolute;
-      top: clamp(20px, 4vh, 40px);
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-      width: min(92%, 1160px);
-      pointer-events: none;
-    }
-
-    .scrolly-header .tag {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 0.3rem;
-      display: inline-block;
-      padding: 0.25rem 0.8rem;
-      background: rgba(251, 191, 36, 0.08);
-      border: 1px solid var(--gold-border);
-      border-radius: 999px;
-    }
-
-    .scrolly-header h2 {
-      font-size: clamp(1.6rem, 3.8vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 0%, #fef08a 60%, #fbbf24 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
     .scrolly-progress-track {
       position: absolute;
-      top: clamp(88px, 12vh, 115px);
+      top: clamp(75px, 10vh, 95px);
       left: 50%;
       transform: translateX(-50%);
       width: min(90%, 650px);
@@ -627,11 +684,10 @@
       width: min(92%, 1160px);
       z-index: 4;
       perspective: 1200px;
-      margin-top: clamp(2rem, 5vh, 4rem);
     }
 
     .scrolly-card {
-      background: rgba(10, 14, 24, 0.9);
+      background: rgba(10, 14, 24, 0.88);
       border: 1.5px solid var(--card-border-color, var(--gold-border));
       border-radius: var(--radius-lg);
       padding: clamp(1.5rem, 4vw, 3rem);
@@ -642,18 +698,16 @@
       gap: clamp(1.5rem, 4vw, 3rem);
       align-items: center;
       opacity: 0;
-      transform: translate3d(0, 60px, -120px) scale(0.9);
+      transform: translate3d(0, 50px, -100px) scale(0.92);
       pointer-events: none;
       transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.4s ease;
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       box-shadow: 0 35px 90px -25px rgba(0, 0, 0, 0.95), 0 0 45px var(--card-glow-color, var(--gold-glow));
       position: absolute;
       inset: 0;
       margin: auto;
-      max-height: 85vh;
+      max-height: 88vh;
       overflow-y: auto;
-      transform-style: preserve-3d;
     }
 
     .scrolly-card.active-slide {
@@ -672,7 +726,6 @@
       background: #080a10;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
       position: relative;
-      transform: translateZ(20px);
     }
 
     .scrolly-media-frame img {
@@ -683,11 +736,7 @@
     }
 
     .scrolly-card:hover .scrolly-media-frame img {
-      transform: scale(1.06);
-    }
-
-    .scrolly-details {
-      transform: translateZ(30px);
+      transform: scale(1.05);
     }
 
     .scrolly-details h3 {
@@ -750,7 +799,7 @@
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
       border: 1px solid var(--border-subtle);
-      background: rgba(13, 16, 26, 0.85);
+      background: rgba(13, 16, 26, 0.8);
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -763,32 +812,41 @@
     }
 
     /* ========================================================
-       CLEAN LUXURY OBSIDIAN CONTACT CARD
+       ANIMATED FLOATING OBSIDIAN CONTACT CARD WITH 3D MORPHING CORE
        ======================================================== */
     .contact-card-outer {
       position: relative;
       width: 100%;
       border-radius: 28px;
-      padding: 1.5px;
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.4) 0%, rgba(168, 85, 247, 0.25) 100%);
-      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.9);
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.6) 0%, rgba(168, 85, 247, 0.4) 50%, rgba(6, 182, 212, 0.4) 100%);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), 0 0 50px rgba(168, 85, 247, 0.25);
+      animation: cardPulseGlow 8s infinite alternate ease-in-out;
+    }
+
+    @keyframes cardPulseGlow {
+      0% { box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), 0 0 40px rgba(251, 191, 36, 0.2); }
+      100% { box-shadow: 0 35px 90px -20px rgba(0, 0, 0, 0.95), 0 0 60px rgba(168, 85, 247, 0.35), 0 0 30px rgba(236, 72, 153, 0.25); }
     }
 
     .contact-card-inner {
       position: relative;
       width: 100%;
-      background: rgba(8, 10, 18, 0.95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(8, 10, 18, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       border-radius: 26px;
-      padding: clamp(2rem, 5vw, 4rem);
+      padding: clamp(2rem, 5vw, 4.5rem);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 4rem);
+      grid-template-columns: 1fr 1.15fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
       align-items: center;
+      overflow: hidden;
     }
 
     .contact-form-side {
+      position: relative;
+      z-index: 3;
       display: flex;
       flex-direction: column;
     }
@@ -840,7 +898,7 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: clamp(0.9rem, 2vw, 1rem);
-      transition: border-color 0.25s ease, background 0.25s ease;
+      transition: all 0.3s ease;
       width: 100%;
     }
 
@@ -848,56 +906,118 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2), 0 0 20px rgba(251, 191, 36, 0.15);
       background: rgba(15, 20, 32, 0.95);
     }
 
-    /* Contact Info Side */
-    .contact-info-side {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      background: rgba(13, 16, 26, 0.6);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: clamp(1.75rem, 4vw, 2.75rem);
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.2rem;
-    }
-
-    .contact-info-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(251, 191, 36, 0.1);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-primary);
-      display: flex;
+    .btn-beam-glow {
+      position: relative;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
+      gap: 0.75rem;
+      padding: 1.1rem 2.4rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: clamp(0.92rem, 2vw, 1rem);
+      color: #ffffff;
+      background: #090c14;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 1;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+      width: auto;
+      margin-top: 0.5rem;
     }
 
-    .contact-info-text h4 {
-      font-size: 1.05rem;
-      margin-bottom: 0.25rem;
-      color: var(--text-main);
+    .btn-beam-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background-image: conic-gradient(
+        from var(--btn-angle),
+        transparent 55%,
+        var(--neon-pink) 75%,
+        var(--gold-primary) 88%,
+        var(--neon-cyan) 98%,
+        transparent 100%
+      );
+      animation: rotateBorderBeam 3.5s linear infinite;
+      z-index: -2;
     }
 
-    .contact-info-text p, .contact-info-text a {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: color 0.2s ease;
+    .btn-beam-glow::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: calc(var(--radius-md) - 2px);
+      background: radial-gradient(
+        circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(251, 191, 36, 0.22),
+        rgba(9, 12, 20, 0.95) 75%
+      );
+      z-index: -1;
     }
 
-    .contact-info-text a:hover {
+    .btn-beam-glow:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 35px -8px rgba(251, 191, 36, 0.45);
+    }
+
+    @keyframes rotateBorderBeam {
+      0% { --btn-angle: 0deg; }
+      100% { --btn-angle: 360deg; }
+    }
+
+    /* 3D Morphing Crystal Visual Column */
+    .contact-visual-side {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, rgba(251, 191, 36, 0.05) 50%, transparent 75%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    #contactOrbCanvas {
+      width: 100%;
+      height: 320px;
+      display: block;
+      pointer-events: none;
+    }
+
+    .contact-direct-chip {
+      margin-top: 1rem;
+      background: rgba(251, 191, 36, 0.06);
+      border: 1px solid var(--gold-border);
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+
+    .contact-direct-chip i {
       color: var(--gold-primary);
+      font-size: 1.1rem;
+    }
+
+    .contact-direct-chip span {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      color: var(--gold-light);
+      font-weight: 600;
     }
 
     /* Modal */
@@ -1001,6 +1121,12 @@
         gap: 2.5rem;
         padding: 2rem;
       }
+      .contact-visual-side {
+        min-height: 300px;
+      }
+      #contactOrbCanvas {
+        height: 240px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1008,6 +1134,7 @@
       .carousel-wrapper { min-height: 420px; }
       .carousel-card { padding: 1.5rem; justify-content: flex-start; }
       .hero-cta .btn { width: 100%; }
+      .btn-beam-glow { width: 100%; }
       .scrolly-portal-section { height: 280vh; }
       .scrolly-media-frame { aspect-ratio: 16 / 10; }
     }
@@ -1070,8 +1197,10 @@
 
     <div class="carousel-container">
       <div class="carousel-wrapper" id="carouselWrapper">
+        <div class="circle-drop-actor" id="dropActor"></div>
+
         <!-- Card 1: UX Design -->
-        <div class="carousel-card card-ux active">
+        <div class="carousel-card card-ux active" data-color="#fbbf24">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-compass-drafting"></i></div>
             <div>
@@ -1089,7 +1218,7 @@
         </div>
 
         <!-- Card 2: UI Design -->
-        <div class="carousel-card card-ui">
+        <div class="carousel-card card-ui" data-color="#ec4899">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-palette"></i></div>
             <div>
@@ -1107,7 +1236,7 @@
         </div>
 
         <!-- Card 3: Frontend Engineering -->
-        <div class="carousel-card card-frontend">
+        <div class="carousel-card card-frontend" data-color="#06b6d4">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-code"></i></div>
             <div>
@@ -1125,7 +1254,7 @@
         </div>
 
         <!-- Card 4: Backend & Architecture -->
-        <div class="carousel-card card-backend">
+        <div class="carousel-card card-backend" data-color="#a855f7">
           <div class="carousel-card-header">
             <div class="carousel-icon-wrap"><i class="fas fa-server"></i></div>
             <div>
@@ -1164,27 +1293,12 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- ========================================================
-       FEATURED ENGINEERING PROJECTS (EXCLUSIVE REAL ANIMATION EFFECTS)
-       ======================================================== -->
+  <!-- Realistic 3D Organic Particle Burst Scrollytelling Showcase -->
   <section class="scrolly-portal-section" id="projects">
     <div class="scrolly-sticky-container">
       
-      <!-- Real-Time 3D Particle Vortex Canvas -->
       <canvas id="scrollyParticleCanvas"></canvas>
 
-      <!-- Section Title & HUD Telemetry -->
-      <div class="scrolly-header">
-        <span class="tag"><i class="fas fa-microchip"></i> 02. Featured Work</span>
-        <h2>Featured Engineering Projects</h2>
-      </div>
-
-      <!-- Scroll Progress Bar -->
-      <div class="scrolly-progress-track">
-        <div class="scrolly-progress-fill" id="scrollyProgressFill"></div>
-      </div>
-
-      <!-- 3D Perspective Stage -->
       <div class="scrolly-stage">
         <!-- Project 1 -->
         <div class="scrolly-card slide-saas active-slide" data-slide="0">
@@ -1259,12 +1373,14 @@
 
   <div class="ambient-separator"></div>
 
-  <!-- Contact Section -->
-  <section class="container" id="contact" style="padding-top: clamp(6rem, 10vw, 9rem);">
+  <!-- ========================================================
+       ANIMATED OBSIDIAN GLASS CONTACT CARD WITH 3D MORPHING CORE
+       ======================================================== -->
+  <section class="container" id="contact" style="padding-top: clamp(6rem, 10vw, 10rem);">
     <div class="contact-card-outer">
       <div class="contact-card-inner">
         
-        <!-- Left: Form Panel -->
+        <!-- Left: Glass Form Panel -->
         <div class="contact-form-side">
           <div class="contact-card-header">
             <span class="tag" style="color: var(--gold-primary); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">03. Get In Touch</span>
@@ -1286,35 +1402,19 @@
               <textarea id="message" name="message" rows="4" placeholder="Tell me about your project goals or timeline..." required></textarea>
             </div>
             
-            <button type="submit" id="submitBtn" class="btn btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">
+            <button type="submit" id="submitBtn" class="btn-beam-glow" style="align-self: flex-start;">
               <i class="fas fa-paper-plane"></i> <span>Send Message</span>
             </button>
             <p id="formStatus" style="font-size: 0.9rem; margin-top: 0.25rem; font-family: var(--font-mono);"></p>
           </form>
         </div>
 
-        <!-- Right: Direct Channels -->
-        <div class="contact-info-side">
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
-            <div class="contact-info-text">
-              <h4>Direct Email</h4>
-              <a href="mailto:nandinijoshi25102006@gmail.com">nandinijoshi25102006@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="fas fa-bolt"></i></div>
-            <div class="contact-info-text">
-              <h4>Availability</h4>
-              <p>Accepting new full-stack & UI/UX contracts</p>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><i class="fas fa-shield-halved"></i></div>
-            <div class="contact-info-text">
-              <h4>Database & Cloud</h4>
-              <p>TiDB Cloud MySQL • Node.js • REST APIs</p>
-            </div>
+        <!-- Right: 3D Morphing Crystal Orb Visual (From Video) -->
+        <div class="contact-visual-side">
+          <canvas id="contactOrbCanvas"></canvas>
+          <div class="contact-direct-chip">
+            <i class="fas fa-envelope-open-text"></i>
+            <span>nandinijoshi25102006@gmail.com</span>
           </div>
         </div>
 
@@ -1340,52 +1440,175 @@
 
   <!-- Scripts -->
   <script>
-    // Capabilities Carousel
+    // Spotlight Mouse Tracker on Send Button
+    const glowBtn = document.getElementById('submitBtn');
+    if (glowBtn) {
+      glowBtn.addEventListener('mousemove', (e) => {
+        const rect = glowBtn.getBoundingClientRect();
+        glowBtn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        glowBtn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    }
+
+    // ========================================================
+    // 3D ORGANIC MORPHING CRYSTAL ORB (CONTACT SECTION)
+    // ========================================================
+    const orbCanvas = document.getElementById('contactOrbCanvas');
+    const orbCtx = orbCanvas.getContext('2d');
+    let orbWidth, orbHeight;
+    let orbPhase = 0;
+
+    function resizeOrbCanvas() {
+      orbWidth = orbCanvas.width = orbCanvas.offsetWidth || 340;
+      orbHeight = orbCanvas.height = orbCanvas.offsetHeight || 320;
+    }
+    window.addEventListener('resize', resizeOrbCanvas);
+    resizeOrbCanvas();
+
+    function drawMorphingOrb() {
+      orbCtx.clearRect(0, 0, orbWidth, orbHeight);
+      orbPhase += 0.025;
+
+      const cx = orbWidth / 2;
+      const cy = orbHeight / 2;
+      const baseRadius = Math.min(orbWidth, orbHeight) * 0.28;
+
+      // Radiant Core Glow
+      const glowGrad = orbCtx.createRadialGradient(cx, cy, 10, cx, cy, baseRadius * 1.8);
+      glowGrad.addColorStop(0, 'rgba(168, 85, 247, 0.45)');
+      glowGrad.addColorStop(0.5, 'rgba(251, 191, 36, 0.2)');
+      glowGrad.addColorStop(1, 'transparent');
+      orbCtx.fillStyle = glowGrad;
+      orbCtx.beginPath();
+      orbCtx.arc(cx, cy, baseRadius * 1.8, 0, Math.PI * 2);
+      orbCtx.fill();
+
+      // Multi-Layer Morphing Organic Spline Waves
+      for (let layer = 0; layer < 4; layer++) {
+        orbCtx.beginPath();
+        const numPoints = 64;
+        const layerOffset = layer * (Math.PI / 2);
+
+        for (let i = 0; i <= numPoints; i++) {
+          const angle = (i / numPoints) * Math.PI * 2;
+          
+          // Organic 3D harmonic distortion formula
+          const wave1 = Math.sin(angle * 3 + orbPhase + layerOffset) * 16;
+          const wave2 = Math.cos(angle * 5 - orbPhase * 1.5) * 10;
+          const wave3 = Math.sin(angle * 7 + orbPhase * 0.8) * 6;
+          const r = baseRadius + wave1 + wave2 + wave3 - (layer * 12);
+
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+
+          if (i === 0) orbCtx.moveTo(x, y);
+          else orbCtx.lineTo(x, y);
+        }
+
+        orbCtx.closePath();
+
+        if (layer === 0) {
+          const bodyGrad = orbCtx.createLinearGradient(cx - baseRadius, cy - baseRadius, cx + baseRadius, cy + baseRadius);
+          bodyGrad.addColorStop(0, 'rgba(236, 72, 153, 0.35)');
+          bodyGrad.addColorStop(0.5, 'rgba(168, 85, 247, 0.25)');
+          bodyGrad.addColorStop(1, 'rgba(251, 191, 36, 0.2)');
+          orbCtx.fillStyle = bodyGrad;
+          orbCtx.fill();
+        }
+
+        orbCtx.strokeStyle = layer === 0 ? 'rgba(251, 191, 36, 0.8)' : layer === 1 ? 'rgba(236, 72, 153, 0.6)' : 'rgba(6, 182, 212, 0.5)';
+        orbCtx.lineWidth = layer === 0 ? 2 : 1.2;
+        orbCtx.shadowBlur = 15;
+        orbCtx.shadowColor = 'rgba(168, 85, 247, 0.8)';
+        orbCtx.stroke();
+        orbCtx.shadowBlur = 0;
+      }
+
+      // Orbital Floating Energy Particles
+      for (let p = 0; p < 12; p++) {
+        const pAngle = orbPhase * (0.8 + p * 0.1) + p * (Math.PI / 6);
+        const pDist = baseRadius * 1.25 + Math.sin(orbPhase * 2 + p) * 18;
+        const px = cx + Math.cos(pAngle) * pDist;
+        const py = cy + Math.sin(pAngle) * pDist;
+
+        orbCtx.beginPath();
+        orbCtx.arc(px, py, 2.5, 0, Math.PI * 2);
+        orbCtx.fillStyle = p % 2 === 0 ? '#fbbf24' : '#06b6d4';
+        orbCtx.shadowBlur = 10;
+        orbCtx.shadowColor = orbCtx.fillStyle;
+        orbCtx.fill();
+        orbCtx.shadowBlur = 0;
+      }
+
+      requestAnimationFrame(drawMorphingOrb);
+    }
+    drawMorphingOrb();
+
+    // Capabilities Drop-Expand Carousel
     const cards = document.querySelectorAll('.carousel-card');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const dropActor = document.getElementById('dropActor');
     let currentCapabilityIndex = 0;
     let autoSlideInterval;
+    let isCapabilityTransitioning = false;
 
-    function showCard(targetIndex) {
+    function triggerCardTransition(targetIndex) {
+      if (isCapabilityTransitioning || targetIndex === currentCapabilityIndex) return;
+      isCapabilityTransitioning = true;
+
+      const currentCard = cards[currentCapabilityIndex];
       if (targetIndex >= cards.length) targetIndex = 0;
       else if (targetIndex < 0) targetIndex = cards.length - 1;
 
-      cards.forEach((card, idx) => {
-        card.classList.toggle('active', idx === targetIndex);
-      });
+      const nextCard = cards[targetIndex];
+      const targetColor = nextCard.getAttribute('data-color') || '#fbbf24';
+
+      dropActor.style.setProperty('--drop-color', targetColor);
+      dropActor.classList.remove('animating');
+      void dropActor.offsetWidth;
+      dropActor.classList.add('animating');
 
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === targetIndex);
       });
 
-      currentCapabilityIndex = targetIndex;
+      setTimeout(() => {
+        nextCard.style.zIndex = '3';
+        currentCard.style.zIndex = '1';
+        nextCard.classList.add('active');
+
+        setTimeout(() => {
+          currentCard.classList.remove('active');
+          nextCard.style.zIndex = '2';
+          currentCapabilityIndex = targetIndex;
+          isCapabilityTransitioning = false;
+        }, 450);
+      }, 500);
     }
 
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        showCard(currentCapabilityIndex - 1);
+    prevBtn.addEventListener('click', () => {
+      triggerCardTransition(currentCapabilityIndex - 1);
+      resetAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      triggerCardTransition(currentCapabilityIndex + 1);
+      resetAutoSlide();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt(e.target.getAttribute('data-index'));
+        triggerCardTransition(targetIndex);
         resetAutoSlide();
       });
-
-      nextBtn.addEventListener('click', () => {
-        showCard(currentCapabilityIndex + 1);
-        resetAutoSlide();
-      });
-
-      dots.forEach((dot) => {
-        dot.addEventListener('click', (e) => {
-          const targetIndex = parseInt(e.target.getAttribute('data-index'));
-          showCard(targetIndex);
-          resetAutoSlide();
-        });
-      });
-    }
+    });
 
     function startAutoSlide() {
       autoSlideInterval = setInterval(() => {
-        showCard(currentCapabilityIndex + 1);
+        triggerCardTransition(currentCapabilityIndex + 1);
       }, 6000);
     }
 
@@ -1396,18 +1619,12 @@
 
     startAutoSlide();
 
-    // ========================================================
-    // REALISTIC 3D ORGANIC PARTICLE BURST ENGINE (FEATURED PROJECTS EXCLUSIVE)
-    // ========================================================
+    // Realistic 3D Organic Particle Burst Engine (Scrollytelling)
     const pCanvas = document.getElementById('scrollyParticleCanvas');
     const pCtx = pCanvas.getContext('2d');
     let pWidth, pHeight;
     let particles = [];
-    const PARTICLE_COUNT = 260;
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetMouseX = 0;
-    let targetMouseY = 0;
+    const PARTICLE_COUNT = 240;
 
     class BurstParticle {
       constructor() {
@@ -1416,21 +1633,20 @@
       reset() {
         this.theta = Math.random() * Math.PI * 2;
         this.phi = Math.acos((Math.random() * 2) - 1);
-        this.baseSpeed = Math.random() * 2.5 + 1.2;
-        this.size = Math.random() * 3.8 + 1.2;
-        this.colorPool = ['#fbbf24', '#ec4899', '#a855f7', '#06b6d4', '#fef08a', '#ffffff'];
+        this.baseSpeed = Math.random() * 2 + 1;
+        this.size = Math.random() * 3.5 + 1.2;
+        this.colorPool = ['#fbbf24', '#ec4899', '#a855f7', '#06b6d4', '#ffffff'];
         this.color = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
-        this.dist = Math.random() * 100;
+        this.dist = Math.random() * 90;
         this.rotation = Math.random() * Math.PI * 2;
         this.rotSpeed = (Math.random() - 0.5) * 0.04;
       }
-      draw(progress, mX, mY) {
-        const expansion = 1 + progress * 10.5;
-        const currentDist = (this.dist * expansion) % (pWidth * 0.88);
+      draw(progress) {
+        const expansion = 1 + progress * 9.5;
+        const currentDist = (this.dist * expansion) % (pWidth * 0.85);
 
-        // 3D coordinates relative to origin with subtle mouse parallax
-        const x3d = currentDist * Math.sin(this.phi) * Math.cos(this.theta) + mX * 60;
-        const y3d = currentDist * Math.sin(this.phi) * Math.sin(this.theta) + mY * 60;
+        const x3d = currentDist * Math.sin(this.phi) * Math.cos(this.theta);
+        const y3d = currentDist * Math.sin(this.phi) * Math.sin(this.theta);
         const z3d = currentDist * Math.cos(this.phi) + 320;
 
         const fov = 380;
@@ -1440,20 +1656,20 @@
 
         this.rotation += this.rotSpeed;
 
-        if (scale > 0 && x2d > -60 && x2d < pWidth + 60 && y2d > -60 && y2d < pHeight + 60) {
+        if (scale > 0 && x2d > -50 && x2d < pWidth + 50 && y2d > -50 && y2d < pHeight + 50) {
           pCtx.save();
           pCtx.translate(x2d, y2d);
           pCtx.rotate(this.rotation);
           
           pCtx.beginPath();
-          const w = Math.max(1, this.size * scale * 3.0);
-          const h = Math.max(0.6, this.size * scale * 1.4);
+          const w = Math.max(1, this.size * scale * 2.8);
+          const h = Math.max(0.6, this.size * scale * 1.2);
           pCtx.ellipse(0, 0, w, h, 0, 0, Math.PI * 2);
           
           pCtx.fillStyle = this.color;
-          pCtx.shadowBlur = 15 * scale;
+          pCtx.shadowBlur = 14 * scale;
           pCtx.shadowColor = this.color;
-          pCtx.globalAlpha = Math.min(1, Math.max(0.18, scale * 1.7));
+          pCtx.globalAlpha = Math.min(1, Math.max(0.18, scale * 1.6));
           pCtx.fill();
           pCtx.restore();
         }
@@ -1471,20 +1687,10 @@
 
     let currentScrollProgress = 0;
 
-    window.addEventListener('mousemove', (e) => {
-      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
-    });
-
     function renderParticles() {
       pCtx.clearRect(0, 0, pWidth, pHeight);
       
-      // Smooth mouse lerp
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
-
-      // Realistic chromatic background gradient reacting to scroll depth
-      const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, Math.min(pWidth, pHeight) * 0.5);
+      const grad = pCtx.createRadialGradient(pWidth/2, pHeight/2, 10, pWidth/2, pHeight/2, Math.min(pWidth, pHeight) * 0.45);
       grad.addColorStop(0, 'rgba(236, 72, 153, 0.28)');
       grad.addColorStop(0.35, 'rgba(168, 85, 247, 0.18)');
       grad.addColorStop(0.7, 'rgba(251, 191, 36, 0.08)');
@@ -1492,7 +1698,7 @@
       pCtx.fillStyle = grad;
       pCtx.fillRect(0, 0, pWidth, pHeight);
 
-      particles.forEach(p => p.draw(currentScrollProgress, mouseX, mouseY));
+      particles.forEach(p => p.draw(currentScrollProgress));
       requestAnimationFrame(renderParticles);
     }
 
@@ -1500,40 +1706,16 @@
     initBurstParticles();
     renderParticles();
 
-    // 3D Card Tilt Interaction for Featured Projects
-    const scrollyCards = document.querySelectorAll('.scrolly-card');
-    scrollyCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -7;
-        const rotateY = ((x - centerX) / centerX) * 7;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-
     // Scroll-Driven Tracking Engine
     const scrollySection = document.getElementById('projects');
+    const scrollyCards = document.querySelectorAll('.scrolly-card');
     const scrollyPills = document.querySelectorAll('.scrolly-pill');
-    const progressFill = document.getElementById('scrollyProgressFill');
 
     function updateScrollyState() {
-      if (!scrollySection) return;
       const rect = scrollySection.getBoundingClientRect();
       const scrollProgress = -rect.top / (rect.height - window.innerHeight);
       const clamped = Math.min(Math.max(scrollProgress, 0), 1);
       currentScrollProgress = clamped;
-
-      if (progressFill) {
-        progressFill.style.width = `${clamped * 100}%`;
-      }
 
       let activeIndex = 0;
       if (clamped >= 0.66) {
@@ -1683,46 +1865,44 @@ function checkContrast(hex1, hex2) {
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
 
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
-        formStatus.innerText = '';
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
+      formStatus.innerText = '';
 
-        const payload = {
-          name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          message: document.getElementById('message').value
-        };
+      const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
 
-        try {
-          const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-          const data = await res.json();
+        const data = await res.json();
 
-          if (res.ok && data.success) {
-            formStatus.style.color = '#fbbf24';
-            formStatus.innerText = '✓ ' + data.message;
-            contactForm.reset();
-          } else {
-            formStatus.style.color = '#ef4444';
-            formStatus.innerText = '✕ ' + (data.error || data.message || 'Failed to send message.');
-          }
-        } catch (err) {
-          console.error(err);
+        if (res.ok && data.success) {
+          formStatus.style.color = '#fbbf24';
+          formStatus.innerText = '✓ ' + data.message;
+          contactForm.reset();
+        } else {
           formStatus.style.color = '#ef4444';
-          formStatus.innerText = '✕ Server error. Please try again later.';
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Message</span>';
+          formStatus.innerText = '✕ ' + (data.error || data.message || 'Failed to send message.');
         }
-      });
-    }
+      } catch (err) {
+        console.error(err);
+        formStatus.style.color = '#ef4444';
+        formStatus.innerText = '✕ Server error. Please try again later.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Message</span>';
+      }
+    });
   </script>
 </body>
 </html>
